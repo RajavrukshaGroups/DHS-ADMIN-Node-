@@ -119,7 +119,7 @@ SELECT
     CASE
       WHEN tr.status = 0 THEN 'Active'
       WHEN tr.status = 1 THEN 'Inactive'
-      ELSE 'Cancelled'
+      ELSE 'Active'
     END AS 'Status',
     mrd.share_fee AS 'Share Fee',
     mrd.membership_fee AS 'Membership Fee',

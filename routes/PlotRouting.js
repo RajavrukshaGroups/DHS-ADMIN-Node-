@@ -266,9 +266,6 @@ router.post('/addcanceldata', (req, res) => {
         p_land_fk,
         p_price
     ];
-
-    console.log(values);
-
     const cur_date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     const user_update = `UPDATE th_user SET user_status = 1 WHERE user_pk = ${cancel_pk}`;

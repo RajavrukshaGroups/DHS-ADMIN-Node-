@@ -69,9 +69,11 @@ router.get("/viewerreceiptview/:receiptId", (req, res) => {
     th_receipt.cheque_dd_transaction_id  as 'Chequetransdd',
     th_receipt.cr_installment as "Installments",
     CASE
-        WHEN th_receipt.status = 0 THEN 'Active'
-        WHEN th_receipt.status = 1 THEN 'Inactive'
-        ELSE 'Cancelled'
+    CASE
+    WHEN th_receipt.status = 0 THEN 'Active'
+    WHEN th_receipt.status = 1 THEN 'Inactive'
+    ELSE ''
+END AS 'Status',
     END AS 'Status',
     th_receipt.share_fee AS 'Share Fee',
     th_receipt.member_fee AS 'Membership Fee',

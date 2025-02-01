@@ -16,7 +16,7 @@ const conn = mysql.createPool({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_DATABASE,
-  waitForConnections: true, // Enable waiting for connections if all are in use
+  waitForConnections: true, 
   connectionLimit: 10, // Adjust the maximum number of connections
   queueLimit: 0 // No limit on the number of queued connections
 });

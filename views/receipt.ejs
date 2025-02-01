@@ -386,12 +386,20 @@
             if (data) {
                 receiptData = data;
 
-                const createdDate = new Date(data['Created Date']);
-                const day = createdDate.getUTCDate().toString().padStart(2, '0');
-                const month = (createdDate.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-                const year = createdDate.getUTCFullYear();
+                // const createdDate = new Date(data['Created Date']);
+                // const day = createdDate.getUTCDate().toString().padStart(2, '0');
+                // const month = (createdDate.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+                // const year = createdDate.getUTCFullYear();
 
-                const formattedDate = `${day}-${month}-${year}`;
+
+				const createdDate = new Date(data['Created Date']);
+				const localDate = new Date(createdDate.getTime() - createdDate.getTimezoneOffset() * 60000);
+				const day = localDate.getDate().toString().padStart(2, '0');
+				const month = (localDate.getMonth() + 1).toString().padStart(2, '0');
+				const year = localDate.getFullYear();
+				const formattedDate = `${day}-${month}-${year}`;
+
+                // const formattedDate = `${day}-${month}-${year}`;
                 console.log("Formatted Date:", formattedDate);
                 document.getElementById('recno').textContent = data['Receipt Number'];
                 document.getElementById('cdate').textContent = formattedDate;

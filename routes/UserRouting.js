@@ -1211,13 +1211,35 @@ router.post("/updateReceiptNo/:userId", async (req, res) => {
 });
 
 // Endpoint to update user status
+// router.put("/updateUserStatus/:userId", (req, res) => {
+//   const userId = req.params.userId;
+
+//   // Construct SQL query to update user status
+//   const sql = `
+//       UPDATE th_user
+//       SET user_status = 1
+//       WHERE user_pk = ?`;
+
+//   // Execute the SQL query with user id as parameter
+//   conn.query(sql, [userId], (err, result) => {
+//     if (err) {
+//       console.error("Error updating user status:", err);
+//       res.status(500).json({ error: "Internal Server Error" });
+//     } else {
+//       // Send success response
+//       res.status(200).json({ message: "User status updated successfully" });
+//     }
+//   });
+// });
+
+// Endpoint to update user status
 router.put("/updateUserStatus/:userId", (req, res) => {
   const userId = req.params.userId;
 
   // Construct SQL query to update user status
   const sql = `
       UPDATE th_user
-      SET user_status = 1
+      SET user_status = CASE WHEN user_status = 1 THEN 0 ELSE 1 END
       WHERE user_pk = ?`;
 
   // Execute the SQL query with user id as parameter

@@ -395,33 +395,64 @@
           window.location.href = viewHistoryUrl;
         }
       });
-      document
-        .getElementById("tableBody")
-        .addEventListener("click", function (event) {
-          if (event.target.classList.contains("fa-times")) {
-            const userId = event.target.dataset.userid;
-            console.log(userId);
-            fetch(`/users/updateUserStatus/${userId}`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((response) => {
-                if (response.ok) {
-                  const statusCell = event.target
-                    .closest("tr")
-                    .querySelector(".user-status-cell");
-                  statusCell.textContent = "Inactive";
-                } else {
-                  console.error("Failed to update user status");
-                }
-              })
-              .catch((error) => {
-                console.error("Error updating user status:", error);
-              });
+      // document
+      //   .getElementById("tableBody")
+      //   .addEventListener("click", function (event) {
+      //     if (event.target.classList.contains("fa-times")) {
+      //       const userId = event.target.dataset.userid;
+      //       console.log(userId);
+      //       fetch(`/users/updateUserStatus/${userId}`, {
+      //         method: "PUT",
+      //         headers: {
+      //           "Content-Type": "application/json",
+      //         },
+      //       })
+      //         .then((response) => {
+      //           if (response.ok) {
+      //             const statusCell = event.target
+      //               .closest("tr")
+      //               .querySelector(".user-status-cell");
+      //             statusCell.textContent = "Inactive";
+      //           } else {
+      //             console.error("Failed to update user status");
+      //           }
+      //         })
+      //         .catch((error) => {
+      //           console.error("Error updating user status:", error);
+      //         });
+      //     }
+      //   });
+
+
+      document.getElementById("tableBody").addEventListener("click", function (event) {
+  if (event.target.classList.contains("fa-times")) {
+    const userId = event.target.dataset.userid;
+    fetch(`/users/updateUserStatus/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          const statusCell = event.target.closest("tr").querySelector(".user-status-cell");
+
+          // Toggle text content based on current status
+          if (statusCell.textContent.trim() === "Active") {
+            statusCell.textContent = "Inactive";
+          } else {
+            statusCell.textContent = "Active";
           }
-        });
+        } else {
+          console.error("Failed to update user status");
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating user status:", error);
+      });
+  }
+});
 
       document
         .getElementById("tableBody")
