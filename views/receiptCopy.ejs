@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/receipt.css">
+    <style>
+        /* Additional CSS for preview UI */
+        body {
+            background-color: #f8f9fa; /* Set background color */
+        }
+
+        .container {
+            background-color: #fff; /* Set container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+            margin-top: 20px;
+        }
+
+        .back-btn,
+        .print-btn {
+            font-size: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .back-btn,
+            .print-btn {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preview UI -->
+    <div class="container">
+        <!-- Back and Print buttons -->
+        <div>
+            <span class="back-btn" onclick="goBack()">&#8592;</span> <!-- Bootstrap icon for back arrow -->
+            <span class="print-btn" onclick="window.print()">&#128438;</span> <!-- Bootstrap icon for print -->
+        </div>
+
+        <!-- Receipt content -->
+        <div class="receipt">
+            <!-- Your existing receipt content here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to navigate back
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

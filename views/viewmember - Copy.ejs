@@ -1,0 +1,153 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+  <link rel="stylesheet" href="/css/styles.css" />
+
+<style>
+
+.table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    .table th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .table tbody tr:hover {
+      background-color: #e0e0e0;
+    }
+
+    .action-icons i {
+      cursor: pointer;
+      margin-right: 5px;
+      color: #333; /* Icon color */
+    }
+
+     /* Hide the edit form initially */
+     #editFormCard {
+      display: none;
+    }
+
+    /* Media query for responsiveness */
+    @media (max-width: 768px) {
+      .card {
+        padding: 10px;
+      }
+
+      .table th,
+      .table td {
+        padding: 8px;
+      }
+
+      .action-icons i {
+        font-size: 18px;
+      }
+    }
+
+
+</style>
+
+</head>
+<body>
+    
+        <%- include('partials/navbar') %>
+
+        <!-- Add your card here -->
+        <div id="content">
+            <!-- Content Goes Here -->
+            <span class="menu-text">Page Title</span>
+            <!-- Form Inside Card -->
+            
+
+              <table class="table table-bordered">
+                  <thead>
+                      <tr>
+                          <th colspan="11" style="text-align: center;">Member Details</th>
+                        </tr>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Member Name</th>
+                      <th>Mobile No.</th>
+                      <th>Email</th>
+                      <th>Seniority ID</th>
+                      <th>Password</th>
+                      <th>Status</th>
+                    </tr>
+
+                    <tr>
+                        
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody"></tbody>
+                </table>
+          
+         
+           
+        
+        
+           
+           
+          </div>
+
+        
+
+        
+     
+    <script src="/js/script.js"></script>
+    <script>
+          document.addEventListener('DOMContentLoaded', () => {
+      fetch('/users/viewdata')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const tableBody = document.getElementById('tableBody');
+          data.forEach((item, index) => {
+            const row = tableBody.insertRow();
+            row.insertCell(0).textContent = index + 1; // S.No
+            row.insertCell(1).textContent = item['username'];
+            row.insertCell(2).textContent = item['user_mobile'];
+            row.insertCell(3).textContent = item['user_email'];
+            row.insertCell(4).textContent = item['senior_id'];
+            row.insertCell(5).textContent = item['user_epwd'];
+            row.insertCell(6).textContent = item['user_status'];
+
+          
+          
+           
+          });
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+          // Handle error scenarios if required
+        });
+    });
+    </script>
+</body>
+</html>

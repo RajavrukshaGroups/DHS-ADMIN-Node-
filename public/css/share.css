@@ -1,0 +1,103 @@
+.sharecert {
+    border: 2px solid black;
+    padding: 15px;
+    width: 53%;
+    margin: 20px auto;
+    align-items: center;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 120px;
+    width: 120px;
+    margin-right: 20px;
+}
+
+.company-info {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'latoregular';
+    margin-bottom: 5px;
+}
+
+.address,
+.phone {
+    margin-top: 10px;
+}
+
+.content{
+    margin-top: 20px;
+}
+
+.info-section {
+    display: flex;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    margin-top: 20px;
+}
+
+.info-item {
+    padding: 10px;
+    /* background-color: #f5f5f5; */
+    margin-top: 20px;
+}
+
+
+.dot2 {
+	border-bottom: dotted 1px #000;
+	float: right;
+	width: 80px;
+	height: 22px;
+	
+}
+
+.details {
+    margin-top: 20px;
+}
+
+.dot2-c1 {
+    border-bottom: dotted 1px #000;
+    font-weight: bold;
+}
+
+.data {
+    font-size: 16px;
+    font-family: 'Calibri', sans-serif;
+    color: #000;
+    line-height: 1.6; /* Adjust line height for better readability */
+    padding: 3px; /* Add padding for spacing around the paragraph */
+}
+
+.sign {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    align-items: center;
+    position: relative;
+}
+
+.signature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.sign img {
+    width: 150px;
+    margin-bottom: 5px;
+}
+
+
+.row {
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Spread items apart horizontally */
+    margin-bottom: 10px; /* Adjust spacing between rows as needed */
+  }

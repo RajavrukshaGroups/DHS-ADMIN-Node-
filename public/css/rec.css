@@ -1,0 +1,81 @@
+.rectangle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border: 2px solid black; /* Adjust border properties as needed */
+    padding: 10px; /* Add padding for spacing inside the rectangle */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+    max-width: 50%; /* Ensures the rectangle doesn't overflow its container */
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 114px;
+    width: 114px;
+    margin-right: 20px;
+}
+
+.company-info {
+    font-weight: bold;
+}
+
+.address,
+.phone {
+    margin-top: 10px;
+}
+
+.info-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.info-item {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.info-border {
+    border: 3px solid #000;
+    border-radius: 22px;
+}
+
+.customer-info .info-item {
+    padding: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.customer-info .info-item span {
+    font-weight: normal;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.border-bottom1 {
+    width: 100%;
+    border-bottom: #000 solid 2px;
+    margin-top: 20px;
+}
+
+
+
+.section-header {
+    display: flex;
+    justify-content: space-between; /* Equal spacing between items */
+    width: 100%; /* Ensure the header spans the full width */
+    margin-top: 20px; /* Adjust spacing as needed */
+}
+
+.section-item {
+    flex: 1; /* Each item takes equal space */
+    text-align: center; /* Center text within each item */
+    /* border-bottom: 1px solid black; Add bottom border for separation */
+    padding: 5px; /* Add padding for spacing within items */
+}

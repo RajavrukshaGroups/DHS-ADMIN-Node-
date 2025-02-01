@@ -1,0 +1,91 @@
+/* confirmationLetter.css */
+
+.container {
+    background-color:#fff; /* Set background color */
+    padding: 20px;
+    border-radius: 10px;
+    /*box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);*/
+    margin-top: 20px;
+    max-width: 100%; 
+    margin: 20px auto; 
+}
+
+
+/* Add hover effect for better interaction */
+/*.container:hover {*/
+/*    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); */
+/*    transition: box-shadow 0.3s ease; */
+/*}*/
+
+.receipt-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+.receipt-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.receipt-buttons .back-btn {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.receipt-buttons .print-btn {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+   /* Style for the A4 sheet container */
+   .a4-container {
+    width: 210mm; /* A4 sheet width */
+    /* height: 288mm;  */
+    /* A4 sheet height */
+    border: 2px solid #000; /* Black border representing the A4 sheet */
+    margin: 20px auto; /* Center the container horizontally */
+    position: relative; /* Positioning for content inside */
+    overflow: hidden; /* Ensure content doesn't overflow outside the border */
+    box-sizing: border-box; /* Include border in the total dimensions */
+}
+
+/* Optional: Add some padding inside the A4 sheet for content */
+.a4-container-inner {
+    padding: 20px;
+}
+
+/* Style for content inside the A4 sheet */
+.content {
+    /* Example styles for content inside the A4 sheet */
+    /* font-family: Arial, sans-serif; */
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+
+
+/* Styles for the content section */
+.letter-content {
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+/* Styles for confirmation number and date row */
+.confirmation-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -10px; /* Adjust spacing as needed */
+}
+
+.confirmation-number,
+.confirmation-date {
+    font-weight: bold;
+    margin-top: -1rem;
+}

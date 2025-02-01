@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Defence Housing Soceity</title>
+    <link rel="icon" href="/img/logo200.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <style>
+      /* Your provided CSS styles */
+      /* ... */
+      /* Add your table styles below */
+
+      /* Style the button */
+      button.edit-button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      /* Style the pencil icon within the button */
+      button.edit-button i {
+        color: #000;
+        /* Change the color as needed */
+        font-size: 1rem;
+        /* Adjust the font size as needed */
+      }
+
+      /* Responsive Table */
+      .responsive-table-container {
+        /* margin-top: 85px; */
+        /* Adjust margin to clear the navbar */
+        transition: margin-left 0.5s ease;
+        /* Add transition for smooth adjustment */
+        overflow-x: auto;
+        /* Enable horizontal scrolling if needed */
+        margin-left: 22rem;
+        padding: 61px 20px 30px 0px;
+      }
+
+      .responsive-table {
+        width: 100%;
+        border-collapse: collapse;
+        /* margin-top: 61px; */
+        /* margin-left: 1px; */
+        /* margin-bottom: 2rem; */
+      }
+
+      .responsive-table th,
+      .responsive-table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+      }
+
+      .responsive-table th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .responsive-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .responsive-table tbody tr:hover {
+        background-color: #e0e0e0;
+      }
+
+      /* Adjust table cell padding for responsiveness */
+      @media (max-width: 768px) {
+        .responsive-table th,
+        .responsive-table td {
+          padding: 8px;
+        }
+      }
+
+      .pagination {
+        display: inline-block;
+        margin-left: 64rem;
+        border: 2px solid transparent;
+        box-shadow: 1px 1px 2px 2px;
+        background-color: white;
+      }
+
+      .pagination a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+
+      .pagination a.active {
+        background-color: #4caf50;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <%- include('partials/navbar') %>
+    <!-- Sidebar content -->
+
+    <div id="searchContainer" class="d-flex">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        id="searchInput"
+        style="width: 25%"
+      />
+      <button class="btn btn-outline-primary" type="submit" id="searchButton">
+        Search
+      </button>
+    </div>
+    <!-- Main Content -->
+    <div id="content" class="responsive-table-container">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th id="sNo">S.No</th>
+            <th>Member details</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Mobile Number</th>
+            <!-- <th>Action</th> -->
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+    <script src="/js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const pagesize = 10;
+        let currentPage = 1;
+        let data = [];
+        fetch("/users/inactivemenbers")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((apiData) => {
+            if (!Array.isArray(apiData.result)) {
+              console.error("API Data is not in the expected format:", apiData);
+              throw new Error("Data is not in the expected format");
+            }
+            data = apiData.result;
+            renderTable();
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+
+        function renderTable() {
+          if (!Array.isArray(data)) {
+            console.error("Data is not an array:", data);
+            return;
+          }
+          const startIndex = (currentPage - 1) * pagesize;
+          const endIndex = startIndex + pagesize;
+          const paginatedData = data.slice(startIndex, endIndex);
+
+          const tableBody = document.getElementById("tableBody");
+          tableBody.innerHTML = "";
+
+          // if (!Array.isArray(data)) {
+          //     throw new Error('Data is not in the expected format');
+          // }
+
+          paginatedData.forEach((item, index) => {
+            const row = `
+                        <tr>
+                            <td>${startIndex + index + 1}</td>
+                            <td>${item.username}</td>
+                            <td>${item.user_email}</td>
+                            <td>${item.user_address}</td>
+                            <td>${item.user_mobile}</td>
+                        </tr>
+                    `;
+            // <td><button class="edit-button" data-user-pk="${item.user_pk}"><i class="fas fa-edit edit-icon"></i></button></td>
+
+            tableBody.innerHTML += row;
+            // tableBody.insertAdjacentElement(row, 'beforeend');
+          });
+          renderPagination();
+
+          // Add event listener to edit buttons
+          document.querySelectorAll(".edit-button").forEach((button) => {
+            button.addEventListener("click", () => {
+              const userPK = button.getAttribute("data-user-pk");
+              // Redirect to editinactivemember page with user_pk parameter
+              window.location.href = `/editinactivemember?user_pk=${userPK}`;
+            });
+          });
+        }
+
+        function renderPagination() {
+          const totalPages = Math.ceil(data.length / pagesize);
+          const paginationElement = document.getElementById("pagination");
+          paginationElement.innerHTML = "";
+
+          if (totalPages > 1) {
+            const numPageToShow = 5;
+            let startPage = Math.max(
+              1,
+              currentPage - Math.floor(numPageToShow / 2)
+            );
+            let endPage = Math.min(totalPages, startPage + numPageToShow - 1);
+
+            if (endPage - startPage + 1 < numPageToShow) {
+              startPage = Math.max(1, endPage - numPageToShow + 1);
+            }
+
+            if (currentPage > 1) {
+              renderPaginationButton("«", currentPage - 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+              if (i === currentPage) {
+                renderPaginationButton(`<b>${i}</b> `, i);
+              } else {
+                renderPaginationButton(i, i);
+              }
+            }
+
+            if (currentPage < totalPages) {
+              renderPaginationButton("»", currentPage + 1);
+            }
+          }
+        }
+
+        function renderPaginationButton(label, page) {
+          const paginationElement = document.getElementById("pagination");
+          const pageLink = document.createElement("a");
+          // pageLink.href = '#'
+          pageLink.innerHTML = label;
+          pageLink.addEventListener("click", () => {
+            currentPage = page;
+            renderTable();
+          });
+          paginationElement.appendChild(pageLink);
+        }
+
+        function handleSearch() {
+          const searchInput = document
+            .getElementById("searchInput")
+            .value.trim().toLowerCase();
+          if (searchInput.trim() === "") {
+            renderTable();
+          } else {
+            const filteredData = data.filter((user) => {
+              return (
+                user.username.toLowerCase().includes(searchInput) ||
+                user.user_email.toLowerCase().includes(searchInput)
+              );
+            });
+            renderFilteredTable(filteredData);
+          }
+        }
+
+        // Function to render filtered table
+        // Global variable to track the overall index
+        // let overallIndex = 0;
+
+        function renderFilteredTable(filteredData) {
+          const tableBody = document.getElementById("tableBody");
+          tableBody.innerHTML = ""; // Clear existing rows
+          // Calculate the index of the first item on the current page
+          if (filteredData.length === 0) {
+            const row = document.getElementById("tr");
+            row.innerHTML = `<td colspan="5">No Results Found</td>`;
+            tableBody.appendChild(row);
+            return;
+          }
+          const startIndex = (currentPage - 1) * pagesize;
+          console.log(startIndex);
+          // Reset overall index based on the start index of the current page
+          overallIndex = startIndex;
+
+          filteredData.forEach((item) => {
+            const row = document.createElement("tr");
+
+            // Populate table cells with filtered user data
+
+            row.innerHTML = `
+                        <tr>
+                          <td>${overallIndex + 1}</td>
+                            <td>${item.username}</td>
+                            <td>${item.user_email}</td>
+                            <td>${item.user_address}</td>
+                            <td>${item.user_mobile}</td>
+                        </tr>
+                    `;
+            // Append the row to the table body
+            tableBody.appendChild(row);
+
+            // Increment overall index
+            overallIndex++;
+          });
+        }
+
+        // Event listener for search button click
+        document
+          .getElementById("searchButton")
+          .addEventListener("click", handleSearch);
+      });
+    </script>
+
+    <!-- JavaScript and additional content -->
+    <!-- Include your JavaScript files and other content here -->
+  </body>
+</html>

@@ -1,0 +1,408 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+      <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .menu-text {
+                font-size: 18px;
+            }
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .icons-container {
+            display: flex;
+            gap: 10px;
+            /* Adjust as needed */
+            align-items: center;
+        }
+
+        .add-more-icon {
+            cursor: pointer;
+        }
+
+        .delete-icon {
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .radio-container {
+            display: flex;
+            /* justify-content: space-between; Adjust alignment as needed */
+        }
+
+        .radio-container label {
+            margin-right: 50px;
+            /* Adjust spacing between radio buttons */
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+
+        <!-- Add your card here -->
+        <div id="content" style="margin-top: 6rem;">
+            <!-- Content Goes Here -->
+            <span class="menu-text">Page Title</span>
+            <!-- Form Inside Card -->
+
+            <div class="card">
+                <h3 class="card-title">AddConfirmation letter</h3>
+                <form id="confirmationletter" >
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="memberName">Member Name</label>
+                            <input type="text" id="memberName" class="form-control" name="memberName" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="address">Address</label>
+                            <textarea id="address" class="form-control" rows="0"
+                                placeholder="Enter residence/contact address" name="address" required></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="proname">Project Name</label>
+                            <input type="text" id="proname" class="form-control" name="proname" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="prosize">Property Size</label>
+                            <input type="text" id="prosize" class="form-control" name="prosize" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="persqft">Sqft Rate</label>
+                            <input type="text" id="persqft" class="form-control" name="persqft" required>
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label for="projectaddress">Project Address</label>
+                            <textarea id="projectaddress" class="form-control" rows="0"
+                                placeholder="Enter residence/contact address" name="projectaddress"></textarea>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="date">Date</label>
+                            <input type="text" id="date" class="form-control" name="date" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="amt">Amount</label>
+                            <input type="text" id="amt" class="form-control" name="amt" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="paymentmethod">Payment Method</label>
+                             <input type="text" id="paymentmethod" class="form-control" name="paymentmethod" required>
+                            
+                            <!--<select id="paymentmethod" class="form-control" name="paymentmethod" required>-->
+                            <!--    <option value="cheque">Cheque</option>-->
+                            <!--    <option value="dd">DD</option>-->
+                            <!--    <option value="online">Online</option>-->
+                            <!--</select>-->
+                        </div>
+                        
+
+
+                        <div class="form-group col-md-4">
+                            <label for="refno">Cheque No/DD No/UTR No</label>
+                            <input type="text" id="refno" class="form-control" name="refno" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="bankname">Bank Name</label>
+                            <input type="text" id="bankname" class="form-control" name="bankname" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="branch">Branch</label>
+                            <input type="text" id="branch" class="form-control" name="branch" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="sitedimension">Site Diemension</label>
+                            <input type="text" id="sitedimension" class="form-control" name="sitedimension" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="recno">Receipt No</label>
+                            <input type="text" id="recno" class="form-control" name="recno" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="memid">Memeber ID</label>
+                            <input type="text" id="memid" class="form-control" name="memid" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sid">Seniority No</label>
+                            <input type="text" id="sid" class="form-control" name="sid" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="duration">Duration</label>
+                            <input type="text" id="duration" class="form-control" name="duration" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="comformation_no">Confirmation Number</label>
+                            <input type="text" id="comformation_no" class="form-control" name="comformation_no" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="issuedate">Confirmation Letter Issue Date</label>
+                            <input type="date" id="issuedate" class="form-control" name="issuedate" >
+                        </div>
+                        
+                        <div class="form-group col-md-6">
+                            <label for="user_affidiafit">Upload Affidivate </label>
+                            <input type="file" id="user_affidiafit" name="user_affidiafit" class="form-control-file" accept="application/pdf" />
+                        </div>
+
+                        <div class="form-group col-md-4" style="display: none;">
+                            <label for="userid">userid</label>
+                            <input type="text" id="userid" class="form-control" name="userid" >
+                        </div>
+                        <div class="form-group col-md-4" style="display: none;">
+                            <label for="userprojectpk">Th_user_project_pk</label>
+                            <input type="text" id="userprojectpk" class="form-control" name="userprojectpk">
+                        </div>
+
+                    </div>
+
+                    <button type="submit" onsubmit=" handleSubmitForm(event)" class="btn btn-primary"
+                        style="width: 70px; margin-top: 5px">
+                        Submit
+                    </button>
+                </form>
+
+
+                <div class="modal" id="submissionStatusModal" tabindex="-1" role="dialog" aria-labelledby="submissionStatusModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="submissionStatusModalLabel">Submission Status</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="submissionStatusMessage"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeModalButton" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+
+
+
+            <!-- JavaScript -->
+            <script src="/js/script.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+                integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+                crossorigin="anonymous"></script>
+
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const user_pk = urlParams.get('user_pk');
+                        const user_project_pk = urlParams.get('user_project_pk');
+                
+                        // Make a GET request to the API with user_pk and user_project_pk
+                        fetch(`/users/get_conn_data?user_pk=${user_pk}&user_project_pk=${user_project_pk}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log("data in first api",data)
+
+                                // Handle the API response here
+                                if (data.result && data.result.length > 0) {
+                                    const user_add = data.result[0].user_address;
+                                    document.getElementById('address').value = user_add;
+                                }
+                                const name = data.membername;
+                                document.getElementById('memberName').value = name;
+                                const user_add = data.user_add;
+                                document.getElementById('address').value = user_add;
+                                const prop_dimension = data.prop_dimension;
+                                document.getElementById('prosize').value = prop_dimension;
+                                const sqftrate = data.sqr;
+                                document.getElementById('persqft').value = sqftrate;
+                                const senrid = data.senID;
+                                console.log(senrid);
+                                document.getElementById('sid').value = senrid;
+                                const userID = data.user_pk;
+
+                                console.log("user_pk from data:", data.user_pk);
+                                 // Log the specific field
+
+                                console.log(user_pk,"user_pk")
+                                document.getElementById('userid').value = userID;
+
+                                console.log("IDDD!!!", userID);
+                                const userprojectpk = data.user_project_pk
+                                document.getElementById('userprojectpk').value=userprojectpk;
+                                console.log("th_user_project_pk",userprojectpk);
+                                const pro_name = data.pro_name;
+                                document.getElementById('proname').value = pro_name;
+                                const pro_add = data.pro_add;
+                                document.getElementById('projectaddress').value = pro_add;
+                                const con_mon = data.con_mon;
+                                document.getElementById('duration').value = con_mon;
+                                const memid = data.memid;
+                                document.getElementById('memid').value = memid;
+                                const dimen = data.sitedimension;
+                                document.getElementById('sitedimension').value = dimen;
+                                const rec_no = data.rec_no;
+                                document.getElementById('recno').value = rec_no;
+                                const rec_dt = new Date(data.rec_dt);
+                                const formattedDate = rec_dt.toLocaleDateString('en-GB');
+                                document.getElementById('date').value = formattedDate;
+                                const amnt = data.amnt;
+                                document.getElementById('amt').value = amnt;
+                                const pmt = data.pmt;
+                                document.getElementById('paymentmethod').value = pmt;
+                                const transaction_id = data.transaction_id;
+                                document.getElementById('refno').value = transaction_id;
+                                const bank = data.bank;
+                                document.getElementById('bankname').value = bank;
+                                const branch = data.branch;
+                                document.getElementById('branch').value = branch;
+                                const comformation_no = data.comformation_no;
+                                document.getElementById('comformation_no').value = comformation_no;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                            });
+                    });
+                    
+//                     function handleSubmitForm(event) {
+//     event.preventDefault(); // Prevent default form submission
+
+//     const form = document.getElementById('confirmationletter');
+//     const formData = new FormData(form);
+//     const affidavitFile = formData.get('user_affidiafit');
+
+//     const jsonData = {};
+//     formData.forEach((value, key) => {
+//         if (key !== 'user_affidiafit') {
+//             jsonData[key] = value;
+//         }
+//     });
+
+//     if (affidavitFile && affidavitFile.type === 'application/pdf') {
+//         // If a file is uploaded and it's a valid PDF, encode it
+//         const reader = new FileReader();
+//         reader.onload = function (event) {
+//             const affidavitBase64 = event.target.result.split(',')[1]; // Get Base64 part only
+//             jsonData.user_affidiafit = affidavitBase64; // Base64 encoded PDF
+
+//             submitData(jsonData);
+//         };
+//         reader.readAsDataURL(affidavitFile); // Convert file to Base64
+//     } else {
+//         // No file uploaded, proceed without affidavit
+//         jsonData.user_affidiafit = null;
+//         submitData(jsonData);
+//     }
+// }
+
+// function handleSubmitForm(event) {
+//     event.preventDefault(); // Prevent default form submission
+
+//     const form = document.getElementById('confirmationletter');
+//     const formData = new FormData(form);
+
+//     // File size validation (50 MB)
+//     const affidavitFile = formData.get('user_affidiafit');
+//     const maxSizeMB = 50;
+//     const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+//     if (affidavitFile && affidavitFile.size > maxSizeBytes) {
+//         alert(`File size exceeds the ${maxSizeMB} MB limit.`);
+//         return; // Stop form submission
+//     }
+
+//     // Submit the form data directly (without converting to JSON)
+//     submitData(formData);
+// }
+
+function handleSubmitForm(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const form = document.getElementById('confirmationletter');
+    const formData = new FormData(form);
+
+    // File size validation (50 MB)
+    const affidavitFile = formData.get('user_affidiafit');
+    const maxSizeMB = 100;
+    const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+    if (affidavitFile && affidavitFile.size > maxSizeBytes) {
+        alert(`File size exceeds the ${maxSizeMB} MB limit.`);
+        return; // Stop form submission
+    }
+
+    // Submit the form data directly (without converting to JSON)
+    submitData(formData);
+}
+
+
+function submitData(formData) {
+    // Send form data to API endpoint
+    fetch('/users/add_con_lett', {
+        method: 'POST',
+        body: formData // FormData automatically handles multipart/form-data
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Success:", data);
+        document.getElementById('submissionStatusMessage').innerText = 'Confirmation letter added successfully!';
+        $('#submissionStatusModal').modal('show');
+    })
+    .catch(error => {
+        console.error('Error submitting form:', error);
+        document.getElementById('submissionStatusMessage').innerText = 'There was an error adding the Confirmation letter.';
+        $('#submissionStatusModal').modal('show');
+    });
+}
+
+
+                    // Add event listener to form submit event
+                    document.getElementById('confirmationletter').addEventListener('submit', handleSubmitForm);
+                
+                    // Add event listener to the close button of the modal
+                    document.getElementById('closeModalButton').addEventListener('click', () => {
+                        window.location.href = '/viewuser';
+                    });
+                </script>
+                
+
+</body>
+
+</html>

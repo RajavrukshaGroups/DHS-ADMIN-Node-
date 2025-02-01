@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Defence Housing Soceity</title>
+    <link rel="icon" href="/img/logo200.png" />
+    <link rel="stylesheet" href="/css/confirmationLetter.css" />
+    <style>
+      @font-face {
+        font-family: "Times New Roman Bold";
+        src: url("fonts/Times New Roman - Bold.ttf") format("truetype");
+        font-weight: bold;
+      }
+      body {
+        font-family: "Times New Roman", Times, serif;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="containe">
+      <div
+        style="
+          position: absolute;
+          text-align: center;
+          top: 32rem;
+          z-index: 10000;
+          font-size: 100px;
+          color: #e1e1e1;
+          transform: rotate(-30deg);
+          opacity: 0.6;
+          left: 20rem;
+        "
+      >
+        View Only
+      </div>
+      <div class="re-container">
+        <div class="wrapper p2 rtop">
+          <a
+            style="
+              color: black;
+              font-weight: 900;
+              font-size: 19px;
+              position: relative;
+              left: 14rem;
+            "
+            onclick="goBack()"
+            class="back-btn"
+          >
+            <img style="vertical-align: sub" src="/img/go-back.png" /> Back
+          </a>
+        </div>
+      </div>
+
+      <div id="printer_ticket">
+        <div class="a4-container" id="a4-container">
+          <!-- Header Image -->
+          <img
+            src="/img/letterheader.jpg"
+            alt="Header Image"
+            class="header-image"
+            style="width: 100%"
+          />
+          <div class="a4-container-inner">
+            <div class="content">
+              <!-- Content Section -->
+              <div class="letter-content">
+                <!-- Confirmation Number and Date Row -->
+                <div class="confirmation-row">
+                  <div class="confirmation-number"><span id="cn"></span></div>
+                  <div class="confirmation-date"><span id="idat"></span></div>
+                </div>
+
+                <h1
+                  style="
+                    text-align: center;
+                    font-size: 20px;
+                    text-decoration: underline;
+                  "
+                >
+                  SITE BOOKING CONFIRMATION
+                </h1>
+                <!-- <p>Dear [Recipient Name],</p>
+                            <p>We are pleased to confirm the receipt of your payment. Details of the transaction are provided below:</p> -->
+                <!-- Add more content as needed -->
+                <!-- <p style="font-family: 'HelveticaLTStdRoman_0';font-weight: normal;font-size: 15px;">
+                                &nbsp;&nbsp;This is to confirm that  <b><span id="memberNamePlaceholder"></span> Residing at  <b><span id="address"></span>, booked a site of measuring <b><span id="plt"></span> (Rate per SQFT Rs.<b><span id="sqftrate"></span>/-) on this day of <b><span id="dt"></span></b> in the proposed <b><span id="pn"></span></b>.
+                                You are booked your site by paying an initial amount of <b><span id="amt"></span></b>  Mode of NEFT/RTGS/UTR <span id="ref"></span>.
+                                The booked site dimension is <span id="dim"></span>SQFT. Receipt number is <b><span id="rec"></span></b>, Membership No. <b><span id="mid"></span></b>, Seniority Number <b><span id="sid"></span></b>.
+                            </p> -->
+
+                <p
+                  style="
+                    font-weight: normal;
+                    font-size: 15px;
+                    text-align: justify;
+                  "
+                >
+                  &nbsp;&nbsp;This is to confirm that
+                  <b
+                    ><span id="mr_mrs_ms"></span>.
+                    <span id="memberNamePlaceholder"></span
+                  ></b>
+                  Residing at
+                  <b><span id="address"></span></b>, booked a site of measuring
+                  <b><span id="plt"></span></b>
+                  (Rate per SQFT Rs.
+                  <b><span id="sqftrate"></span></b>/-) on this day of
+                  <b><span id="dt"></span></b>
+                  in the proposed
+                  <b><span id="pname"></span></b>
+                  <span id="paddrees"></span>. You have booked your site by
+                  paying an initial amount of
+                  <b><span id="amt"></span></b>
+                  by way of
+                  <!-- <span id="paymenttype"></span>
+                                bearing <b>No. </b>
+                                <b><span id="chequeddonline"></span></b> -->
+                  <span id="paymenttype"></span>
+                  <span id="bearingText"></span>
+                  <!-- <b>No. </b> -->
+                  <b><span id="chequeddonline"></span></b>
+                  Drwan at
+                  <b><span id="bank"></span></b>
+                  <b>Bank</b>,
+                  <b><span id="branch"></span></b>
+                  <b>Branch</b>.
+                  <b><span id="ref"></span></b>
+                  The booked site dimension is
+                  <b><span id="dim"></span></b>
+                  SQFT. Receipt number is
+                  <b><span id="rec"></span></b>, Membership No.
+                  <b><span id="mid"></span></b>, Seniority Number
+                  <b><span id="sid"></span></b>.
+                </p>
+
+                <!-- Additional points -->
+                <h2 style="font-size: 16px; text-decoration: underline">
+                  The site is booked under the following conditions:
+                </h2>
+                <ol style="font-weight: normal; font-size: 15px">
+                  <li>
+                    The booking of your site is purely based on rules and
+                    regulations of the society and provisions of Karnataka
+                    Co-operative registration act and the rules and By-laws of
+                    the society.
+                  </li>
+                  <li>
+                    The allotment of site is subject to approval of membership /
+                    associate membership, clearance of land by concerned
+                    authority and subject to availability of the site.
+                  </li>
+                  <li>
+                    Sites will be allotted on a first come first serve basis and
+                    Conditions mentioned behind the application will be
+                    applicable. Seniority number may change, in case of failing
+                    to pay the installment amount in time.
+                  </li>
+                  <li>
+                    Withdrawals or transfers of membership / bookings are only
+                    after the completion of the project period. Any withdrawal
+                    before completion of the project will be liable for penalty
+                    and Interest will not be paid for any withdrawals of site
+                    advances.
+                  </li>
+                  <li>
+                    All the remaining payments should be paid as per Defence
+                    Habitat Housing co-operative Society Norms. Bank loans will
+                    be arranged from leading banks after the plan approval.
+                  </li>
+                  <li>
+                    Installment amount should be paid within
+                    <span id="duration"></span> from the date of booking
+                    confirmation.
+                  </li>
+                  <li>Corner/Commercial plots will be charged extra.</li>
+                  <li>
+                    Any issues that arise in the process of completion of the
+                    project should be resolved in the General Body Meeting.
+                  </li>
+                  <li>
+                    As per rules & regulations of Karnataka Co-Operative
+                    Department, the paid amount will be refundable in case of
+                    project failure.
+                  </li>
+                  <!-- Add more list items for other points -->
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- Footer Image -->
+          <img
+            src="/img/footerSign.jpg"
+            alt="Footer Image"
+            class="footer-image"
+            style="width: 100%; height: 196px; margin-top: -2rem"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script language="javascript" type="text/javascript">
+      // Function to navigate back
+      function goBack() {
+        window.history.back();
+      }
+
+      // Function to print the div content
+      // function printDiv(divID) {
+      //     var divElements = document.getElementById(divID).innerHTML;
+      //     var oldPage = document.body.innerHTML;
+      //     document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body>";
+      //     window.print();
+      //     document.body.innerHTML = oldPage;
+      // }
+
+      function printDiv(divID) {
+        var divElements = document.getElementById(divID).innerHTML;
+        var oldPage = document.body.innerHTML;
+        document.body.innerHTML =
+          "<html><head><title></title></head><body>" + divElements + "</body>";
+        window.print();
+        document.body.innerHTML = oldPage;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const user_pk = urlParams.get("user_pk");
+        const user_project_pk = urlParams.get("user_project_pk");
+        console.log(user_project_pk, "user_project_pk");
+
+        // Make a GET request to the API with user_pk and user_project_pk
+        fetch(
+          `/gen_conn_view?user_pk=${user_pk}&user_project_pk=${user_project_pk}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle the API response here
+            if (data.result && data.result.length > 0) {
+              const membername = data.result[0].name1;
+              const address = data.result[0].name2;
+              const plotsize = data.result[0].name4;
+              const sqftprice = data.result[0].name5;
+              const date = data.result[0].name7;
+              const pro_address = data.result[0].name6;
+              const project_name = data.result[0].name3;
+              const amt = data.result[0].name8;
+              const paymentMode = data.result[0].name9;
+              const chequeddonline = data.result[0].name10;
+              const bank = data.result[0].name11;
+              const branch = data.result[0].name12;
+              const dimension = data.result[0].name13;
+              const recno = data.result[0].name14;
+              const memid = data.result[0].name15;
+              const senid = data.result[0].name16;
+              const idate = data.result[0].issuedate;
+              const duration = data.result[0].site_fk;
+              const formattedDate = new Date(idate).toLocaleDateString("en-GB");
+              const u_id = data.result[0].name17;
+              const mr_mrs_ms = data.result[0].mr_mrs_ms;
+
+              document.getElementById("memberNamePlaceholder").textContent =
+                membername;
+              document.getElementById("mr_mrs_ms").textContent = mr_mrs_ms;
+              document.getElementById("address").textContent = address;
+              document.getElementById("plt").textContent = plotsize;
+              document.getElementById("sqftrate").textContent = sqftprice;
+              document.getElementById("dt").textContent = date;
+              document.getElementById("paddrees").textContent = pro_address;
+              document.getElementById(
+                "pname"
+              ).textContent = `"${project_name}"`;
+              // document.getElementById('amt').textContent = amt + " (" + convertNumberToWords(parseInt(amt)) + ")";
+              // document.getElementById('amt').textContent = `Rs. ${formatNumberIndianStyle(amt)}/- (Rupees ${convertNumberToWords(parseInt(amt))} Only)`;
+              // document.getElementById('amt').textContent = `Rs. ${formatNumberIndianStyle(amt)}/- (Rupees ${convertNumberToWords(amt)} Only)`;
+              document.getElementById(
+                "amt"
+              ).textContent = `Rs. ${formatNumberIndianStyle(
+                amt
+              )}/- (Rupees ${convertNumberToWords(parseInt(amt))} )`;
+
+              // Payment type logic
+              const paymentTypeElement = document.getElementById("paymenttype");
+              const chequeddonlineElement =
+                document.getElementById("chequeddonline");
+              const bearingTextElement = document.getElementById("bearingText");
+
+              paymentTypeElement.textContent = paymentMode;
+
+              if (paymentMode === "cheque" || paymentMode === "dd") {
+                bearingTextElement.textContent = "bearing No. ";
+                chequeddonlineElement.textContent = chequeddonline;
+              } else if (paymentMode === "online") {
+                bearingTextElement.textContent = ""; // Hide bearing text
+                chequeddonlineElement.textContent = `Transaction Ref. No. ${chequeddonline}`;
+              } else {
+                bearingTextElement.textContent = "";
+                chequeddonlineElement.textContent = "";
+              }
+
+              document.getElementById("bank").textContent = bank;
+              document.getElementById("branch").textContent = branch;
+              document.getElementById("sid").textContent = senid;
+              document.getElementById("mid").textContent = memid;
+              document.getElementById("dim").textContent = dimension;
+              document.getElementById("rec").textContent = recno;
+              document.getElementById("idat").textContent = formattedDate;
+              document.getElementById("cn").textContent = u_id;
+              document.getElementById("duration").textContent = duration;
+
+              console.log("name: ", membername);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      });
+
+      // Format the number with commas based on the Indian numbering system
+      function formatNumberIndianStyle(num) {
+        const amountStr = num.toString();
+        const lastThreeDigits = amountStr.slice(-3); // Last 3 digits
+        const restDigits = amountStr.slice(0, -3); // Digits before last 3
+
+        return restDigits.length > 0
+          ? restDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+              "," +
+              lastThreeDigits
+          : lastThreeDigits;
+      }
+
+      // Convert the number to words based on the Indian numbering system
+      function convertNumberToWords(amount) {
+        const singleDigits = [
+          "",
+          "One",
+          "Two",
+          "Three",
+          "Four",
+          "Five",
+          "Six",
+          "Seven",
+          "Eight",
+          "Nine",
+        ];
+        const twoDigits = [
+          "Ten",
+          "Eleven",
+          "Twelve",
+          "Thirteen",
+          "Fourteen",
+          "Fifteen",
+          "Sixteen",
+          "Seventeen",
+          "Eighteen",
+          "Nineteen",
+        ];
+        const tensMultiple = [
+          "",
+          "",
+          "Twenty",
+          "Thirty",
+          "Forty",
+          "Fifty",
+          "Sixty",
+          "Seventy",
+          "Eighty",
+          "Ninety",
+        ];
+
+        const places = ["", "Thousand", "Lakh", "Crore"];
+
+        if (amount === 0) return "Zero Only";
+
+        function numToWordsHelper(n) {
+          let str = "";
+          if (n > 19) {
+            str +=
+              tensMultiple[Math.floor(n / 10)] + " " + singleDigits[n % 10];
+          } else if (n > 9) {
+            str += twoDigits[n - 10];
+          } else {
+            str += singleDigits[n];
+          }
+          return str.trim();
+        }
+
+        let amountStr = "";
+        let placeIndex = 0;
+
+        while (amount > 0) {
+          let part;
+          if (placeIndex === 1) {
+            // Handling thousands (two digits like 1,000 to 99,000)
+            part = amount % 100;
+            amount = Math.floor(amount / 100);
+          } else {
+            // Handling lakhs and crores (three digits like 1,00,000 and beyond)
+            part = amount % 1000;
+            amount = Math.floor(amount / 1000);
+          }
+
+          if (part > 0) {
+            let hundreds = Math.floor(part / 100);
+            let remainder = part % 100;
+
+            let wordPart =
+              (hundreds > 0 ? singleDigits[hundreds] + " Hundred " : "") +
+              numToWordsHelper(remainder);
+            amountStr =
+              wordPart +
+              (places[placeIndex] ? " " + places[placeIndex] : "") +
+              " " +
+              amountStr;
+          }
+          placeIndex++;
+        }
+
+        return amountStr.trim() + " Only";
+      }
+    </script>
+  </body>
+</html>

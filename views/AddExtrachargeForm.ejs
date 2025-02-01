@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <title>Side Navigation Bar in HTML CSS JavaScript</title>
+   <title>Defence Housing Society </title>
+  <link rel="icon" href="/img/logo200.png"> <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .menu-text {
+        font-size: 18px;
+      }
+    }
+
+    .icons-container {
+      display: flex;
+      gap: 10px;
+      /* Adjust as needed */
+      align-items: center;
+    }
+
+    .add-more-icon {
+      cursor: pointer;
+    }
+
+    .delete-icon {
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .radio-container {
+      display: flex;
+      /* justify-content: space-between; Adjust alignment as needed */
+    }
+
+    .radio-container label {
+      margin-right: 50px;
+      /* Adjust spacing between radio buttons */
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('partials/navbar') %>
+
+    <!-- Add your card here -->
+    <div id="content" style="margin-top: 6rem;">
+      <!-- Content Goes Here -->
+      <span class="menu-text">Page Title</span>
+      <!-- Form Inside Card -->
+      <form id="Extrachargesform">
+        <div class="card">
+          <h3 class="card-title">Extra Charge User Details</h3>
+          <div class="form-row"></div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="seniorityIdFrom">Seniority ID</label>
+              <input list="seniorityIdsList" type="text" class="form-control" id="seniorityIdFrom" placeholder="Enter Seniority ID" />
+              <datalist id="seniorityIdsList" ></datalist>
+          </div>
+
+            <div class="form-group col-md-6">
+              <label for="Extrachargesname">Name</label>
+              <input type="text" id="Extrachargesname" class="form-control" placeholder="Enter name" required/>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ExtrachargesmobileNumber">Mobile Number</label>
+              <input type="text" id="ExtrachargesmobileNumber" class="form-control" placeholder="Enter mobile number"
+                pattern="[0-9]{10}" title="Please enter a 10-digit mobile number" required/>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="email">Email ID</label>
+              <input type="email" id="email" class="form-control" placeholder="Enter email address" required/>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="residenceAddress">Residence/Contact Address</label>
+              <textarea id="residenceAddress" class="form-control" rows="3"
+                placeholder="Enter residence/contact address"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Extra Charges Details </h3>
+          <div class="form-row"></div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="totalExtraAmnt">Amount</label>
+              <input type="text" id="totalExtraAmnt" class="form-control" placeholder="Enter Total Extra Amount" required/>
+            </div>
+
+
+             <div class="form-group col-md-6">
+              <label for="chequeNo">Cheque No</label>
+              <input type="text" id="chequeNo" class="form-control" placeholder="Enter Cheque Number" />
+            </div>
+          </div>
+
+          <div class="form-row">
+               <div class="form-group col-md-6">
+              <label for="paidDate">Paid Date</label>
+              <input type="date" id="paidDate" class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="reason">Reason</label>
+              <textarea id="reason" class="form-control" rows="3" placeholder="Enter Reason" required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary"  style="width: 70px; margin-top: 5px;margin-left: 25rem;">Submit</button>
+      </form>
+
+      <div class="modal" id="submissionStatusModal" tabindex="-1" role="dialog" aria-labelledby="submissionStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="submissionStatusModalLabel">Submission Status</h5>
+                    <button type="button" class="close" id="modalCloseButton" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="submissionStatusMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="closeModalButton" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"></script>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const seniorityIdFrom = document.getElementById('seniorityIdFrom');
+          const seniorityIdsList = document.getElementById('seniorityIdsList');
+          const Extrachargesname = document.getElementById('Extrachargesname');
+          const ExtrachargesmobileNumber = document.getElementById('ExtrachargesmobileNumber');
+          const email = document.getElementById('email');
+          const residenceAddress = document.getElementById('residenceAddress');
+    
+          seniorityIdFrom.addEventListener('input', function() {
+            fetch('/plots/sen_id')
+              .then(response => response.json())
+              .then(data => {
+                seniorityIdsList.innerHTML = '';
+                data.forEach(item => {
+                  const option = document.createElement('option');
+                  option.value = item.user_seniority_id;
+                  seniorityIdsList.appendChild(option);
+                });
+              })
+              .catch(error => console.error('Error fetching seniority IDs:', error));
+          });
+          seniorityIdFrom.addEventListener("keydown" , async (e) =>{
+            if(e.key == 'Enter' || e.key == 'Tab'){
+              e.preventDefault();
+              const seniorityId = e.target.value.trim();
+
+              if(!seniorityId){
+                clearInputFields();
+                return;
+              }
+
+              try{
+                const response = await fetch ("/plots/getdata",{
+                    method : "POST",
+                    headers: {
+                      "Content-Type" : "application/json",
+                    },
+                    body: JSON.stringify({seniorityId}),
+                  });
+                  const userData = await response.json();
+                  if(Array.isArray(userData)&&userData.length>0){
+                    const user = userData[0];
+                    document.getElementById("Extrachargesname").value = user.username ;
+                    document.getElementById("ExtrachargesmobileNumber").value = user.user_mobile;
+                    document.getElementById("email").value = user.user_email;
+                    document.getElementById("residenceAddress").value = user.user_address;
+                  } else{
+                    clearInputFields()
+                    alert("User not found")
+                  }
+
+              } catch(error){
+
+                console.error("Error fetching user information:", error);
+                alert("An error occurred while fetching user information");
+              }
+            }
+          })
+
+          function clearInputFields() {
+            // Clear other input fields
+            document.getElementById("seniorityIdFrom").value = "";
+            document.getElementById("Extrachargesname").value = "";
+            document.getElementById("ExtrachargesmobileNumber").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("residenceAddress").value = "";
+            document.getElementById("totalExtraAmnt").value = "";
+            document.getElementById("chequeNo").value = "";
+            document.getElementById("paidDate").value = "";
+            document.getElementById("reason").value = "";
+          }
+
+          const form = document.getElementById('Extrachargesform');
+          form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = {
+              seniorityID: document.getElementById('seniorityIdFrom').value,
+              name: document.getElementById('Extrachargesname').value,
+              mobileNumber: document.getElementById('ExtrachargesmobileNumber').value,
+              email: document.getElementById('email').value,
+              residenceAddress: document.getElementById('residenceAddress').value,
+              totalExtraAmnt: document.getElementById('totalExtraAmnt').value,
+              chequeNo: document.getElementById('chequeNo').value,
+              paidDate: document.getElementById('paidDate').value,
+              reason: document.getElementById('reason').value,
+            };
+
+            try {
+              const response = await fetch('/charges/submitForm', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+              });
+
+              const result = await response.json();
+              const submissionStatusModal = new bootstrap.Modal(document.getElementById('submissionStatusModal'), {
+                keyboard: false
+              });
+              const submissionStatusMessage = document.getElementById('submissionStatusMessage');
+              
+              if (response.ok) {
+                submissionStatusMessage.textContent = 'Data submitted successfully';
+              } else {
+                submissionStatusMessage.textContent = result.error || 'Error submitting data';
+              }
+              
+              submissionStatusModal.show();
+            } catch (error) {
+              console.error('Error submitting form:', error);
+              alert('An error occurred while submitting the form');
+            }
+          });
+
+          $('#submissionStatusModal').on('hidden.bs.modal', function () {
+            clearInputFields();
+          });
+        });
+      </script>
+
+</body>
+
+</html>

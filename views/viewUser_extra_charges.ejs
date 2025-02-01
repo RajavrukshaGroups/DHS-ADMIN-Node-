@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Table with Sidebar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+ <style>
+    /* Your provided CSS styles */
+    /* ... */
+    /* Add your table styles below */
+
+    /* Responsive Table */
+    .responsive-table-container {
+      /* margin-top: 85px; */
+       /* Adjust margin to clear the navbar */
+      transition: margin-left 0.5s ease; /* Add transition for smooth adjustment */
+      overflow-x: auto; /* Enable horizontal scrolling if needed */
+      margin-left: 22rem;
+      padding: 61px 20px 30px 0px;
+    }
+
+    .responsive-table {
+      width: 100%;
+      border-collapse: collapse;
+      /* margin-top: 61px; */
+      /* margin-left: 1px; */
+      /* margin-bottom: 2rem; */
+    }
+
+    .responsive-table th,
+    .responsive-table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    .responsive-table th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .responsive-table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .responsive-table tbody tr:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* Adjust table cell padding for responsiveness */
+    @media (max-width: 768px) {
+      .responsive-table th,
+      .responsive-table td {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <%- include('partials/navbar') %>
+    <!-- Sidebar content -->
+ 
+
+ <!-- Main Content -->
+ 
+<div id="content" class="responsive-table-container" style="margin-top: 6rem;">
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th >S.No</th>
+        <th >Project Details</th>
+        <th >Member Name</th>
+        <th >Total Ex.Amount</th>
+        <th >Reference ID</th>
+        <th >Paid Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+<script src="/js/script.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+// Fetch data from the API endpoint
+fetch('/charges/viewextracharges')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Get the table body element
+    const tableBody = document.getElementById('tableBody');
+
+    // Iterate through the data and create table rows
+    data.forEach((userExtra, index) => {
+      const row = document.createElement('tr');
+      // const pend_amt = user.plot_amount - user.paid_amount;
+      // let plt_size = user.plotsize_width ? `${user.plotsize_width}X${user.plotsize_height}` : '------';
+
+      // Populate the table cells with user data
+      const formattedAmount = formatNumber(userExtra.total_extra_amnt); // Format the amount
+
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>
+            <div>Seniority ID: ${userExtra.senior_id}</div>
+            <div>Project Name: ${userExtra.pro_name}</div>
+            <div>Property Size: ${userExtra.prop_dimension}</div>
+          </td>
+        <td>${userExtra.username}</td>
+        <td>${formattedAmount}/-</td>
+        <td>${userExtra.cheque_no}</td>
+        <td>${userExtra.paid_date}</td>
+         <td>
+           <a href="/editAddExtraCharges/${userExtra.senior_id}" class="edit-icon">
+               <i class="fas fa-edit"></i>
+           </a>
+    
+       </td>
+        `;
+      // Append the row to the table body
+      tableBody.appendChild(row);
+    });
+
+// Add event listener to all buttons with the class 'view-history-button'
+
+
+
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+});
+
+
+
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('viewExtra-history-button')) {
+    event.preventDefault();
+
+    // Get the user ID from the button's data attribute
+    const userExtraPk = event.target.getAttribute('data-userExtraid');
+
+    // Construct the URL with the user ID parameter
+    const viewExtraHistoryUrl = `/viewExtraHistroy?userExtraPk=${userExtraPk}`;
+
+    // Redirect the user to the viewhistory page with the user ID
+    window.location.href = viewExtraHistoryUrl;
+  }
+});
+
+
+const formatNumber = (number) => {
+    const formatter = new Intl.NumberFormat('en-IN');
+    return formatter.format(number);
+};
+
+
+  </script>
+ 
+</body>
+</html>

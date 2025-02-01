@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @media print {
+            body, html {
+                margin: 0;
+                padding: 0;
+                width: 100%; /* Ensure full width for printing */
+            }
+
+            .container {
+                max-width: none; /* Remove Bootstrap max-width for full width */
+            }
+
+            .img-fluid {
+                width: 100% !important; /* Force image to take full width */
+                height: auto !important; /* Maintain aspect ratio */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Image Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/img/letter.jpg" class="img-fluid" alt="Your Image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Print Icon -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary" onclick="printImage()">
+                    <i class="fas fa-print"></i> Print Image
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap and Font Awesome JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+
+    <script>
+        function printImage() {
+            window.print();
+        }
+    </script>
+</body>
+</html>

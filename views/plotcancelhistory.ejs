@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <style>
+    /* Your provided CSS styles */
+    /* ... */
+    /* Add your table styles below */
+
+    /* Responsive Table */
+    .responsive-table-container {
+      /* margin-top: 85px; */
+      /* Adjust margin to clear the navbar */
+      transition: margin-left 0.5s ease;
+      /* Add transition for smooth adjustment */
+      overflow-x: auto;
+      /* Enable horizontal scrolling if needed */
+      margin-left: 22rem;
+      padding: 61px 20px 30px 0px;
+    }
+
+    .responsive-table {
+      width: 100%;
+      border-collapse: collapse;
+      /* margin-top: 61px; */
+      /* margin-left: 1px; */
+      /* margin-bottom: 2rem; */
+    }
+
+    .responsive-table th,
+    .responsive-table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    .responsive-table th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .responsive-table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .responsive-table tbody tr:hover {
+      background-color: #e0e0e0;
+    }
+
+    /* Adjust table cell padding for responsiveness */
+    @media (max-width: 768px) {
+
+      .responsive-table th,
+      .responsive-table td {
+        padding: 8px;
+      }
+    }
+
+    .pagination {
+      display: inline-block;
+      margin-left: 69rem;
+      margin-top: 2rem;
+      border: 2px solid transparent;
+      box-shadow: 1px 1px 2px 2px;
+      background-color: white;
+    }
+
+    .pagination a {
+      color: black;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    .pagination a.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <%- include('partials/navbar') %>
+    <!-- Sidebar content -->
+
+    <div id="searchContainer" class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput"
+        style="width:25%">
+      <button class="btn btn-outline-primary" type="submit" id="searchButton">Search</button>
+    </div>
+    <!-- Main Content -->
+    <div id="content" class="responsive-table-container">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+            <th id="sNo">S.No</th>
+            <th>Member Details</th>
+            <th>Addres</th>
+            <th>Mobile Number</th>
+              <th>Action</th>
+
+
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+    <script src="/js/script.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const pageSize = 10; // Number of rows per page
+        let currentPage = 1;
+        let data = []; // Array to store all data
+        // Fetch data from the API endpoint
+        fetch('/plots/viewcanceldata')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(apiData => {
+            data = apiData; // Store fetched data
+            renderTable(); // Render initial table
+
+
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          });
+
+        function renderTable() {
+
+          const startIndex = (currentPage - 1) * pageSize;
+          const endIndex = startIndex + pageSize;
+          const paginatedData = data.slice(startIndex, endIndex);
+          const tableBody = document.getElementById('tableBody');
+          tableBody.innerHTML = ''; // Clear existing rows
+          // Iterate through the data and create table rows
+          paginatedData.forEach((user, index) => {
+            const row = document.createElement('tr');
+
+
+            // Populate the table cells with user data
+            row.innerHTML = `
+          <td>${startIndex + index + 1}</td>
+          <td>${user.username}<br>${user.user_email}</td>
+          <td>${user.user_address}</td>
+          <td>${user.user_mobile}</td>
+           <td>
+          <a class="delete-button" data-userid="${user.user_pk}" title="Delete" onClick="deleteUser(this)">
+            <i class="fas fa-trash"></i>
+          </a>
+         </td>
+        `;
+
+            // Append the row to the table body
+            tableBody.appendChild(row);
+          });
+          renderPagination();
+
+
+        }
+
+        function renderPagination() {
+          const totalPages = Math.ceil(data.length / pageSize);
+          const paginationElement = document.getElementById('pagination');
+          paginationElement.innerHTML = '';
+
+          // Check if pagination is needed (totalPages > 1)
+          if (totalPages > 1) {
+            // Determine the range of pages to display
+            const numPagesToShow = 5; // Adjust this number as needed
+            let startPage = Math.max(1, currentPage - Math.floor(numPagesToShow / 2));
+            let endPage = Math.min(totalPages, startPage + numPagesToShow - 1);
+
+            // Adjust startPage and endPage if necessary to ensure we have numPagesToShow pages
+            if (endPage - startPage + 1 < numPagesToShow) {
+              startPage = Math.max(1, endPage - numPagesToShow + 1);
+            }
+
+            // Render previous button
+            if (currentPage > 1) {
+              renderPaginationButton('«', currentPage - 1);
+            }
+
+            // Render page numbers
+            for (let i = startPage; i <= endPage; i++) {
+              if (i === currentPage) {
+                renderPaginationButton(`<b>${i}</b>`, i);
+              } else {
+                renderPaginationButton(i, i);
+              }
+            }
+
+            // Render next button
+            if (currentPage < totalPages) {
+              renderPaginationButton('»', currentPage + 1);
+            }
+          }
+        }
+
+        // Function to render a pagination button
+        function renderPaginationButton(label, page) {
+          const paginationElement = document.getElementById('pagination');
+          const pageLink = document.createElement('a');
+          pageLink.href = '#';
+          pageLink.innerHTML = label;
+          pageLink.addEventListener('click', () => {
+            currentPage = page;
+            renderTable();
+          });
+          paginationElement.appendChild(pageLink);
+        }
+
+        // Function to handle search
+        function handleSearch() {
+          const searchInput = document.getElementById('searchInput').value.trim().toLowerCase();
+          const filteredData = data.filter(user => {
+            // Customize this condition based on your search requirements
+            return user.username.toLowerCase().includes(searchInput)
+          });
+          renderFilteredTable(filteredData);
+        }
+
+
+
+        function renderFilteredTable(filteredData) {
+          const tableBody = document.getElementById('tableBody');
+          tableBody.innerHTML = ''; // Clear existing rows
+          // Calculate the index of the first item on the current page
+          const startIndex = (currentPage - 1) * pageSize;
+          console.log(startIndex);
+          // Reset overall index based on the start index of the current page
+          overallIndex = startIndex;
+
+          filteredData.forEach(user => {
+            const row = document.createElement('tr');
+
+            // Populate table cells with filtered user data
+            row.innerHTML = `
+      <td>${overallIndex + 1}</td>
+      <td>${user.username}<br>${user.user_email}</td>
+          <td>${user.user_address}</td>
+          <td>${user.user_mobile}</td>
+    `;
+
+            // Append the row to the table body
+            tableBody.appendChild(row);
+
+            // Increment overall index
+            overallIndex++;
+          });
+        }
+
+        // Event listener for search button click
+        document.getElementById('searchButton').addEventListener('click', handleSearch);
+
+      });
+
+
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    
+    <script>
+  async function deleteUser(element) {
+    console.log('function clicked');
+    const userId = element.getAttribute('data-userid');
+    try {
+      let response = await axios.post('https://adminpanel.defencehousingsociety.com/deletViewplotcancel', { userId });
+      console.log(response.data);
+      if(response.data.message=='User deleted successfully'){
+        location.reload()
+        alert('deleted successfully')
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  }
+</script>
+
+    <!-- JavaScript and additional content -->
+    <!-- Include your JavaScript files and other content here -->
+</body>
+
+</html>

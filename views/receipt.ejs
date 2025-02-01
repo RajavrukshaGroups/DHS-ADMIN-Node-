@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Receipt | Defence Habitat Housing Co-operative Society Ltd.</title>
+<meta name="Description" content="" /> 
+<meta name="Keywords" content="" /> 
+<meta name="robots" content="index,follow" /> 
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+    <link rel="icon" href="/img/fevicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet"  href="/css/bootstrap.min.css">
+    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" href="/css/receipt.css">
+
+
+<style>
+.logo-cnt{width:666px;font: 24px 'HelveticaLTStdRoman_0';    line-height: 30px;}
+.logo-cnt2{width:320px;}
+.logo-cnt4 {
+    float: left;
+    font: 24px 'HelveticaLTStdRoman_0';
+    color: #1b1b1b;
+    padding: 5px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    border: #000 1px solid;
+}
+.re-ceipt td+td+td+td{ text-align:center; width:6%;border-right:#000 0px solid;}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printer_ticket, #printer_ticket * {
+        visibility: visible;
+    }
+    #printer_ticket {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+</style>
+</head>
+
+<body >
+<!--================header start===========-->
+<header>
+   
+	<!-- <div style="position: relative;
+    bottom: -441px;
+    left: 300px;
+    z-index: 10000;
+    font-size: 100px;
+    color: #e1e1e1;
+    transform: rotate(-30deg);
+    opacity: 0.6;">
+        View Only
+    </div> -->
+<div class="re-container">
+	<div class="wrapper p2 rtop">
+		<a  style="float:left;color:black;font-weight:900;font-size:19px;"  onclick="goBack()" class="back-btn" ><img style="vertical-align:sub;" src="/img/go-back.png" /> Back </a>
+        <a style="color:black;float:right;font-weight:900;font-size:19px;" onclick="window.print();" class="print-btn">
+            <img style="vertical-align:middle;" src="/img/print.png" /> Click to Print
+        </a>
+        
+            </div>
+</div>   
+</header>
+<!--===========header end===============-->
+<!--=====================section start=============-->
+
+<section style="background:fff">
+						
+<section style="background-image:url(images/cancelled.png) ">
+
+<div class="re-container">
+
+<div class="wrapper p9">
+<div class="receipt-border" id="printer_ticket">
+	<div class="receipt-border1" style=" border-top:1px solid #000!important; border-left:1px solid #000!important; border-right:1px solid #000!important;">
+		<div class="wrapper p5" style="margin-bottom: 5px;">
+			<div class="re-logo">
+				<img src="/img/logo200.png" alt=""/>
+			</div>
+			<div class="logo-cnt">
+				<p class="logo-cnt1 p1"></p>
+				<p class="p2 1b1b1b" style="font:28px 'HelveticaLTStdBlkCond_0';">DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD.</p>
+				<p class="logo-cnt1 p1" style="font-weight: normal; text-align:center;">Behind Swathi Garden Hotel,  E-Block, Sahakar Nagar, Bangalore – 560092</p>
+				<p class="logo-cnt1 p1" style="padding-left:180px;font-weight: normal;">Mobile:+91 7026147770</p>
+			</div>
+		</div>
+		<div class="wrapper p4">
+		<p>
+			<span class="logo-cnt2" ><span style="font-weight:normal;">No.</span><span style="color:red;" id="recno"> </span></span> 
+			<span class="logo-cnt4" style="padding: 6px 20px;margin-left:0px;border:3px solid #000;    border-radius: 22px;"> RECEIPT</span> 
+			<span class="logo-cnt3">Date :
+				<span class="date-dot" style="width: 141px; font-size: 24px;" id="cdate"></span>
+			</span>
+			
+		</p>
+		</div>
+		<div class="wrapper p3">
+			<p class="logo-cnt1"><span style="float:left;margin-right:10px;font-weight:normal;background:#fff;" >Received from Smt./Sri :</span>
+				<span class="date-dot1" style="width:77%;text-align:left;" id="cname"></span>
+			</p>
+		</div>
+		<div class="wrapper p3">
+		<p class="logo-cnt1"><span style="float:left;margin-right:10px;font-weight:normal;background:#fff;" >Address :</span>
+				<span class="date-dot11" style="width: 90%;" id="caddress"></span>
+			</p>
+		</div>
+	</div>
+
+	<div class="receipt-bg" style=" border-bottom:1px solid #000!important; border-left:1px solid #000!important; border-right:1px solid #000!important;width: 860px;">
+	<div class="wmark"></div>
+		<div class="receipt-border2 p0">
+		<div class="wrapper">
+			
+			<p class="logo-cnt1 p3"><span style="float:left;margin-right:10px;font-weight:normal;background:#fff; ">Rupees :</span>
+				<span class="date-dot2" style="text-align:left;" id="rupeesvalue"> </span>
+				
+			</p>
+			
+			<div class="wrapper">
+			<p class="logo-cnt1 p3"><span style="float:left;margin-top:10px;font-weight:normal;background:#fff; ">RTGS/CHEQUES/DD No :</span>
+			<span class="date-dot2" style="width:75%;margin-top:10px; text-align:left;"  id="transactionId"><span style="float:right;">by</span></span>	
+			</p>
+			
+			</div>
+			<div class="wrapper">
+			<p class="logo-cnt1 p3"><span style="float:left;margin-top:10px;font-weight:normal;background:#fff; ">Branch :</span>
+			<span class="date-dot2" style="width:45%;margin-top:10px; text-align:left;float:left;margin-left: 10px;" id="branchname"></span>	
+			</p>
+			<p class="logo-cnt1 p3"><span style="float:left;margin-left:8px;font-weight:normal;background:#fff; ">Bank :</span>
+			<span class="date-dot2" style="width: 38%;text-align: left;height:20px;margin-left: 10px;" id="bankname" ><span style="position: absolute;right: 34%;bottom: 7px;"></span>	</span>
+			</p>
+			</div>
+			
+			<div class="wrapper" style="padding-bottom:10px;">
+			<p class="logo-cnt1 p3"><span style="float:left;margin-top:10px;font-weight:normal;background:#fff; ">Project Name :</span>
+			
+			<span class="date-dot2" style="width:86%;margin-top:10px; text-align:left;" id="projectname"></span>
+			
+			</p>
+			
+			
+			</div>
+			
+			
+		</div>
+		</div>
+		</div>
+		
+		
+		<div class="border-bottom1" style="width:100%;"></div>
+		<!--<div class="receipt-border2">-->
+			<table class="re-ceipt">
+				<tr class="re-mob_ftr">
+					<th></th>
+					<th style="width:10%;">L.F</th>
+					<th>Rs.</th>
+					<th style="border-right: 0px;">Ps.</th>
+				
+				</tr>
+				<!-- <tr hidden>
+					<td>
+					<span style="float:left; width:50px;">1.</span> Share 
+					<span class="tab-dot"></span></td>
+					<td></td>
+					<td style="text-align:right;"></td>
+					<td></td>
+				</tr> -->
+				<tr>
+					<td>
+					<span style="float:left;padding-left:12px; width:50px;">1.</span> Membership Fee
+					<span class="tab-dot"></span></td>
+					<td></td>
+					<td style="text-align:right;" class="membership-rupees-value"></td>
+					<td><span style="font-size:18px;" class="membership-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+					<span style="float:left;padding-left:12px; width:50px;">2.</span> Admission Fee 
+					<span class="tab-dot"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="admission-rupees-value"></td>
+					<td><span style="font-size:18px;" class="admission-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td><span style="float:left;padding-left:12px; width:50px;">3.</span> Share Fee 
+					<span class="tab-dot"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="share-rupees-value"></td>
+					<td><span style="font-size:18px;" class="share-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+					<span style="float:left;padding-left:12px; width:50px;">4.</span>Application Fee 
+					<span class="tab-dot"></span></td>
+					<td></td>
+					<td style="text-align:right;" class="application-rupees-value"></td>
+					<td><span style="font-size:18px;" class="application-paisa-value"></span></td>
+				</tr>
+				
+				<tr>
+					<td>
+						<span style="float:left;padding-left:12px; width:50px;">5.</span> Site Down Payment 
+						<span class="tab-dot" id="down-payment-dimension"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="site-down-payment-rupees-value"></td>
+					<td><span style="font-size:18px;" class="site-down-payment-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+						<span style="float:left;padding-left:12px; width:50px;">6.</span> Site Advance
+						<span class="tab-dot" id="advance-dimension"></span>
+						
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="site-advance-fee-rupees-value"></td>
+					<td><span style="font-size:18px;" class="site-advance-fee-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+						<span style="float:left;padding-left:12px; width:50px;">7.</span> 1st Installment
+						<span class="tab-dot" id="first-installment-dimension"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="first-installment-fee-rupees-value"></td>
+					<td><span style="font-size:18px;" class="first-installment-fee-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+						<span style="float:left;padding-left:12px; width:50px;">8.</span> 2nd Installment
+						<span class="tab-dot" id="second-installment-dimension"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="second-installment-fee-rupees-value"></td>
+					<td><span style="font-size:18px;" class="second-installment-fee-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+						<span style="float:left;padding-left:12px; width:50px;">9.</span> 3rd Installment
+						<span class="tab-dot" id="third-installment-dimension"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="third-installment-fee-rupees-value"></td>
+					<td><span style="font-size:18px;" class="third-installment-fee-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+						<span style="float:left;padding-left:12px; width:50px;">10.</span> 4th Installment
+						<span class="tab-dot" id="fourth-installment-dimension"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;" class="fourth-installment-fee-rupees-value"></td>
+					<td><span style="font-size:18px;" class="fourth-installment-fee-paisa-value"></span></td>
+				</tr>
+				
+				
+				<tr>
+					<td>
+					<span style="float:left;padding-left:12px; width:50px;">11.</span>Miscellaneous Expenses 
+					<span class="tab-dot">
+					
+					</span></td>
+					<td></td>
+					<td style="text-align:right;" class="miscellaneous-expenses-rupees-value"></td>
+					<td><span style="font-size:18px;" class="miscellaneous-expenses-paisa-value"></span></td>
+				</tr>
+				<tr>
+					<td>
+					<span style="float:left;padding-left:13px; width:50px;">12.</span>Other Charges
+					<span class="tab-dot"></span>
+					</td>
+					<td></td>
+					<td style="text-align:right;"></td>
+					<td><span style="font-size:18px;" class="other-charges-paisa-value"></span></td>
+				</tr>
+				
+			
+				
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th style="border-right:#000 0px solid;"></th>
+				</tr>
+			
+				</td>
+				<td><td><span style="font-weight:bold;float:center;">Total</span></td></td>
+				<td style="text-align:right;font-size: 22px;font-weight: bold;" class="total-rupees-value"></td>
+				<td><span style="font-weight:bold;font-size:22px;" class="total-paisa-value"></span></td>
+				</tr>
+				
+			</table>
+			 
+		<!--</div>-->
+		<div class="border-bottom1" style="width:100%;"></div>
+		<div class="wrapper">
+		<div class="receipt-border1">
+		<p class="mtop1">
+        <img src="/img/sign_.jpg" style="position: absolute;width: 150px;right: 9%;top: 4%;"/>
+				<span class="fright logo-cnt3" style="text-align:center;width:200px;font-size:18px;margin-right: 43px;line-height: 116px;"><span style="text-decoration: line-through;">President</span> &nbsp;/ Secretary</span>
+			</p>
+		</div>
+		</div>
+	</div>
+</div>
+</div>
+
+</div>
+</section>
+<!--==================section end===================-->
+<!--======================footer start===============-->
+<footer>
+</footer>
+<!--==================footer end===================-->
+</body>
+<!-- <script language="javascript" type="text/javascript">
+	function printDiv(divID) {
+	//alert(divID);
+		//Get the HTML of div
+		var divElements = document.getElementById(divID).innerHTML;
+		//Get the HTML of whole page
+		var oldPage = document.body.innerHTML;
+
+		//Reset the page's HTML with div's HTML only
+		document.body.innerHTML = 
+		  "<html><head><title></title></head><body>" + divElements + "</body>";
+		//Print Page
+		window.print();
+		//Restore orignal HTML
+		document.body.innerHTML = oldPage;
+	}
+</script>  -->
+<script>
+	// Function to navigate back
+	function goBack() {
+		window.history.back();
+	}
+</script>
+
+<script language="javascript" type="text/javascript">
+    function printDiv(divID) {
+    // Get the HTML of the div
+    var divElements = document.getElementById(divID).innerHTML;
+    // Store the original HTML of the page
+    var originalContent = document.body.innerHTML;
+
+    // Replace the body's HTML with the div's HTML
+    document.body.innerHTML = divElements;
+
+    // Trigger the print dialog
+    window.print();
+
+    // Restore the original HTML of the page
+    document.body.innerHTML = originalContent;
+}
+</script>
+
+<script>
+	const UrlParams =new URLSearchParams(window.location.search);
+	const receiptId = UrlParams.get('receiptId');
+	if(receiptId){
+		fetchReceiptData(receiptId);
+	}
+
+	function fetchReceiptData(receiptId) {
+    fetch(`/receipt/viewerreceipt/${receiptId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Data is ", data); // Log the fetched data
+            if (data) {
+                receiptData = data;
+
+                const createdDate = new Date(data['Created Date']);
+                const day = createdDate.getUTCDate().toString().padStart(2, '0');
+                const month = (createdDate.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+                const year = createdDate.getUTCFullYear();
+
+                const formattedDate = `${day}-${month}-${year}`;
+                console.log("Formatted Date:", formattedDate);
+                document.getElementById('recno').textContent = data['Receipt Number'];
+                document.getElementById('cdate').textContent = formattedDate;
+                document.getElementById('cname').textContent = data['User Name'];
+				document.getElementById('caddress').textContent = data['Receipt Address'];
+
+                // Check the total amount
+                const membershipFee = data['Membership Fee'] || 0;
+                const applicationFee = data['Application Fee'] || 0;
+                const admissionFee = data['Admission Fee'] || 0;
+                const shareFee = data['Share Fee'] || 0;
+                const miscellaneous = data['Miscellaneous'] || 0;
+                const otherCharges = data['Other Charges'] || 0;
+                const paymentAmount = data['Payment Amount'] || 0;
+
+                const totalAmount = membershipFee + applicationFee + admissionFee + 
+                                    shareFee + miscellaneous + otherCharges +
+                                    (data['Payment Type'] === 'advance' ? paymentAmount : 0) +
+                                    (data['Payment Type'] === 'downPayment' ? paymentAmount : 0) +
+                                    (data['Payment Type'] === 'installment' ? paymentAmount : 0);
+
+                console.log("Total Amount: ", totalAmount); // Log the total amount
+                console.log("Project Name: ", data['Project Name']); // Log the project name from data
+
+                // Update Project Name based on total amount
+                if (totalAmount === 2500) {
+                    document.getElementById('projectname').textContent = 'Membership Fee';
+                } else if (totalAmount > 2500) {
+                    document.getElementById('projectname').textContent = data['Project Name'];
+                }
+
+                document.getElementById('transactionId').textContent = data['Chequetransdd'];
+                document.getElementById('bankname').textContent = data['Bank Name'];
+                document.getElementById('branchname').textContent = data['Branch Name'];
+
+                // Populate membership, admission, share, and application fees
+                populateAmount('.membership-rupees-value', '.membership-paisa-value', membershipFee);
+                populateAmount('.admission-rupees-value', '.admission-paisa-value', admissionFee);
+                populateAmount('.share-rupees-value', '.share-paisa-value', shareFee);
+                populateAmount('.application-rupees-value', '.application-paisa-value', applicationFee);
+                populateAmount('.miscellaneous-expenses-rupees-value', '.miscellaneous-expenses-paisa-value', miscellaneous);
+                populateAmount('.other-charges-rupees-value', '.other-charges-paisa-value', otherCharges);
+
+ // Function to display dimension with enhanced debugging
+ function displayDimension(dimension, elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = dimension || "N/A"; // Default to "N/A" if dimension is empty or undefined
+    } else {
+        console.error(`Element with ID ${elementId} not found.`);
+    }
+}
+
+
+
+
+
+                // Populate payment amount based on payment type and installment
+                let siteAdvanceFee = 0;
+                let siteDownPayment = 0;
+                let firstInstallmentFee = 0;
+                let secondInstallmentFee = 0;
+                let thirdInstallmentFee = 0;
+
+                if (data['Payment Type'] === 'advance') {
+                    siteAdvanceFee = paymentAmount;
+                    populateAmount('.site-advance-fee-rupees-value', '.site-advance-fee-paisa-value', siteAdvanceFee);
+                    displayDimension(data['Property Dimension'], 'advance-dimension');
+                } else if (data['Payment Type'] === 'downPayment') {
+                    siteDownPayment = paymentAmount;
+                    populateAmount('.site-down-payment-rupees-value', '.site-down-payment-paisa-value', siteDownPayment);
+                    displayDimension(data['Property Dimension'], 'down-payment-dimension');
+                } 
+
+				else if (data['Payment Type'] === 'installment') {
+    			let dimension = data['Property Dimension'];
+    			console.log('Dimension Value:', dimension);
+
+    			if (data['Installments'] === 'installment1') {
+        		firstInstallmentFee = paymentAmount;
+        		populateAmount('.first-installment-fee-rupees-value', '.first-installment-fee-paisa-value', firstInstallmentFee);
+        		displayDimension(dimension, 'first-installment-dimension');
+        		console.log("Property Dimension for Installment 1:", dimension);
+    			} else if (data['Installments'] === 'installment2') {
+        		secondInstallmentFee = paymentAmount;
+        		populateAmount('.second-installment-fee-rupees-value', '.second-installment-fee-paisa-value', secondInstallmentFee);
+        		displayDimension(dimension, 'second-installment-dimension');
+        		console.log("Property Dimension for Installment 2:", dimension);
+    			} else if (data['Installments'] === 'installment3') {
+        		thirdInstallmentFee = paymentAmount;
+        		populateAmount('.third-installment-fee-rupees-value', '.third-installment-fee-paisa-value', thirdInstallmentFee);
+        		displayDimension(dimension, 'third-installment-dimension');
+        		console.log("Property Dimension for Installment 3:", dimension);
+    	}
+	}
+
+				
+				// else if (data['Payment Type'] === 'installment') {
+                //     if (data['Installments'] === 'installment1') {
+                //         firstInstallmentFee = paymentAmount;
+                //         populateAmount('.first-installment-fee-rupees-value', '.first-installment-fee-paisa-value', firstInstallmentFee);
+                //         displayDimension(data['property-dimension'], 'first-installment-dimension');
+        		// 		console.log("Property Dimension for Installment 1:", data['Property Dimension'] ,) ;
+				// 		console.log("First Installment Dimension Element Content:", document.getElementById('first-installment-dimension').textContent);
+
+                //     } else if (data['Installments'] === 'installment2') {
+                //         secondInstallmentFee = paymentAmount;
+                //         populateAmount('.second-installment-fee-rupees-value', '.second-installment-fee-paisa-value', secondInstallmentFee);
+                //         displayDimension(data['property-dimension'], 'second-installment-dimension');
+				// 		console.log("Property Dimension for Installment 2:", data['Property Dimension']);
+
+                //     } else if (data['Installments'] === 'installment3') {
+                //         thirdInstallmentFee = paymentAmount;
+                //         populateAmount('.third-installment-fee-rupees-value', '.third-installment-fee-paisa-value', thirdInstallmentFee);
+                //         displayDimension(data['property-dimension'], 'third-installment-dimension');
+				// 		console.log("Property Dimension for Installment 3:", data['Property Dimension']);
+
+                //     }
+                // }
+
+                // Calculate and display total amounts
+                const totalAmounts = calculateAndDisplayTotalAmounts({
+                    membershipFee,
+                    applicationFee,
+                    admissionFee,
+                    shareFee,
+                    siteAdvanceFee,
+                    siteDownPayment,
+                    firstInstallmentFee,
+                    secondInstallmentFee,
+                    thirdInstallmentFee,
+                    miscellaneousExpenses: miscellaneous,
+                    otherCharges: otherCharges
+                });
+
+                // Format total amount in words
+                const totalAmountInWords = formatAmountInWords(totalAmounts.totalRupees + totalAmounts.totalPaisa / 100);
+                document.getElementById('rupeesvalue').textContent = totalAmountInWords;
+            } else {
+                console.error('Error: Data is empty.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching receipt data:', error);
+        });
+}
+
+// Function to populate the amount fields
+function populateAmount(rupeesSelector, paisaSelector, amount) {
+    if (amount) {
+        const rupees = Math.floor(amount);
+        const paisa = Math.round((amount - rupees) * 100);
+        document.querySelector(rupeesSelector).textContent = formatNumber(rupees);
+        document.querySelector(paisaSelector).textContent = paisa.toString().padStart(2, '0');
+    }
+}
+
+// Function to calculate and display the total amounts
+function calculateAndDisplayTotalAmounts(data) {
+    const amounts = [
+        'membershipFee',
+        'applicationFee',
+        'admissionFee',
+        'shareFee',
+        'siteAdvanceFee',
+        'siteDownPayment',
+        'firstInstallmentFee',
+        'secondInstallmentFee',
+        'thirdInstallmentFee',
+        'miscellaneousExpenses',
+        'otherCharges'
+    ];
+
+    let totalRupees = 0;
+    let totalPaisa = 0;
+
+    amounts.forEach(amount => {
+        if (data[amount]) {
+            totalRupees += Math.floor(data[amount]);
+            totalPaisa += Math.round((data[amount] - Math.floor(data[amount])) * 100);
+        }
+    });
+
+    totalRupees += Math.floor(totalPaisa / 100);
+    totalPaisa = totalPaisa % 100;
+
+    document.querySelector('.total-rupees-value').textContent = formatNumber(totalRupees) ;
+    document.querySelector('.total-paisa-value').textContent = totalPaisa.toString().padStart(2, '0');
+
+    return { totalRupees, totalPaisa };
+}
+
+function convertNumberToWords(number) {
+    const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine','Ten'];
+    const teens = ['', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen','Twenty'];
+    const tens = ['', 'Ten', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+    let words = '';
+
+    if (number === 0) {
+        return 'Zero';
+    }
+
+    if (number < 0) {
+        words += 'minus ';
+        number = Math.abs(number);
+    }
+
+    if (number >= 10000000) {
+        words += convertNumberToWords(Math.floor(number / 10000000)) + ' Crore ';
+        number %= 10000000;
+    }
+
+    if (number >= 100000) {
+        words += convertNumberToWords(Math.floor(number / 100000)) + ' Lakh ';
+        number %= 100000;
+    }
+
+    if (number >= 1000) {
+        words += convertNumberToWords(Math.floor(number / 1000)) + ' Thousand ';
+        number %= 1000;
+    }
+
+    if (number >= 100) {
+        words += convertNumberToWords(Math.floor(number / 100)) + ' Hundred ';
+        number %= 100;
+    }
+
+    if (number >= 20) {
+        words += tens[Math.floor(number / 10)] + ' ';
+        number %= 10;
+    }
+
+    if (number > 10 && number < 20) {
+        words += teens[number - 10] + ' ';
+        number = 0;
+    }
+
+    if (number > 0) {
+        words += ones[number] + ' ';
+    }
+
+    return words.trim();
+}
+
+function formatAmountInWords(amount) {
+    const amountInWords = convertNumberToWords(amount);
+    return amountInWords.replace(/\s+/g, ' ') + ' Only';
+}
+
+const formatNumber = (number) => {
+    const formatter = new Intl.NumberFormat('en-IN');
+    return formatter.format(number);
+};
+
+
+
+</script>
+
+
+    
+
+</html>

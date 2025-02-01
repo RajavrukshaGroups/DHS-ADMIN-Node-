@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <!-- Boxicons CSS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Defence Housing Soceity</title>
+    <link rel="icon" href="/img/logo200.png" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .menu-text {
+          font-size: 18px;
+        }
+      }
+
+      .icons-container {
+        display: flex;
+        gap: 10px;
+        /* Adjust as needed */
+        align-items: center;
+      }
+
+      .add-more-icon {
+        cursor: pointer;
+      }
+
+      .delete-icon {
+        cursor: pointer;
+        margin-left: auto;
+      }
+
+      .radio-container {
+        display: flex;
+        /* justify-content: space-between; Adjust alignment as needed */
+      }
+
+      .radio-container label {
+        margin-right: 50px;
+        /* Adjust spacing between radio buttons */
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <!-- Add your card here -->
+    <div id="content" style="margin-top: 6rem">
+      <!-- Content Goes Here -->
+      <span class="menu-text">Page Title</span>
+      <!-- Form Inside Card -->
+      <form id="plotTransferForm">
+        <div class="card">
+          <h3 class="card-title">Plot Transfer From</h3>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="seniorityIdFrom">Seniority ID</label>
+              <input
+                list="seniorityIdsList"
+                type="text"
+                class="form-control"
+                id="seniorityIdFrom"
+                placeholder="Enter Seniority ID"
+              />
+              <datalist id="seniorityIdsList"></datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="nameFrom">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nameFrom"
+                placeholder="Enter Name"
+                required
+              />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="emailFrom">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="emailFrom"
+                placeholder="Enter Email ID"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="projectLoadFrom">Project Load</label>
+              <input
+                type="text"
+                class="form-control"
+                id="projectLoadFrom"
+                required
+              />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="projectFrom">Project </label>
+              <select class="form-control" id="projectFrom"></select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="propertySizeFrom">Property Size</label>
+              <input
+                type="text"
+                class="form-control"
+                id="propertySizeFrom"
+                placeholder="Enter the plot Size"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Plot Transfer To</h3>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="memberNameTo">Member Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="memberNameTo"
+                placeholder="Enter Member Name"
+                required
+              />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="transferDate">Transfer Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="transferDate"
+                placeholder="Enter Member Name"
+                required
+              />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="mobileNumberTo">Mobile Number</label>
+              <input
+                type="text"
+                id="mobileNumberTo"
+                class="form-control"
+                placeholder="Enter mobile number"
+                pattern="[0-9]{10}"
+                title="Please enter a 10-digit mobile number"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="emailTo">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="emailTo"
+                placeholder="Enter Email ID"
+              />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="addressTo">Residence/Contact Address</label>
+              <textarea
+                id="addressTo"
+                class="form-control"
+                rows="3"
+                placeholder="Enter residence/contact address"
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="reason">Reason</label>
+              <textarea
+                id="reason"
+                class="form-control"
+                rows="3"
+                placeholder="Enter the reason"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 70px; margin-top: 5px"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal"
+      id="submissionStatusModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="submissionStatusModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="submissionStatusModalLabel">
+              Submission Status
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="submissionStatusMessage"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="closeModalButton"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script>
+
+    <script>
+      let cancel_pk;
+      document.addEventListener("DOMContentLoaded", () => {
+        const seniorityIdInput = document.getElementById("seniorityIdFrom");
+        const seniorityIdsList = document.getElementById("seniorityIdsList");
+        const projectFromSelect = document.getElementById("projectFrom");
+        const plotTransferForm = document.getElementById("plotTransferForm");
+
+        // Fetch seniority IDs from the API
+        fetch("/plots/sen_id")
+          .then((response) => response.json())
+          .then((data) => {
+            if (Array.isArray(data)) {
+              // Clear previous options in the datalist
+              seniorityIdsList.innerHTML = "";
+
+              // Create and append new options for the datalist
+              data.forEach((seniorityId) => {
+                const option = document.createElement("option");
+                option.value = seniorityId.user_seniority_id;
+                seniorityIdsList.appendChild(option);
+              });
+            }
+          })
+          .catch((error) =>
+            console.error("Error fetching seniority IDs:", error)
+          );
+
+        // Add event listener to fetch user data when Enter or Tab is pressed
+        seniorityIdInput.addEventListener("keydown", async (e) => {
+          if (e.key === "Enter" || e.key === "Tab") {
+            e.preventDefault(); // Prevent default behavior (moving focus to the next input on Tab press)
+            const seniorityId = e.target.value.trim();
+
+            if (!seniorityId) {
+              // Clear other input fields if Seniority ID is empty
+              clearInputFields();
+              return;
+            }
+
+            try {
+              const response = await fetch("/plots/getmemdata", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ seniorityId }),
+              });
+
+              const userData = await response.json();
+
+              if (Array.isArray(userData) && userData.length > 0) {
+                // Update the UI with fetched user information
+                const user = userData[0];
+                document.getElementById("nameFrom").value = user.username;
+                document.getElementById("emailFrom").value = user.user_email;
+                document.getElementById("propertySizeFrom").value =
+                  user.plotsize_dimensions;
+                document.getElementById("projectLoadFrom").value =
+                  user.pro_name;
+                cancel_pk = user.user_pk;
+
+                // Clear previous options in the dropdown
+                projectFromSelect.innerHTML = "";
+
+                // Create and append new option for the project dropdown
+                const option = document.createElement("option");
+                option.value = user.project_id;
+                option.text = user.pro_name;
+                projectFromSelect.appendChild(option);
+              } else {
+                clearInputFields(); // Clear input fields if user not found
+                alert("User not found");
+              }
+            } catch (error) {
+              console.error("Error fetching user information:", error);
+              alert("An error occurred while fetching user information");
+            }
+          }
+        });
+
+        function clearInputFields() {
+          // Clear other input fields
+          document.getElementById("nameFrom").value = "";
+          document.getElementById("emailFrom").value = "";
+          document.getElementById("projectLoadFrom").value = "";
+          projectFromSelect.innerHTML = ""; // Clear dropdown options
+        }
+
+        function generateRandomString(n) {
+          const characters =
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          let randomString = "";
+          for (let i = 0; i < n; i++) {
+            const index = Math.floor(Math.random() * characters.length);
+            randomString += characters[index];
+          }
+          return randomString;
+        }
+
+        function generatePwd(length) {
+          const chars =
+            "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+          let password = "";
+          for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * chars.length);
+            password += chars.charAt(randomIndex);
+          }
+          return password;
+        }
+
+        plotTransferForm.addEventListener("submit", (e) => {
+          e.preventDefault(); // Prevent the default form submission behavior
+
+          // Get values from the form fields
+          const seniorityIdValue = seniorityIdInput.value.trim();
+          const nameFromValue = document
+            .getElementById("nameFrom")
+            .value.trim();
+          const emailFromValue = document
+            .getElementById("emailFrom")
+            .value.trim();
+          const projectLoadFromValue = document
+            .getElementById("projectLoadFrom")
+            .value.trim();
+          const projectFromValue = document
+            .getElementById("projectFrom")
+            .value.trim();
+          const propertySizeFromValue = document
+            .getElementById("propertySizeFrom")
+            .value.trim();
+          const memberNameToValue = document
+            .getElementById("memberNameTo")
+            .value.trim();
+          const transferDateValue = document
+            .getElementById("transferDate")
+            .value.trim();
+          const mobileNumberToValue = document
+            .getElementById("mobileNumberTo")
+            .value.trim();
+          const emailToValue = document.getElementById("emailTo").value.trim();
+          const addressToValue = document
+            .getElementById("addressTo")
+            .value.trim();
+          const reasonValue = document.getElementById("reason").value.trim();
+          const nu_pud = generatePwd(8);
+          const hash = CryptoJS.SHA1(nu_pud).toString();
+          const user_pwd = hash.substring(0, 8);
+          const member_PId = generateRandomString(6);
+
+          const data = {
+            seniorityIdValue,
+            nameFromValue,
+            emailFromValue,
+            projectLoadFromValue,
+            projectFromValue,
+            propertySizeFromValue,
+            memberNameToValue,
+            transferDateValue,
+            mobileNumberToValue,
+            emailToValue,
+            addressToValue,
+            reasonValue,
+            user_pwd,
+            member_PId,
+            cancel_pk,
+          };
+
+          console.log("Data : ", data);
+
+          const jsonData = JSON.stringify(data);
+
+          fetch("/plots/adddata", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: jsonData,
+          })
+            .then((response) => {
+              return response.json().then((data) => {
+                if (!response.ok) {
+                  const error = new Error(
+                    data.error || "Network response was not ok"
+                  );
+                  error.status = response.status;
+                  throw error;
+                }
+                return data;
+              });
+            })
+            .then((data) => {
+              console.log("Success:", data);
+              document.getElementById("submissionStatusMessage").innerText =
+                "Plot Transfer Form Submitted Successfully!";
+              $("#submissionStatusModal").modal("show");
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              document.getElementById(
+                "submissionStatusMessage"
+              ).innerText = `There was an error submitting the form: ${error.message}`;
+              $("#submissionStatusModal").modal("show");
+            });
+        });
+
+        // Add event listener to the close button and modal close button
+        document
+          .getElementById("closeModalButton")
+          .addEventListener("click", hideModalMessage);
+        document
+          .querySelector(".modal .close")
+          .addEventListener("click", hideModalMessage);
+
+        function hideModalMessage() {
+          document.getElementById("plotTransferForm").reset();
+          document.getElementById("submissionStatusMessage").innerText = "";
+          $("#submissionStatusModal").modal("hide");
+        }
+
+        // function hideModalMessage() {
+        //     // Clear the form content
+        //     document.getElementById('plotTransferForm').reset();
+        //     // Clear the modal message
+        //     document.getElementById('submissionStatusMessage').innerText = '';
+        // }
+      });
+    </script>
+  </body>
+</html>

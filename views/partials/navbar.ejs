@@ -1,0 +1,237 @@
+<!-- views/partials/navbar.ejs -->
+<link rel="stylesheet" href="/css/styles.css" />
+<link
+  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+  rel="stylesheet"
+/>
+
+<nav class="navbar">
+  <div class="logo_item">
+    <i class="bx bx-menu" id="sidebarOpen"></i>
+
+    <img src="/img/logo200.png" alt="" />
+    <i
+      >ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್ ಹೌಸಿಂಗ್ ಕೋ-ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.<br />
+      DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD.<br />
+      Reg. No.:- HSG-3/64/HHS/53744
+    </i>
+
+    <!-- Rest of the code -->
+  </div>
+
+  <!-- <div class="search_bar">
+        <input type="text" placeholder="Search" />
+      </div> -->
+
+  <div class="navbar_content">
+    <i class="bi bi-grid"></i>
+    <i class="" id="darkLight"></i>
+    <i class=""></i>
+    <!-- <span class="profile-name">John Doe</span> -->
+    <!-- <% if (typeof session !== 'undefined' && typeof session.user !== 'undefined' && session.user !== null) { %>
+        <span class="profile-name"><%= session.user.name %></span>
+    <% } %> -->
+    <span class="profile-name"><%= userName %></span>
+    <button class="btn btn-success" id="logoutBtn">Logout</button>
+  </div>
+</nav>
+<nav class="sidebar">
+  <div class="menu_content">
+    <ul class="menu_items">
+      <div class="menu_title menu_dahsboard"></div>
+      <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+      <!-- start -->
+      <li class="item">
+        <a href="#" class="nav_link">
+          <!-- <span class="navlink_icon">
+                <i class="bx bxs-magic-wand"></i>
+              </span> -->
+          <span class="navlink"></span>
+        </a>
+      </li>
+
+      <li class="item">
+        <a href="/" class="nav_link">
+          <span class="navlink_icon">
+            <i class="bx bx-grid-alt"></i>
+          </span>
+          <span class="navlink">Dashboard</span>
+        </a>
+      </li>
+
+      <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-buildings"></i>
+          </span>
+          <span class="navlink">Project</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
+
+        <ul class="menu_items submenu">
+          <a href="/AddProjectDetails" class="nav_link sublink"
+            >- Add Project Details</a
+          >
+          <a href="/AddProjectStatus" class="nav_link sublink"
+            >- Add Project Status</a
+          >
+          <a href="/pro_details" class="nav_link sublink">- View projects</a>
+          <a href="/viewPlotDimesion" class="nav_link sublink"
+            >- View Plot Dimensions</a
+          >
+          <a href="/viewLandDetails" class="nav_link sublink"
+            >- View Land Details</a
+          >
+          <a href="/ViewProjectStatus" class="nav_link sublink"
+            >- View Project Status</a
+          >
+        </ul>
+      </li>
+
+      <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-user"></i>
+          </span>
+          <span class="navlink">Member Details</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
+        <ul class="menu_items submenu">
+          <a href="/newuser" class="nav_link sublink">- Add New User</a>
+          <a href="/viewuser" class="nav_link sublink">- View User Details</a>
+          <a href="/viewmember" class="nav_link sublink"
+            >- View Member Details</a
+          >
+          <a href="/viewinactivemember" class="nav_link sublink"
+            >- View Inactive Members</a
+          >
+          <!--<a href="#" class="nav_link sublink">- View Member Due <br>Pending List</a>
+            <a href="#" class="nav_link sublink">- Online Application Member  <br>Details</a>
+            <a href="#" class="nav_link sublink">- View Contact Form  <br>Submissions</a>
+            -->
+        </ul>
+      </li>
+
+      <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-map"></i>
+          </span>
+          <span class="navlink">Plot Details</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
+        <ul class="menu_items submenu">
+          <a href="/plotTransferForm" class="nav_link sublink"
+            >- Plot Transfer Form</a
+          >
+          <a href="/PlotCancellation" class="nav_link sublink"
+            >- Plot Cancellation Form</a
+          >
+          <a href="/plotTransferhistory" class="nav_link sublink"
+            >- View Transferred Plot History</a
+          >
+          <a href="/viewplotcancel" class="nav_link sublink"
+            >- Plot Cancellation History</a
+          >
+        </ul>
+      </li>
+
+      <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-credit-card"></i>
+          </span>
+          <span class="navlink">Extra Charges Details</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
+        <ul class="menu_items submenu">
+          <a href="/AddExtraCharges" class="nav_link sublink"
+            >- Extra Charges Form</a
+          >
+          <a href="/viewUserExtraCharges" class="nav_link sublink"
+            >- View Extra Charges</a
+          >
+        </ul>
+      </li>
+
+      <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-receipt"></i>
+          </span>
+          <span class="navlink">Receipt Details</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
+        <ul class="menu_items submenu">
+          <a href="viewreciept" class="nav_link sublink">- View Reciepts</a>
+          <!-- <a href="#" class="nav_link sublink">- View Cancelled Reciepts</a> -->
+          <!-- <a href="/ManageRecieptAmount" class="nav_link sublink">- Manage Receipt Amount</a> -->
+          <a href="/view-sitebooking" class="nav_link sublink"
+            >-Site Booking Confirmation</a
+          >
+          <a href="/viewshare" class="nav_link sublink"
+            >- View Share Certficate</a
+          >
+        </ul>
+      </li>
+
+      <li class="item">
+        <div href="#" class="nav_link submenu_item">
+          <span class="navlink_icon">
+            <i class="bx bx-receipt"></i>
+          </span>
+          <span class="navlink">Downloads</span>
+          <i class="bx bx-chevron-right arrow-left"></i>
+        </div>
+        <ul class="menu_items submenu">
+          <a href="/viewdownloadapplication" class="nav_link sublink"
+            >- Applicaion Downloaded Users</a
+          >
+          <a href="/viewcontactedmember" class="nav_link sublink"
+            >- View Contacted Members</a
+          >
+          <a href="/viewonlineapllication" class="nav_link sublink"
+            >- View Online Application</a
+          >
+
+          <!--<a href="/viewcontactuswebsite" class="nav_link sublink">- Contacted Member From Website</a>-->
+          <!-- <a href="/ManageRecieptAmount" class="nav_link sublink">- Manage Receipt Amount</a> -->
+          <!-- <a href="/view-sitebooking" class="nav_link sublink">- View Site Booking</a> -->
+          <!-- <a href="/viewshare" class="nav_link sublink">- View Share Certficate</a> -->
+        </ul>
+      </li>
+    </ul>
+    <!-- Sidebar Open / Close -->
+    <div class="bottom_content">
+      <div class="bottom expand_sidebar">
+        <span> Expand</span>
+        <i class="bx bx-log-in"></i>
+      </div>
+      <div class="bottom collapse_sidebar">
+        <span> Collapse</span>
+        <i class="bx bx-log-out"></i>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- JavaScript -->
+<script src="/js/script.js"></script>
+
+<script>
+  document.getElementById("logoutBtn").addEventListener("click", () => {
+    fetch("/logout", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.redirected) {
+          // Redirect to the login page
+          window.location.href = response.url;
+        }
+      })
+      .catch((error) => {
+        console.error("Error logging out:", error);
+        alert("An error occurred during logout");
+      });
+  });
+</script>

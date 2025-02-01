@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Defence Housing Society</title>
+    <link rel="icon" href="/img/logo200.png" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      @media (max-width: 768px) {
+        .menu-text {
+          font-size: 18px;
+        }
+      }
+
+      .icons-container {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .add-more-icon {
+        cursor: pointer;
+      }
+
+      .delete-icon {
+        cursor: pointer;
+        margin-left: auto;
+      }
+
+      .radio-container {
+        display: flex;
+      }
+
+      .radio-container label {
+        margin-right: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <div id="content" style="margin-top: 6rem">
+      <span class="menu-text">Page Title</span>
+      <form id="plotcancelForm">
+        <div class="card">
+          <h3 class="card-title">Plot Cancellation Form</h3>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="seniorityIdFrom">Seniority ID</label>
+              <input
+                list="seniorityIdsList"
+                type="text"
+                class="form-control"
+                id="seniorityIdFrom"
+                placeholder="Enter Seniority ID"
+              />
+              <datalist id="seniorityIdsList"></datalist>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="nameFrom">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nameFrom"
+                placeholder="Enter Name"
+                required
+              />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="emailFrom">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="emailFrom"
+                placeholder="Enter Email ID"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="mobileNumber">Mobile Number</label>
+              <input
+                type="text"
+                id="mobileNumber"
+                class="form-control"
+                placeholder="Enter mobile number"
+                pattern="[0-9]{10}"
+                title="Please enter a 10-digit mobile number"
+                required
+              />
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="projectLoadFrom">Project Load</label>
+              <input type="text" class="form-control" id="projectLoadFrom" required/>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="propertySizeFrom">Property Size</label>
+              <input
+                type="text"
+                class="form-control"
+                id="propertySizeFrom"
+                placeholder="Enter the plot Size"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="doc">Date of Cancellation Confirmed</label>
+              <input type="date" id="doc" class="form-control" />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="cancellationReason">Reason For Cancellation</label>
+              <textarea
+                id="cancellationReason"
+                class="form-control"
+                rows="3"
+                placeholder="Enter the Reason For Cancellation"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="transactionId"
+                >Cheque Number /Transaction ID /DD Number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="transactionId"
+                placeholder="Enter Transaction ID"
+              />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="cancelationLetter">Upload Cancellation Letter</label>
+              <input
+                type="file"
+                class="form-control"
+                id="cancelationLetter"
+                accept="application/pdf"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 70px; margin-top: 5px"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div
+      class="modal"
+      id="submissionStatusModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="submissionStatusModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="submissionStatusModalLabel">
+              Submission Status
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="submissionStatusMessage"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="closeModalButton"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const seniorityIdInput = document.getElementById("seniorityIdFrom");
+        const seniorityIdsList = document.getElementById("seniorityIdsList");
+        const projectFromSelect = document.getElementById("projectFrom");
+    
+        fetch("/plots/sen_id")
+          .then((response) => response.json())
+          .then((data) => {
+            if (Array.isArray(data)) {
+              seniorityIdsList.innerHTML = "";
+    
+              data.forEach((seniorityId) => {
+                const option = document.createElement("option");
+                option.value = seniorityId.user_seniority_id;
+                seniorityIdsList.appendChild(option);
+              });
+            }
+          })
+          .catch((error) => console.error("Error fetching seniority IDs:", error));
+    
+        seniorityIdInput.addEventListener("keydown", async (e) => {
+          if (e.key === "Enter" || e.key === "Tab") {
+            e.preventDefault();
+    
+            const seniorityId = e.target.value.trim();
+    
+            if (!seniorityId) {
+              clearInputFields();
+              return;
+            }
+    
+            try {
+              const response = await fetch("/plots/getmemdata", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ seniorityId }),
+              });
+    
+              const userData = await response.json();
+    
+              if (Array.isArray(userData) && userData.length > 0) {
+                const user = userData[0];
+                document.getElementById("nameFrom").value = user.username;
+                document.getElementById("emailFrom").value = user.user_email;
+                document.getElementById("propertySizeFrom").value = user.plotsize_dimensions;
+                document.getElementById("projectLoadFrom").value = user.pro_name;
+    
+                document.getElementById("mobileNumber").value = user.user_mobile;
+                cancel_pk = user.user_pk;
+                cancel_pro_pk = user.user_project_pk;
+                cancel_mid = user.property_mid;
+                c_pid = user.project_id;
+                p_land_fk = user.project_land_fk;
+                p_price = user.property_price;
+              } else {
+                clearInputFields();
+                alert("User not found");
+              }
+            } catch (error) {
+              console.error("Error fetching user information:", error);
+              alert("An error occurred while fetching user information");
+            }
+          }
+        });
+    
+        function clearInputFields() {
+          document.getElementById("nameFrom").value = "";
+          document.getElementById("emailFrom").value = "";
+          document.getElementById("projectLoadFrom").value = "";
+          projectFromSelect.innerHTML = "";
+        }
+    
+        plotcancelForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+    
+          const seniorityIdValue = seniorityIdInput.value.trim();
+          const nameFromValue = document.getElementById("nameFrom").value.trim();
+          const emailFromValue = document.getElementById("emailFrom").value.trim();
+          const mobileNumberValue = document.getElementById("mobileNumber").value.trim();
+          const projectLoadFromValue = document.getElementById("projectLoadFrom").value.trim();
+          const propertySizeFromValue = document.getElementById("propertySizeFrom").value.trim();
+          const doc = document.getElementById("doc").value.trim();
+          const reasonValue = document.getElementById("cancellationReason").value.trim();
+    
+          const data = {
+            seniorityIdValue,
+            nameFromValue,
+            emailFromValue,
+            mobileNumberValue,
+            projectLoadFromValue,
+            propertySizeFromValue,
+            doc,
+            reasonValue,
+            cancel_pk,
+            cancel_pro_pk,
+            cancel_mid,
+            c_pid,
+            p_land_fk,
+            p_price,
+          };
+    
+          const jsonData = JSON.stringify(data);
+    
+          fetch("/plots/addcanceldata", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: jsonData,
+          })
+            .then((response) => {
+              if (!response.ok) {
+                return response.json().then((data) => {
+                  throw new Error(data.error || "Unknown error occurred");
+                });
+              }
+              return response.json();
+            })
+            .then((data) => {
+              document.getElementById("submissionStatusMessage").innerText = data.message;
+              $("#submissionStatusModal").modal("show");
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              document.getElementById("submissionStatusMessage").innerText = `There was an error submitting the form`;
+              $("#submissionStatusModal").modal("show");
+            });
+        });
+    
+        document.getElementById('closeModalButton').addEventListener('click', hideModalMessage);
+        document.querySelector('.modal .close').addEventListener('click', hideModalMessage);
+    
+        function hideModalMessage() {
+          document.getElementById('plotcancelForm').reset();
+          document.getElementById('submissionStatusMessage').innerText = '';
+          $('#submissionStatusModal').modal('hide');
+        }
+      });
+    </script>
+    
+  </body>
+</html>

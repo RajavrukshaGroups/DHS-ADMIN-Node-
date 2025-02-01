@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+  <link rel="stylesheet" href="/css/styles.css" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
+
+  <style>
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    .table th {
+      background-color: #f0f0f0;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .table tbody tr:hover {
+      background-color: #e0e0e0;
+    }
+
+    .action-icons i {
+      cursor: pointer;
+      margin-right: 5px;
+      color: #333;
+      /* Icon color */
+    }
+
+    /* Hide the edit form initially */
+    #editFormCard {
+      display: none;
+    }
+
+    /* Media query for responsiveness */
+    @media (max-width: 768px) {
+      .card {
+        padding: 10px;
+      }
+
+      .table th,
+      .table td {
+        padding: 8px;
+      }
+
+      .action-icons i {
+        font-size: 18px;
+      }
+    }
+
+    .pagination {
+      display: inline-block;
+      margin-left: 59rem;
+      margin-top: 2rem;
+      border: 2px solid transparent;
+      box-shadow: 1px 1px 2px 2px;
+      background-color: white;
+    }
+
+    .pagination a {
+      color: black;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+
+    .pagination a.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <%- include('partials/navbar') %>
+
+    <!-- Add your card here -->
+    <div id="content" style="margin-top: 6rem">
+      <!-- Content Goes Here -->
+      <span class="menu-text">Page Title</span>
+      <!-- Form Inside Card -->
+      <div class="card">
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th colspan="5" style="text-align: center;">Available Plot Dimensions</th>
+            </tr>
+            <tr>
+              <th>S.No</th>
+              <th>Width</th>
+              <th>Height</th>
+
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div id="pagination" class="pagination"></div>
+
+
+
+
+    <script src="/js/script.js"></script>
+
+    <script>
+       const pageSize = 5; // Number of rows per page
+        let currentPage = 1;
+        let data = []; // Array to store all data
+      document.addEventListener('DOMContentLoaded', () => {
+       
+
+        fetch('/project/viewPlotdimension')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(apiData => {
+            data = apiData; // Store fetched data
+            renderTable(); // Render initial table
+
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+
+      
+      });
+
+      function renderTable() {
+          const startIndex = (currentPage - 1) * pageSize;
+          const endIndex = startIndex + pageSize;
+          const paginatedData = data.slice(startIndex, endIndex);
+          const tableBody = document.getElementById('tableBody');
+          tableBody.innerHTML = ''; // Clear existing rows
+          // const tableBody = document.getElementById('tableBody');
+          if (!Array.isArray(data)) {
+            throw new Error('Data is not in the expected format');
+          }
+
+          paginatedData.forEach((item, index) => {
+            const row = `
+                    <tr>
+                        <td>${startIndex  + index + 1}</td>
+                        <td>${item.plotsize_width}</td>
+                        <td>${item.plotsize_height}</td>
+                    </tr>
+                `;
+            tableBody.innerHTML += row;
+          });
+          renderPagination();
+
+        }
+
+        function renderPagination() {
+          const totalPages = Math.ceil(data.length / pageSize);
+          const paginationElement = document.getElementById('pagination');
+          paginationElement.innerHTML = '';
+
+          // Check if pagination is needed (totalPages > 1)
+          if (totalPages > 1) {
+            // Determine the range of pages to display
+            const numPagesToShow = 5; // Adjust this number as needed
+            let startPage = Math.max(1, currentPage - Math.floor(numPagesToShow / 2));
+            let endPage = Math.min(totalPages, startPage + numPagesToShow - 1);
+
+            // Adjust startPage and endPage if necessary to ensure we have numPagesToShow pages
+            if (endPage - startPage + 1 < numPagesToShow) {
+              startPage = Math.max(1, endPage - numPagesToShow + 1);
+            }
+
+            // Render previous button
+            if (currentPage > 1) {
+              renderPaginationButton('«', currentPage - 1);
+            }
+
+            // Render page numbers
+            for (let i = startPage; i <= endPage; i++) {
+              if (i === currentPage) {
+                renderPaginationButton(`<b>${i}</b>`, i);
+              } else {
+                renderPaginationButton(i, i);
+              }
+            }
+
+            // Render next button
+            if (currentPage < totalPages) {
+              renderPaginationButton('»', currentPage + 1);
+            }
+          }
+        }
+
+        // Function to render a pagination button
+        function renderPaginationButton(label, page) {
+          const paginationElement = document.getElementById('pagination');
+          const pageLink = document.createElement('a');
+          pageLink.href = '#';
+          pageLink.innerHTML = label;
+          pageLink.addEventListener('click', () => {
+            currentPage = page;
+            renderTable();
+          });
+          paginationElement.appendChild(pageLink);
+        }
+
+
+
+    </script>
+
+
+</body>
+
+</html>

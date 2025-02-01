@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Table with Sidebar</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <style>
+      .responsive-table-container {
+        transition: margin-left 0.5s ease;
+        overflow-x: auto;
+        margin-left: 22rem;
+        padding: 61px 20px 30px 0px;
+      }
+
+      .responsive-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .responsive-table th,
+      .responsive-table td {
+        padding: 12px;
+        border: 1px solid #ddd;
+      }
+
+      .responsive-table th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .responsive-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .responsive-table tbody tr:hover {
+        background-color: #e0e0e0;
+      }
+
+      /* Adjust table cell padding for responsiveness */
+      @media (max-width: 768px) {
+        .responsive-table th,
+        .responsive-table td {
+          padding: 8px;
+        }
+      }
+
+      #myInput {
+        background-image: url("/css/searchicon.png");
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 38%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        margin-left: 23rem;
+        margin-top: 20rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <%- include('partials/navbar') %>
+    <div id="searchContainer" class="d-flex align-items-center">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        id="searchInput"
+        style="width: 25%"
+      />
+      <!-- <button class="btn btn-outline-primary" type="submit" id="searchButton">
+        Search
+      </button> -->
+      <p style="color: green; margin-left: 10px; margin-bottom: 0">
+        *search here on username,email,seniority id or project name
+      </p>
+    </div>
+    <div id="content" class="responsive-table-container">
+      <table class="responsive-table" id="responsive-table">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>
+              Member details & <br />
+              Seniority ID
+            </th>
+            <th>Project</th>
+            <th>Project Size</th>
+            <th>Project Price</th>
+            <th>Paid Amount</th>
+            <th>Pending Amount</th>
+            <th>Payment History</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Additional Details</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div id="pagination" class="pagination"></div>
+    <script src="/js/script.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const pageSize = 10; // Number of rows per page
+        let currentPage = 1;
+        let data = []; // Array to store all data
+
+        // Function to render table rows based on current page
+        function renderTable() {
+          const startIndex = (currentPage - 1) * pageSize;
+          const endIndex = startIndex + pageSize;
+          const paginatedData = data.slice(startIndex, endIndex);
+          const tableBody = document.getElementById("tableBody");
+          tableBody.innerHTML = ""; // Clear existing rows
+
+          paginatedData.forEach((user, index) => {
+            const row = document.createElement("tr");
+            const pend_amt = user.property_price - user.paid_amount;
+            const formattedAmount = formatNumber(pend_amt); // Format the amount
+            const formattedPaidAmount = formatNumber(user.paid_amount); // Format the amount
+            const formattedproperty_price = formatNumber(user.property_price); // Format the amount
+            // let plt_size = user.plotsize_width ? `${user.plotsize_width}X${user.plotsize_height}` : '------';
+            // Populate the table cells with user data
+            row.innerHTML = ` 
+      <td>${startIndex + index + 1}</td>
+      <td>${user.username}<br>${user.user_mobile}<br>${user.user_email}<br>${
+              user.senior_id
+            }</td>
+      <td>${user.pro_name}</td>
+      <td>${user.prop_dimension}</td>
+      <td>${formattedproperty_price}/-</td>
+      <td>${formattedPaidAmount}/-</td>
+      <td>${formattedAmount}/-</td>
+
+      <td><a class="view-history-button" data-userid="${
+        user.user_pk
+      }" style="cursor: pointer;">View History</a></td>
+      <td class="user-status-cell">${user.status}</td>
+      <td>
+        <i class="fas fa-trash" data-userid="${
+          user.user_pk
+        }" style="cursor: pointer;"></i>
+        <i class="fas fa-times" data-userid="${
+          user.user_pk
+        }" style="cursor: pointer;"></i>
+      </td>
+      <td>
+         <i class="fas fa-plus-circle addition-button" 
+         data-userpk="${user.user_pk}" 
+         data-userprojectpk="${user.user_project_pk}" 
+         data-toggle="tooltip" 
+         title="Add Confirmation Letter"
+         style="cursor: pointer;"></i>
+      </td>
+                                                                
+      <td>
+      <i class="fas fa-edit edit-button"
+       data-userpk="${user.user_pk}" 
+       data-userprojectpk="${user.user_project_pk}" 
+       data-toggle="tooltip" 
+       title="Edit items"
+       style="cursor: pointer;"></i>
+    </td>
+        `;
+
+            // Append the row to the table body
+            tableBody.appendChild(row);
+          });
+
+          // Render pagination controls
+          renderPagination();
+        }
+
+        function renderPagination() {
+          const totalPages = Math.ceil(data.length / pageSize);
+          const paginationElement = document.getElementById("pagination");
+          paginationElement.innerHTML = "";
+
+          // Render previous button
+          if (currentPage > 1) {
+            renderPaginationButton("«", currentPage - 1);
+          }
+
+          // Render page numbers
+          for (let i = 1; i <= totalPages; i++) {
+            if (i === currentPage) {
+              renderPaginationButton(`<b>${i}</b>`, i);
+            } else {
+              renderPaginationButton(i, i);
+            }
+          }
+
+          // Render next button
+          if (currentPage < totalPages) {
+            renderPaginationButton("»", currentPage + 1);
+          }
+        }
+
+        // Function to render a pagination button
+        function renderPaginationButton(label, page) {
+          const paginationElement = document.getElementById("pagination");
+          const pageLink = document.createElement("a");
+          pageLink.href = "#";
+          pageLink.innerHTML = label;
+          pageLink.addEventListener("click", () => {
+            currentPage = page;
+            renderTable();
+          });
+          paginationElement.appendChild(pageLink);
+        }
+
+        // Function to handle search
+        // function handleSearch() {
+        //   const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        //   const filteredData = data.filter(user => {
+        //     return user.username.toLowerCase().includes(searchInput) ||
+        //       user.pro_name.toLowerCase().includes(searchInput);
+        //   });
+        //   renderFilteredTable(filteredData);
+        // }
+        //     function renderFilteredTable(filteredData) {
+        //       const tableBody = document.getElementById("tableBody");
+        //       tableBody.innerHTML = "";
+        //       const startIndex = (currentPage - 1) * pageSize;
+        //       console.log(startIndex);
+        //       overallIndex = startIndex;
+        //       filteredData.forEach((user) => {
+        //         const row = document.createElement("tr");
+        //         const pend_amt = user.plot_amount - user.paid_amount;
+        //         const formattedAmount = formatNumber(pend_amt);
+        //         let plt_size = user.plotsize_width
+        //           ? `${user.plotsize_width}X${user.plotsize_height}`
+        //           : "------";
+        //         row.innerHTML = `
+        //   <td>${overallIndex + 1}</td>
+        //   <td>${user.username}<br>${user.user_mobile}<br>${user.user_email}<br>${
+        //           user.user_seniority_id
+        //         }</td>
+        //   <td>${user.pro_name}</td>
+        //   <td>${plt_size}</td>
+        //   <td>${user.plot_amount}</td>
+        //   <td>${user.paid_amount}</td>
+        //   <td>${formattedAmount}/-</td>
+        //   <td>${user.total_extra_amnt}</td>
+        //   <td><a class="view-history-button" data-userid="${
+        //     user.user_pk
+        //   }">View History</a></td>
+        //   <td class="user-status-cell">${user.user_status_display}</td>
+        //   <td>
+        //     <i class="fas fa-trash" data-userid="${user.user_pk}"></i>
+        //     <i class="fas fa-times" data-userid="${user.user_pk}"></i>
+        //   </td>
+        //   <td>${user.additional_details}</td>
+        // `;
+        //         tableBody.appendChild(row);
+        //         overallIndex++;
+        //       });
+        //     }
+        // Function to handle search
+        function handleSearch() {
+          const searchInput = document
+            .getElementById("searchInput")
+            .value.trim()
+            .toLowerCase();
+          if (searchInput === "") {
+            renderTable(); // Show full table when search is cleared
+          } else {
+            const filteredData = data.filter((user) => {
+              return (
+                user.username.toLowerCase().includes(searchInput) ||
+                user.user_email.toLowerCase().includes(searchInput) ||
+                user.pro_name.toLowerCase().includes(searchInput) ||
+                user.senior_id.toLowerCase().includes(searchInput)
+              );
+            });
+
+            renderFilteredTable(filteredData);
+          }
+        }
+
+        function renderFilteredTable(filteredData) {
+          const tableBody = document.getElementById("tableBody");
+          tableBody.innerHTML = "";
+
+          filteredData.forEach((user, index) => {
+            const pend_amt = user.property_price - user.paid_amount;
+            const formattedAmount = formatNumber(pend_amt);
+            const formattedPaidAmount = formatNumber(user.paid_amount);
+            const formattedPropertyPrice = formatNumber(user.property_price);
+
+            const row = document.createElement("tr");
+            row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${user.username || "N/A"}<br>${user.user_mobile || "N/A"}<br>${
+              user.user_email || "N/A"
+            }<br>${user.senior_id || "N/A"}</td>
+      <td>${user.pro_name || "N/A"}</td>
+      <td>${user.prop_dimension || "N/A"}</td>
+      <td>${formattedPropertyPrice}/-</td>
+      <td>${formattedPaidAmount}/-</td>
+      <td>${formattedAmount}/-</td>
+      <td><a class="view-history-button" data-userid="${
+        user.user_pk
+      }" style="cursor: pointer;">View History</a></td>
+      <td class="user-status-cell">${user.status || "N/A"}</td>
+      <td>
+        <i class="fas fa-trash" data-userid="${
+          user.user_pk
+        }" style="cursor: pointer;"></i>
+        <i class="fas fa-times" data-userid="${
+          user.user_pk
+        }" style="cursor: pointer;"></i>
+      </td>
+      <td>
+        <i class="fas fa-plus-circle addition-button" 
+          data-userpk="${user.user_pk}" 
+          data-userprojectpk="${user.user_project_pk}" 
+          data-toggle="tooltip" 
+          title="Add Confirmation Letter"
+          style="cursor: pointer;"></i>
+      </td>
+      <td>
+        <i class="fas fa-edit edit-button"
+          data-userpk="${user.user_pk}" 
+          data-userprojectpk="${user.user_project_pk}" 
+          data-toggle="tooltip" 
+          title="Edit items"
+          style="cursor: pointer;"></i>
+      </td>
+    `;
+
+            tableBody.appendChild(row);
+          });
+        }
+
+        // Event listener for search button click
+        // document
+        //   .getElementById("searchButton")
+        //   .addEventListener("click", handleSearch);
+        document
+          .getElementById("searchInput")
+          .addEventListener("input", handleSearch);
+        // Fetch data from API endpoint
+        fetch("/users/viewmembers")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((apiData) => {
+            data = apiData;
+            console.log("data123", data); // Store fetched data
+            renderTable(); // Render initial table
+          })
+          .catch((error) => {
+            console.error(
+              "There was a problem with the fetch operation:",
+              error
+            );
+          });
+      });
+      // Event listener for 'View History' button
+      document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("view-history-button")) {
+          event.preventDefault();
+          const userId = event.target.getAttribute("data-userid");
+          console.log("fetched datas 3:05", userId);
+
+          const viewHistoryUrl = `/viewhistory?userId=${userId}`;
+          window.location.href = viewHistoryUrl;
+        }
+      });
+      document
+        .getElementById("tableBody")
+        .addEventListener("click", function (event) {
+          if (event.target.classList.contains("fa-times")) {
+            const userId = event.target.dataset.userid;
+            console.log(userId);
+            fetch(`/users/updateUserStatus/${userId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                if (response.ok) {
+                  const statusCell = event.target
+                    .closest("tr")
+                    .querySelector(".user-status-cell");
+                  statusCell.textContent = "Inactive";
+                } else {
+                  console.error("Failed to update user status");
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating user status:", error);
+              });
+          }
+        });
+
+      document
+        .getElementById("tableBody")
+        .addEventListener("click", function (event) {
+          if (event.target.classList.contains("fa-trash")) {
+            const userId = event.target.dataset.userid;
+            console.log(userId);
+            const confirmation = confirm(
+              "Are you sure you want to delete this user?"
+            );
+            if (confirmation) {
+              fetch(`/users/deleteUser/${userId}`, {
+                method: "DELETE",
+              })
+                .then((response) => {
+                  if (response.ok) {
+                    // Remove the row from the table if deletion was successful
+                    event.target.closest("tr").remove();
+                  } else {
+                    console.error("Failed to delete user");
+                  }
+                })
+                .catch((error) => {
+                  console.error("Error deleting user:", error);
+                });
+            }
+          }
+        });
+
+      document
+        .getElementById("tableBody")
+        .addEventListener("click", function (event) {
+          if (event.target.classList.contains("addition-button")) {
+            const user_pk = event.target.getAttribute("data-userpk");
+            console.log(user_pk, "user_pk in addition-button");
+
+            const user_pro_pk = event.target.getAttribute("data-userprojectpk");
+            console.log(user_pro_pk);
+
+            const addConnUrl = `/add_conn?user_pk=${user_pk}&user_project_pk=${user_pro_pk}`;
+            console.log(addConnUrl);
+            // Navigate to the add_conn page with user ID and project PK
+            window.location.href = addConnUrl;
+          }
+        });
+
+      const formatNumber = (number) => {
+        const formatter = new Intl.NumberFormat("en-IN");
+        return formatter.format(number);
+      };
+
+      document
+        .getElementById("tableBody")
+        .addEventListener("click", function (event) {
+          if (event.target.classList.contains("edit-button")) {
+            event.preventDefault();
+            const user_pk = event.target.getAttribute("data-userpk"); // Extract user_pk
+            const user_pro_pk = event.target.getAttribute("data-userprojectpk");
+
+            // const userId = event.target.getAttribute('data-userid');
+            console.log("USER ID FETCHED in edit button", user_pk);
+            // console.log('user id in edit button',userId);
+
+            const EditViewUserUrl = `https://adminpanel.defencehousingsociety.com/editViewuser?user_pk=${user_pk}&user_project_pk=${user_pro_pk}`;
+            // const EditViewUserUrl = `http://localhost:4000/editViewuser?user_pk=${user_pk}&user_project_pk=${user_pro_pk}`;
+
+            window.location.href = EditViewUserUrl;
+          }
+        });
+    </script>
+  </body>
+</html>

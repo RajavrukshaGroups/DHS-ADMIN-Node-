@@ -1,0 +1,1201 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <!-- Boxicons CSS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Defence Housing Soceity</title>
+    <link rel="icon" href="/img/logo200.png" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .menu-text {
+          font-size: 18px;
+        }
+      }
+
+      .icons-container {
+        display: flex;
+        gap: 10px;
+        /* Adjust as needed */
+        align-items: center;
+      }
+
+      .add-more-icon {
+        cursor: pointer;
+      }
+
+      .delete-icon {
+        cursor: pointer;
+        margin-left: auto;
+      }
+
+      .radio-container {
+        display: flex;
+        /* justify-content: space-between; Adjust alignment as needed */
+      }
+
+      .radio-container label {
+        margin-right: 50px;
+        /* Adjust spacing between radio buttons */
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <!-- Add your card here -->
+    <div id="content" style="margin-top: 6rem">
+      <!-- Content Goes Here -->
+      <span class="menu-text">Page Title</span>
+      <!-- Form Inside Card -->
+      <form id="userDataForm" onsubmit="submituserdata(event)">
+        <div class="card">
+          <h3 class="card-title">Reference Details</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="refname">Name</label>
+              <input
+                type="text"
+                name="refname"
+                id="refname"
+                class="form-control"
+                placeholder="Enter name"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="refdesignation">Rank/Designation</label>
+              <input
+                type="text"
+                id="refdesignation"
+                class="form-control"
+                name="refdesignation"
+                placeholder="Enter rank/designation"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="refidNo">Service/ID No</label>
+              <input
+                type="text"
+                id="refidNo"
+                class="form-control"
+                name="refidNo"
+                placeholder="Enter service/ID number"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="relationship">Relationship with the Applicant</label>
+              <input
+                type="text"
+                id="relationship"
+                class="form-control"
+                name="relationship"
+                placeholder="Enter relationship"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Details -->
+
+        <!-- <div class="card">
+                    <h3 class="card-title">Property Details</h3>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="projectDropdown">Project</label>
+                            <select class="form-control" id="projectDropdown" name="projectDropdown" required>
+                                <option value="" selected disabled>Choose an option</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="plotDimensionDropdown">Property Size</label>
+                            <select class="form-control" id="plotDimensionDropdown" name="plotDimensionDropdown"
+                                required>
+                                <option value="" selected disabled>Choose an option</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="perSqftPrice">Per Sqft Property Price</label>
+                            <input type="text" id="perSqftPrice" class="form-control" name="perSqftPrice"
+                                oninput="calculateCosts()" placeholder="Enter per sqft property price" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="selectedPropertyCost">Selected Property Cost</label>
+                            <input type="text" id="selectedPropertyCost" class="form-control"
+                                name="selectedPropertyCost" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="twentyFivePercentCost">25% of the Property Cost</label>
+                            <input type="text" id="twentyFivePercentCost" class="form-control"
+                                name="twentyFivePercentCost" readonly />
+                        </div>
+                    </div>
+                </div> -->
+
+        <div class="card">
+          <h3 class="card-title">Property Details</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="projectDropdown">Project</label>
+              <select
+                class="form-control"
+                id="projectDropdown"
+                name="projectDropdown"
+                required
+              >
+                <option value="" selected disabled>Choose an option</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="plotDimensionDropdown">Property Size</label>
+              <select
+                class="form-control"
+                id="plotDimensionDropdown"
+                name="plotDimensionDropdown"
+                required
+              >
+                <option value="" selected disabled>Choose an option</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="perSqftPrice">Per Sqft Property Price</label>
+              <input
+                type="text"
+                id="perSqftPrice"
+                class="form-control"
+                name="perSqftPrice"
+                oninput="calculateCosts()"
+                placeholder="Enter per sqft property price"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="selectedPropertyCost">Selected Property Cost</label>
+              <input
+                type="text"
+                id="selectedPropertyCost"
+                class="form-control"
+                name="selectedPropertyCost"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Percentage</label>
+              <div>
+                <input
+                  type="radio"
+                  id="twentyFivePercent"
+                  name="percentage"
+                  value="25"
+                  onchange="calculateCosts()"
+                />
+                <label for="twentyFivePercent">25%</label>
+                <input
+                  type="radio"
+                  id="thirtyPercent"
+                  name="percentage"
+                  value="30"
+                  onchange="calculateCosts()"
+                />
+                <label for="thirtyPercent">30%</label>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="percentageCost">Selected Percentage Cost</label>
+              <input
+                type="text"
+                id="percentageCost"
+                class="form-control"
+                name="percentageCost"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal Details -->
+
+        <div class="card">
+          <h3 class="card-title">Personal Details</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="salutationDropdown">Salutation</label>
+              <select
+                id="salutationDropdown"
+                class="form-control"
+                name="salutationDropdown"
+              >
+                <option value="Mr">Mr</option>
+                <option value="Ms">Ms</option>
+                <option value="Mrs">Mrs</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                placeholder="Enter name"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="mobileNumber">Mobile Number</label>
+              <input
+                type="text"
+                id="mobileNumber"
+                class="form-control"
+                name="mobileNumber"
+                placeholder="Enter mobile number"
+                pattern="[0-9]{10}"
+                title="Please enter a 10-digit mobile number"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="altMobileNumber">Alternative Mobile Number</label>
+              <input
+                type="text"
+                id="altMobileNumber"
+                class="form-control"
+                name="altMobileNumber"
+                placeholder="Enter alternative mobile number"
+                pattern="[0-9]{10}"
+                title="Please enter a 10-digit mobile number"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="email">Email ID</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                name="email"
+                placeholder="Enter email address"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" class="form-control" name="dob" />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="fatherHusbandName">Father's/Spouse Name</label>
+              <input
+                type="text"
+                id="fatherHusbandName"
+                class="form-control"
+                name="fatherHusbandName"
+                placeholder="Enter father's/husband's name"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="residenceAddress"
+                >Correspondence/Contact Address</label
+              >
+              <textarea
+                id="residenceAddress"
+                class="form-control"
+                rows="3"
+                placeholder="Enter residence/contact address"
+                name="residenceAddress"
+              ></textarea>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="correspondenceAddress">Permanent Address</label>
+              <textarea
+                id="correspondenceAddress"
+                class="form-control"
+                rows="3"
+                name="correspondenceAddress"
+                placeholder="Enter correspondence address"
+              ></textarea>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="workingAddress">Working Address</label>
+              <textarea
+                id="workingAddress"
+                class="form-control"
+                rows="3"
+                name="workingAddress"
+                placeholder="Enter working address"
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="memberPhoto">Member Photo</label>
+              <input
+                type="file"
+                id="memberPhoto"
+                name="memberPhoto"
+                class="form-control-file"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="memberSign">Member Sign</label>
+              <input
+                type="file"
+                id="memberSign"
+                name="memberSign"
+                class="form-control-file"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Nominees Particular -->
+        <div class="card">
+          <h3 class="card-title">Nominees Particular</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="nomineename">Name</label>
+              <input
+                type="text"
+                id="nomineename"
+                name="nomineename"
+                class="form-control"
+                placeholder="Enter name"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="nomineeage">Age</label>
+              <input
+                type="text"
+                id="nomineeage"
+                name="nomineeage"
+                class="form-control"
+                placeholder="Enter nominee Age"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="nomineeRelationship">Relationship</label>
+              <input
+                type="text"
+                id="nomineeRelationship"
+                name="nomineeRelationship"
+                class="form-control"
+                placeholder="Enter nominee relationship with Applicant"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="nomineeaddress">Address</label>
+              <input
+                type="text"
+                id="nomineeaddress"
+                class="form-control"
+                name="nomineeaddress"
+                placeholder="Enter nominee Address"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Membership & Seniority Details -->
+
+        <div class="card">
+          <h3 class="card-title">Membership & Seniority Details</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="seniorityID">Seniority ID</label>
+              <input
+                type="text"
+                id="seniorityID"
+                class="form-control"
+                name="seniorityID"
+                placeholder="Enter seniority ID"
+              />
+              <small
+                id="seniorityIdError"
+                class="text-danger"
+                style="display: none"
+              >
+                Seniority ID already exists!
+              </small>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="membershipNo">Membership No</label>
+              <input
+                type="text"
+                id="membershipNo"
+                class="form-control"
+                name="membershipNo"
+                placeholder="Enter membership number"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="confirmationNo">Confirmation Letter No</label>
+              <input
+                type="text"
+                id="confirmationNo"
+                class="form-control"
+                name="confirmationNo"
+                placeholder="Enter confirmation letter number"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="shareCertificateNo">Share Certificate Number</label>
+              <input
+                type="text"
+                id="shareCertificateNo"
+                class="form-control"
+                name="shareCertificateNo"
+                placeholder="Enter share certificate number"
+              />
+              <small
+                id="shareCertificateNoError"
+                class="text-danger"
+                style="display: none"
+              >
+                Share Certificate Number already exists!!
+              </small>
+            </div>
+          </div>
+        </div>
+        <!-- Membership Details -->
+        <div class="card">
+          <h3 class="card-title">Membership Details</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="receiptNo" class="small-label">Receipt No</label>
+              <input
+                type="text"
+                id="receiptNo"
+                class="form-control small-input"
+                name="receiptNo"
+                placeholder="Enter receipt number"
+              />
+              <small
+                id="receiptError"
+                class="text-danger"
+                style="display: none"
+              >
+                Receipt number already exists!
+              </small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="recpdate">Date</label>
+              <input
+                type="date"
+                id="recpdate"
+                class="form-control"
+                name="recpdate"
+                placeholder="Enter date"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="noOfShares">No of Shares</label>
+              <input
+                type="text"
+                id="noOfShares"
+                class="form-control"
+                name="noOfShares"
+                placeholder="Enter number of shares"
+                value="2"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="shareFee">Share Fee</label>
+              <input
+                type="text"
+                id="shareFee"
+                class="form-control"
+                name="shareFee"
+                placeholder="Enter share fee"
+                value="2000"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="membershipFee">Membership Fee</label>
+              <input
+                type="text"
+                id="membershipFee"
+                class="form-control"
+                name="membershipFee"
+                placeholder="Enter membership fee"
+                value="100"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="applicationFee">Application Fee</label>
+              <input
+                type="text"
+                id="applicationFee"
+                class="form-control"
+                name="applicationFee"
+                placeholder="Enter application fee"
+                value="200"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="admissionFee">Admission Fee</label>
+              <input
+                type="text"
+                id="admissionFee"
+                class="form-control"
+                name="admissionFee"
+                placeholder="Enter admission fee"
+                value="100"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="miscExpenses">Miscellaneous Expenses</label>
+              <input
+                type="text"
+                id="miscExpenses"
+                class="form-control"
+                name="miscExpenses"
+                placeholder="Enter miscellaneous expenses"
+                value="100"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Details -->
+        <div id="paymentDetailsContainer">
+          <div class="card payment-card">
+            <h3 class="card-title">Payment Details</h3>
+            <!-- Payment Type Dropdown -->
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="paymentTypeDropdown">Payment Type:</label>
+                <input
+                  type="text"
+                  class="form-control payment-type-dropdown"
+                  id="paymentTypeDropdown"
+                  name="paymentTypeDropdown"
+                  value="Membership Fee"
+                />
+
+                <!-- <select class="form-control payment-type-dropdown" name="paymentTypeDropdown"
+                                    id="paymentTypeDropdown" required>
+                                    <option value="" selected disabled>
+                                        Choose payment type
+                                    </option>
+                                    <option value="advance">Site Advance</option>
+                                    <option value="downPayment">Site Down Payment</option>
+                                    <option value="installment">Installments</option>
+                                </select> -->
+              </div>
+              <!-- Payment Mode Dropdown -->
+              <div class="form-group col-md-6">
+                <label for="paymentModeDropdown">Payment Mode:</label>
+                <select
+                  id="paymentModeDropdown"
+                  class="form-control payment-mode-dropdown"
+                  name="paymentModeDropdown"
+                  required
+                  onchange="handlePaymentModeChange(this)"
+                >
+                  <option value="" selected disabled>
+                    Choose payment mode
+                  </option>
+                  <option value="cheque">Cheque</option>
+                  <option value="netbanking">Netbanking/UPI</option>
+                  <option value="cash">Cash</option>
+                  <option value="dd">DD</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Input Fields -->
+            <div class="form-row">
+              <div class="form-group col-md-6" id="bankNameGroup">
+                <label for="bankName">Bank Name:</label>
+                <input
+                  type="text"
+                  class="form-control bank-name-input"
+                  id="bankNameInput"
+                  name="bankNameInput"
+                />
+              </div>
+              <div class="form-group col-md-6" id="branchNameGroup">
+                <label for="branchName">Branch Name:</label>
+                <input
+                  type="text"
+                  class="form-control branch-name-input"
+                  id="branchNameInput"
+                  name="branchNameInput"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="amount">Amount:</label>
+                <input
+                  type="text"
+                  class="form-control amount-input"
+                  id="amount"
+                  name="amount"
+                  value="2500"
+                  required
+                />
+              </div>
+              <!-- <div class="form-group col-md-6">
+                                <label for="paymentDate">Payment Date:</label>
+                                <input type="date" class="form-control payment-date-input" id="paymentDate" name="paymentDate" required />
+                            </div> -->
+            </div>
+            <div class="form-row">
+              <div
+                id="dynamicField"
+                style="display: none"
+                class="form-group col-md-6"
+              >
+                <label id="dynamicLabel" for="dynamicInput"
+                  >Dynamic Field:</label
+                >
+                <input
+                  type="text"
+                  class="form-control dynamic-input"
+                  id="dynamicInput"
+                  name="dynamicInput"
+                />
+              </div>
+
+              <!-- Installments Dropdown (Initially Hidden) -->
+              <div
+                class="form-group installments-dropdown col-md-6"
+                style="display: none"
+              >
+                <label for="installmentsDropdown">Installments:</label>
+                <select
+                  class="form-control installments-dropdown"
+                  id="installmentsDropdown"
+                  name="installmentsDropdown"
+                >
+                  <option value="" selected disabled>Choose installment</option>
+                  <option value="installment1">Installment 1</option>
+                  <option value="installment2">Installment 2</option>
+                  <option value="installment3">Installment 3</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Add More Icon -->
+            <!-- <div class="icons-container">
+                            <div class="add-more-icon">
+                                <i class="bx bx-plus-circle" onclick="addPaymentCard(this)" style="color: black">Add
+                                    Additional payment Detail</i>
+                            </div>
+                            <div class="delete-icon" style="display: none">
+                                <i class="bx bx-trash" onclick="deletePaymentCard(this)" style="color: red">Delete the
+                                    Card</i>
+                            </div>
+                        </div> -->
+          </div>
+        </div>
+
+        <!-- Create reciept -->
+        <div class="card">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 70px; margin-top: 5px"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+
+      <div
+        class="modal fade"
+        id="submissionStatusModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="submissionStatusLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="submissionStatusLabel">
+                User Submission Status
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p id="submissionStatusMessage"></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/script.js"></script>
+    <script src="/js/adduser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        // When the modal is hidden
+        $("#submissionStatusModal").on("hidden.bs.modal", function () {
+          // Refresh the form
+          $("#userDataForm")[0].reset(); // Replace 'yourFormId' with the actual ID of your form
+        });
+
+        // Close button handler inside the modal
+        $(".close, .btn-secondary").on("click", function () {
+          $("#submissionStatusModal").modal("hide");
+        });
+      });
+
+      // dropdown for projectName
+
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("/project/projectNames")
+          .then((response) => response.json())
+          .then((data) => {
+            const projectDropdown = document.getElementById("projectDropdown");
+            data.forEach((project) => {
+              const option = document.createElement("option");
+              option.value = project.project_id;
+              console.log("option value", option.value);
+              option.textContent = project.pro_name;
+              option.setAttribute("pro_name", project.pro_name);
+              projectDropdown.appendChild(option);
+            });
+          })
+          .catch((error) =>
+            console.error("Error fetching project names:", error)
+          );
+
+        fetch("/project/plotDimensions")
+          .then((response) => response.json())
+          .then((data) => {
+            const plotDimensionDropdown = document.getElementById(
+              "plotDimensionDropdown"
+            );
+            data.forEach((dimension) => {
+              const option = document.createElement("option");
+              option.value = dimension.dimension;
+              option.textContent = dimension.dimension;
+              option.setAttribute("data-plotsize-pk", dimension.plotsize_pk); // Store plotsize_pk as data attribute
+              option.setAttribute(
+                "total-property-size",
+                dimension.property_size
+              );
+              plotDimensionDropdown.appendChild(option);
+            });
+          })
+          .catch((error) =>
+            console.error("Error fetching plot dimensions:", error)
+          );
+
+        // fetch("/receipt/viewReceipts")
+        //   .then((response) => response.json())
+        //   .then((data) => {
+        //     console.log("data123", data);
+        //     existingReceiptNumbers = data.receiptNumbers.map(String);
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error fetching plot dimensions:", error);
+        //   });
+      });
+
+      // Function to delete a payment card
+      function deletePaymentCard(iconElement) {
+        const paymentCard = iconElement.closest(".payment-card");
+        paymentCard.remove();
+      }
+
+      function handlePaymentModeChange(paymentModeDropdown) {
+        const dynamicField = paymentModeDropdown
+          .closest(".payment-card")
+          .querySelector("#dynamicField");
+        const dynamicLabel = paymentModeDropdown
+          .closest(".payment-card")
+          .querySelector("#dynamicLabel");
+        const bankNameGroup = paymentModeDropdown
+          .closest(".payment-card")
+          .querySelector("#bankNameGroup");
+        const branchNameGroup = paymentModeDropdown
+          .closest(".payment-card")
+          .querySelector("#branchNameGroup");
+
+        if (paymentModeDropdown.value === "dd") {
+          dynamicLabel.textContent = "DD Number:";
+          dynamicField.style.display = "block";
+          bankNameGroup.style.display = "block";
+          branchNameGroup.style.display = "block";
+        } else if (paymentModeDropdown.value === "netbanking") {
+          dynamicLabel.textContent = "Transaction ID / UTR No:";
+          dynamicField.style.display = "block";
+          bankNameGroup.style.display = "block";
+          branchNameGroup.style.display = "block";
+        } else if (paymentModeDropdown.value === "cheque") {
+          dynamicLabel.textContent = "Cheque Number:";
+          dynamicField.style.display = "block";
+          bankNameGroup.style.display = "block";
+          branchNameGroup.style.display = "block";
+        } else if (paymentModeDropdown.value === "cash") {
+          dynamicField.style.display = "none";
+          bankNameGroup.style.display = "none";
+          branchNameGroup.style.display = "none";
+        }
+      }
+
+      function addPaymentCard(iconElement) {
+        const paymentCard = iconElement.closest(".payment-card");
+        const clonedCard = paymentCard.cloneNode(true);
+
+        // Reset payment type dropdown value and other fields
+        const paymentTypeDropdown = clonedCard.querySelector(
+          ".payment-type-dropdown"
+        );
+        if (paymentTypeDropdown) {
+          paymentTypeDropdown.value = "";
+        }
+        clonedCard.querySelector("#bankNameInput").value = "";
+        clonedCard.querySelector("#branchNameInput").value = "";
+        // clonedCard.querySelector("#amount").value = "";
+        // clonedCard.querySelector("#paymentDate").value = "";
+        clonedCard.querySelector("#dynamicInput").value = "";
+
+        // Append cloned card to the container
+        document
+          .getElementById("paymentDetailsContainer")
+          .appendChild(clonedCard);
+
+        // Attach event listener to delete icon in the cloned card
+        const deleteIcon = clonedCard.querySelector(".delete-icon");
+        if (deleteIcon) {
+          deleteIcon.style.display = "block";
+          deleteIcon.addEventListener("click", function () {
+            deletePaymentCard(this);
+          });
+        }
+
+        // Show or hide Installments dropdown based on payment type
+        const clonedPaymentTypeDropdown = clonedCard.querySelector(
+          ".payment-type-dropdown"
+        );
+        const clonedInstallmentsDropdown = clonedCard.querySelector(
+          ".installments-dropdown"
+        );
+        if (clonedPaymentTypeDropdown && clonedInstallmentsDropdown) {
+          clonedPaymentTypeDropdown.addEventListener("change", function () {
+            if (this.value === "installment") {
+              clonedInstallmentsDropdown.style.display = "block";
+            } else {
+              clonedInstallmentsDropdown.style.display = "none";
+            }
+          });
+        }
+      }
+
+      // Event listener for payment type dropdown change
+      document
+        .querySelectorAll(".payment-type-dropdown")
+        .forEach((dropdown) => {
+          dropdown.addEventListener("change", function () {
+            const installmentsDropdown = this.closest(
+              ".payment-card"
+            ).querySelector(".installments-dropdown");
+            if (this.value === "installment") {
+              installmentsDropdown.style.display = "block";
+            } else {
+              installmentsDropdown.style.display = "none";
+            }
+          });
+        });
+
+      //     function calculateCosts() {
+      //     const propertySize = document.getElementById(
+      //         "plotDimensionDropdown"
+      //     ).value;
+      //     const perSqftPrice = parseFloat(
+      //         document.getElementById("perSqftPrice").value
+      //     );
+
+      //     if (!propertySize || isNaN(perSqftPrice)) {
+      //         alert(
+      //             "Please enter valid values for Property Size and Per Sqft Property Price."
+      //         );
+      //         return;
+      //     }
+
+      //     // Extract dimensions from property size input
+      //     const dimensions = propertySize
+      //         .split("x")
+      //         .map((dim) => parseFloat(dim.trim()));
+
+      //     if (dimensions.length !== 2 || dimensions.some((dim) => isNaN(dim))) {
+      //         alert(
+      //             'Please enter a valid property size in the format "length x width".'
+      //         );
+      //         return;
+      //     }
+
+      //     const selectedPropertyCost =
+      //         dimensions[0] * dimensions[1] * perSqftPrice;
+      //     const twentyFivePercentCost = (25 / 100) * selectedPropertyCost;
+
+      //     document.getElementById("selectedPropertyCost").value =
+      //         selectedPropertyCost.toFixed(2);
+      //     document.getElementById("twentyFivePercentCost").value =
+      //         twentyFivePercentCost.toFixed(2);
+      // }
+
+      function calculateCosts() {
+        const propertySize = document.getElementById(
+          "plotDimensionDropdown"
+        ).value;
+        const perSqftPrice = parseFloat(
+          document.getElementById("perSqftPrice").value
+        );
+        const selectedPercentage = document.querySelector(
+          'input[name="percentage"]:checked'
+        )?.value;
+
+        if (!propertySize || isNaN(perSqftPrice)) {
+          alert(
+            "Please enter valid values for Property Size and Per Sqft Property Price."
+          );
+          return;
+        }
+
+        // Extract dimensions from property size input
+        const dimensions = propertySize
+          .split("X")
+          .map((dim) => parseFloat(dim.trim()));
+
+        if (dimensions.length !== 2 || dimensions.some((dim) => isNaN(dim))) {
+          alert(
+            'Please enter a valid property size in the format "length x width".'
+          );
+          return;
+        }
+
+        const selectedPropertyCost =
+          dimensions[0] * dimensions[1] * perSqftPrice;
+
+        if (selectedPercentage) {
+          const percentageCost =
+            (selectedPercentage / 100) * selectedPropertyCost;
+          document.getElementById("percentageCost").value =
+            percentageCost.toFixed(2);
+        } else {
+          // Clear the percentage cost field if no percentage is selected
+          document.getElementById("percentageCost").value = "";
+        }
+
+        document.getElementById("selectedPropertyCost").value =
+          selectedPropertyCost.toFixed(2);
+      }
+    </script>
+
+    <script>
+      let existingReceiptNumbers = [];
+      let existingSeniorityIds = [];
+      let existingShareCertificateNos = [];
+      console.log("existingSeniorityIds", existingSeniorityIds);
+      console.log("existingReceiptNumbers", existingReceiptNumbers);
+
+      // Fetch receipt numbers from the server when the page loads
+      fetch("/receipt/viewReceipts")
+        .then((response) => response.json())
+        .then((data) => {
+          existingReceiptNumbers = data.receiptNumbers.map(String); // Store receipt numbers as strings
+          console.log(
+            "existingReceiptNumbers after fetch:",
+            existingReceiptNumbers
+          );
+        })
+        .catch((error) => {
+          console.error("Error fetching receipt numbers:", error);
+        });
+
+      fetch("/users/viewSeniorityId")
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data123",data)
+          existingSeniorityIds = data.seniorityIDs.map(String); // Store receipt numbers as strings
+          console.log("seniorityIDs after fetch:", existingSeniorityIds);
+        })
+        .catch((error) => {
+          console.error("Error fetching seniorityIDs:", error);
+        });
+
+      fetch("/users/viewShareCertificateNo")
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log("data123",data)
+          existingShareCertificateNos = data.share_certificate_nos.map(String); // Store receipt numbers as strings
+          console.log(
+            "shareCertification no after fetch:",
+            existingShareCertificateNos
+          );
+        })
+        .catch((error) => {
+          console.error("Error fetching shareCertification no:", error);
+        });
+
+      // Event listener for the receipt number input field
+      document
+        .getElementById("receiptNo")
+        .addEventListener("input", function () {
+          const receiptNo = this.value.trim();
+          const errorElement = document.getElementById("receiptError");
+
+          if (existingReceiptNumbers.includes(receiptNo)) {
+            errorElement.style.display = "block"; // Show error message if receipt number exists
+          } else {
+            errorElement.style.display = "none"; // Hide error message if receipt number is unique
+          }
+        });
+
+      document
+        .getElementById("seniorityID")
+        .addEventListener("input", function () {
+          const seniorityId = this.value.trim();
+          const errorElement = document.getElementById("seniorityIdError");
+          if (existingSeniorityIds.includes(seniorityId)) {
+            errorElement.style.display = "block"; // Show error message if seniority ID exists
+          } else {
+            errorElement.style.display = "none"; // Hide error message if seniority ID is unique
+          }
+        });
+
+      document
+        .getElementById("shareCertificateNo")
+        .addEventListener("input", function () {
+          const shareCertificateNo = this.value.trim();
+          const errorElement = document.getElementById(
+            "shareCertificateNoError"
+          );
+          if (existingShareCertificateNos.includes(shareCertificateNo)) {
+            errorElement.style.display = "block"; // Show error message if seniority ID exists
+          } else {
+            errorElement.style.display = "none"; // Hide error message if seniority ID is unique
+          }
+        });
+
+      // Calculate the total when any fee input is changed
+      function calculateTotal() {
+        // Get the values of the fee input fields
+        const membershipFee =
+          parseFloat(document.getElementById("membershipFee").value) || 0;
+        const applicationFee =
+          parseFloat(document.getElementById("applicationFee").value) || 0;
+        const admissionFee =
+          parseFloat(document.getElementById("admissionFee").value) || 0;
+        const miscExpenses =
+          parseFloat(document.getElementById("miscExpenses").value) || 0;
+        const shareFee =
+          parseFloat(document.getElementById("shareFee").value) || 0;
+
+        // Calculate the total
+        const total =
+          membershipFee +
+          applicationFee +
+          admissionFee +
+          miscExpenses +
+          shareFee;
+
+        // Update the "Amount" input field
+        document.getElementById("amount").value = total;
+      }
+
+      // Add event listeners to the fee input fields
+      document
+        .getElementById("membershipFee")
+        .addEventListener("input", calculateTotal);
+      document
+        .getElementById("applicationFee")
+        .addEventListener("input", calculateTotal);
+      document
+        .getElementById("admissionFee")
+        .addEventListener("input", calculateTotal);
+      document
+        .getElementById("miscExpenses")
+        .addEventListener("input", calculateTotal);
+      document
+        .getElementById("shareFee")
+        .addEventListener("input", calculateTotal);
+    </script>
+  </body>
+</html>

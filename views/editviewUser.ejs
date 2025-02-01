@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Edit USER DETAILS </title>
+    <link rel="icon" href="/img/logo200.png">
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        @media (max-width: 768px) {
+            .menu-text {
+                font-size: 18px;
+            }
+        }
+
+        .icons-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .add-more-icon,
+        .delete-icon {
+            cursor: pointer;
+        }
+
+        .delete-icon {
+            margin-left: auto;
+        }
+
+        .radio-container {
+            display: flex;
+        }
+
+        .radio-container label {
+            margin-right: 50px;
+        }
+        button[type="submit"] {
+    display: block; 
+   
+    width: 100%;
+    max-width: 200px; 
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <div id="content" style="margin-top: 6rem;">
+        <h1>Edit View User</h1>
+        <form id="userDataForm" onsubmit="submituserdata(event)">
+            <div class="card">
+                <h3 class="card-title" style="font-weight: bold;">Edit Member Details</h3>
+                <div class="form-row">
+                    <input type="hidden" name="user_pk" id="user_pk" value="<%= response.user_pk %>"/>
+                    <div class="form-group col-md-6">
+                        <label for="refname">Name</label>
+                        <input type="text" name="refname" id="refname" class="form-control"
+                            placeholder="Enter name" value="<%= response.username %>" /> 
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="senior_id">Seniority Id</label>
+                        <input type="text" name="senior_id" id="senior_id" class="form-control"
+                            placeholder="Enter seniority ID" value="<%= response.senior_id %>"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="emailInput">Email</label>
+                        <input type="email" name="emailInput" id="emailInput" class="form-control"
+                            placeholder="Enter email" value="<%= response.user_email %>" /> 
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="phoneInput">Phone</label>
+                        <input type="text" name="phoneInput" id="phoneInput" class="form-control"
+                            placeholder="Enter Phone Number" value="<%= response.user_mobile %>"/>
+                    </div>
+                    <% function formatDate(dateString) {
+                        if (!dateString) return ''; // Handle empty or undefined dates
+                        const date = new Date(dateString);
+                        const year = date.getFullYear();
+                        const month = ('0' + (date.getMonth() + 1)).slice(-2); // Ensures 2 digits for month
+                        const day = ('0' + date.getDate()).slice(-2); // Ensures 2 digits for day
+                        return `${year}-${month}-${day}`; // Format as YYYY-MM-DD
+                      } %>
+                    <div class="form-group col-md-6">
+                        <label for="phoneInput">Date Of Birth</label>
+                        <input type="date" name="dateofbirth" id="dateofbirth" class="form-control"
+                             value="<%= formatDate(response.user_date_birth) %>"/>         
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="projectprice">	Membership Fee</label>
+                        <input type="number" name="projectprice" id="projectprice" class="form-control"
+                            placeholder="Enter projectprice" value="<%= response.mem_amnt %>" /> 
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="property_price">property Amount</label>
+                        <input type="text" name="property_price" id="paid_amnt" class="form-control"
+                            placeholder="Enter paid Amount" value="<%= response.property_price%>"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="projectDropdown">Project</label>
+                        <select class="form-control" id="projectDropdown" name="projectDropdown">
+                            <option value="" disabled>Select a Project</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="plotDimensionDropdown">Property Size</label>
+                        <select class="form-control" id="plotDimensionDropdown" name="plotDimensionDropdown"
+                            >
+                            <option value="" disabled>Select a Size</option>
+                        </select>
+                    </div>
+                    
+                </div>
+               
+                <div style="display: flex; justify-content: center; padding: 0;">
+                    <button type="submit" class="btn btn-primary">Save Edit</button>
+                </div>
+            </div>  
+        </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectedProject = "<%= response.pro_name %>"; // Store the current selected project
+            const selectedDimension = "<%= response.prop_dimension %>"; // Store the current selected dimension
+            fetch("/project/projectNames")
+                .then((response) => response.json())
+                .then((data) => {
+                    const projectDropdown = document.getElementById("projectDropdown");
+                    data.forEach((project) => {
+                        const option = document.createElement("option");
+                        option.value = project.project_id;
+                        option.textContent = project.pro_name;
+                        if (project.pro_name === selectedProject) {
+                        option.selected = true; 
+                }
+                        projectDropdown.appendChild(option);
+                    });
+                });
+            // Load plot dimensions
+            fetch("/project/plotDimensions")
+            .then((response) => response.json())
+                    .then((data) => {
+                        const plotDimensionDropdown = document.getElementById("plotDimensionDropdown");
+                        data.forEach((dimension) => {
+                        const option = document.createElement("option");
+                        option.value = dimension.dimension;
+                        option.textContent = dimension.dimension;
+                        if (dimension.dimension === selectedDimension) {
+                            option.selected = true; // Select the dimension that matches the current user's value
+                        }
+                        plotDimensionDropdown.appendChild(option);
+                        });
+                 });
+             }
+        );
+    </script>
+    <script>
+       function submituserdata(event) {
+
+         event.preventDefault(); 
+
+         const refname = document.getElementById("refname").value.trim();
+         const senior_id = document.getElementById("senior_id").value.trim();
+         const emailInput = document.getElementById("emailInput").value.trim();
+         const phoneInput = document.getElementById("phoneInput").value.trim();
+         const dateofbirth = document.getElementById("dateofbirth").value.trim();
+         const projectprice = document.getElementById("projectprice").value.trim();
+         const paid_amnt = document.getElementById("paid_amnt").value.trim();
+         const projectDropdown = document.getElementById("projectDropdown").value;
+         const plotDimensionDropdown = document.getElementById("plotDimensionDropdown").value;
+
+                // Name validation
+                if (refname === "") {
+                      alert("Name is required.");
+                      return;
+                  }
+              
+                  // Seniority ID validation
+                  if (senior_id === "") {
+                      alert("Seniority ID is required.");
+                      return;
+                  }
+              
+                  // Email validation
+                  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                  if (!emailRegex.test(emailInput)) {
+                      alert("Please enter a valid email address.");
+                      return;
+                  }
+              
+                  // Phone validation
+                  const phoneRegex = /^[6-9]\d{9}$/;
+                  if (!phoneRegex.test(phoneInput)) {
+                      alert("Please enter a valid 10-digit phone number.");
+                      return;
+                  }
+              
+                  // Date of birth validation
+                  if (dateofbirth === "") {
+                      alert("Date of Birth is required.");
+                      return;
+                  }
+              
+                  // Project price validation
+                  if (projectprice === "" || isNaN(projectprice) || Number(projectprice) <= 0) {
+                      alert("Please enter a valid Project Price.");
+                      return;
+                  }
+              
+    // Paid amount validation
+    if (paid_amnt === "" || isNaN(paid_amnt) || Number(paid_amnt) < 0) {
+        alert("Please enter a valid Paid Amount.");
+        return;
+    }
+
+    // Project Dropdown validation
+    if (!projectDropdown) {
+        alert("Please select a project.");
+        return;
+    }
+
+    // Plot Dimension Dropdown validation
+    if (!plotDimensionDropdown) {
+        alert("Please select a property size.");
+        return;
+    }
+
+         const formData = new FormData(document.getElementById('userDataForm'));
+
+         const jsonData = {};
+         formData.forEach((value, key) => {
+             jsonData[key] = value;
+         });
+          fetch('https://adminpanel.defencehousingsociety.com/editUser', {
+     
+    // fetch('http://localhost:4000/editUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify(jsonData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        
+        if (data.message ==='User Editted Successfully') {
+            alert("User updated successfully");
+            window.location.href = '/viewuser';  
+        } else {
+            alert("Error updating user");
+        }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    }
+    </script>
+     <script>
+        var response = <%- JSON.stringify(response) %>;
+        console.log("Server-side response:", response);
+      
+    </script>
+    <script>
+        // Log the response object passed from the server to the browser's console
+        const response = <%- JSON.stringify(response) %>;
+        console.log("Response Object:", response);
+      </script> 
+</body>
+
+</html>

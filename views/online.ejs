@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family:"Cambria Math";
+            /* font-family: 'Math'; */
+            margin: 40px;
+        }
+
+        /* table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: "Cambria Math";
+            border: 1px solid;
+                } */
+/* 
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {padding-right: 71px;} */
+
+        .no-border {
+            border: none;
+        }
+
+        .no-padding {
+            padding: 0;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .double-column {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .double-column div {
+            width: 28%;
+            height: 160px;
+            border-left: 1px solid;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .title-cell {
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+
+        .amount-cell {
+            text-align: center;
+            font-weight: bold;
+            color: black;
+            vertical-align: middle;
+        }
+
+        .payment-methods td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .account-details {
+            border: 1px solid black;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            margin: auto;
+        }
+
+        .account-details h3 {
+            text-align: center;
+            color: blue;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+
+        .account-details p {
+            margin: 5px 0;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .terms {
+            padding: 20px;
+            max-width: 100%;
+            margin-top: 1rem;
+        }
+
+        .terms h3 {
+            text-align: center;
+            /* text-decoration: underline; */
+            /* font-size: 1.5em; */
+            margin-bottom: 20px;
+        }
+
+        .terms ol {
+            padding-left: 20px;
+        }
+
+        .terms li {
+            margin-bottom: 10px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        span {
+            color: black;
+            font-weight: bold;
+        }
+
+        .declaration {
+            /* border: 1px solid black; */
+            padding: 20px;
+            max-width: 100%;
+            margin: 10px;
+        }
+
+        .declaration h3 {
+            text-align: center;
+            /* text-decoration: underline; */
+            /* font-size: 1.5em; */
+            margin-bottom: 20px;
+        }
+
+        .declaration p {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        .signature-section {
+            margin-top:20px;
+        }
+
+        .signature-section div {
+            margin-bottom: 10px;
+        }
+
+        .signature-section div span {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .signature-section div span.signature {
+            width: 100%;
+            text-align: right;
+            margin-top: 0.5rem;
+
+        }
+
+        .office {
+            padding: 20px;
+            max-width: 100%;
+            margin: 2px;
+        }
+
+        .office h3 {
+            text-align: center;
+            /* text-decoration: underline; */
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .signature span {
+            margin: 0 50px;
+        }
+
+        p {
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .date {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+    
+        .input-field {
+            width: 200px;
+            padding: 5px;
+            border: none;
+        }
+
+        .signature {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .signature span {
+            margin: 0 50px;
+        }
+
+        .names {
+            border: none;
+            border-bottom: 2px solid;
+            width: 550px;
+            text-align: center;
+        }
+
+        .rank {
+            border: none;
+            border-bottom: 2px solid;
+            text-align: center;
+            width: 250px;
+        }
+
+        .relation {
+            border: none;
+            border-bottom: 2px solid;
+            width: 550px;
+            text-align: center;
+        }
+
+        .located {
+            border: none;
+            border-bottom: 2px solid;
+            text-align: center;
+            width: 330px;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .booked {
+            border: none;
+            border-bottom: 2px solid;
+            text-align: center;
+            width: 330px;
+        }
+
+        .margint {
+            margin-top: 0.5rem;
+        }
+
+        .defence {
+            border: none;
+            border-bottom: 2px solid;
+            text-align: center;
+            width: 500px;
+        }
+
+        .defencemargin {
+            margin-top: 1rem;
+        }
+
+        .phone {
+            border: none;
+            border-bottom: 2px solid;
+            text-align: center;
+            width: 295px;
+        }
+
+        .photoframe {
+            border: 2px solid;
+            height: auto;
+            width: 206px;
+            margin-top: 2rem;
+        }
+
+        .dateof {
+            border: none;
+            border-bottom: 2px solid;
+            text-align: center;
+            width: 380px;
+        
+        }
+
+        .amount {
+            border: none;
+            border-bottom: 2px solid;
+            text-align: center;
+            width: 244px;
+        }
+
+        .phonelabel {
+            padding: 1px
+        }
+
+        .receipt {
+            padding: 1px;
+        }
+
+        .signima {
+    position: relative;
+    left: 77%;
+    right: 0;
+    border: 2px solid;
+}
+
+        .signphoto{
+            margin-top: 1px;
+        }
+
+        .testsign{
+            margin-top: 1px;
+        }
+        .testsign1{
+            margin-top: 1px;
+        }
+
+        .printcontainer{
+            padding: 1px;
+        }
+
+        .text-wrap {
+      word-wrap: break-word;
+      word-break: break-all;
+      white-space: normal;
+      overflow-wrap: break-word;
+    }
+
+    .headingcolor{
+        color: black;
+        font-weight: bold;
+    }
+    .complete{
+        padding: 1px;
+    }
+.blackcolor{
+    color: black;
+    font-weight: bold;
+}
+
+.row.align-items-center {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+
+.dashed-line {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -7px;
+    position: relative;
+    margin-left: -118px;
+    margin-top: 2px;
+}
+
+.name-above-line {
+  position: absolute;
+  top: -9px; 
+  margin-left: 0rem;
+}
+
+
+
+.dashed-line-rank {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -20px;
+    position: relative;
+    margin-left: -46px;
+    margin-top: 5px;
+}
+
+.dashed-line-service{
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -62px;
+    position: relative;
+    margin-left: -62px;
+    margin-top: 5px;
+}
+
+
+
+.dashed-line-relation {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -9px;
+    position: relative;
+    margin-left: -134px;
+    margin-top: 2px;
+}
+
+
+
+.dashed-line-booked {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: 10px;
+    position: relative;
+    margin-left: -96px;
+    margin-top: 18px;
+}
+
+
+
+.dashed-line-defence {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -101px;
+    position: relative;
+    margin-left: -90px;
+    margin-top: 18px;
+}
+
+
+
+.dashed-line-habitat {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -233px;
+    position: relative;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+
+
+
+.dashed-line-phone {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -20px;
+    position: relative;
+    margin-left: -78px;
+    margin-top: 4px;
+}
+
+
+.dashed-line-mobile {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -20px;
+    position: relative;
+    margin-left: -59px;
+    margin-top: 4px;
+}
+
+
+
+.dashed-line-email {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -11px;
+    position: relative;
+    margin-left: -102px;
+    margin-top: 2px;
+}
+
+
+
+.dashed-line-am {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -21px;
+    position: relative;
+    margin-left: -102px;
+    margin-top: 2px;
+}
+
+
+
+.dashed-line-app {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -11px;
+    position: relative;
+    margin-left: -115px;
+    margin-top: 2px;
+}
+
+.dashed-line-date {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -11px;
+    position: relative;
+    margin-left: -239px;
+    margin-top: 2px;
+}
+
+
+
+.dashed-line-amount {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -22px;
+    position: relative;
+    margin-left: -81px;
+    margin-top: 2px;
+}
+
+
+
+.dashed-line-receipt {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -22px;
+    position: relative;
+    margin-left: -84px;
+    margin-top: 2px;
+}
+
+
+
+.dashed-line-date {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -12px;
+    position: relative;
+    margin-left: -143px;
+    margin-top: 3px;
+}
+
+.name-above-line1 {
+    position: absolute;
+    top: -9px;
+    left: 21%; 
+}
+
+
+.name-above-line-phone {
+    position: absolute;
+    top: -9px;
+    left:30%; 
+}
+.ml-2 {
+  margin-left: 10px;
+}
+
+.applicationfor{
+    margin-top: 13px;
+    border-bottom: 2px solid;
+    width: 608px;
+    /* text-align: center; */
+    margin-left: 16rem;
+
+}
+
+.marginbt{
+    margin-bottom: 2rem;
+}
+.defencehabitathousing{
+    margin-left: 213px;
+
+}
+
+.accountdetails{
+    font-weight: bold;
+    border-bottom: 2px solid;
+    width: 565px;
+    margin-left: 12rem;
+    margin-bottom: 1rem;
+    padding: 1px;
+}
+
+.accountde{
+    padding-left:50px;
+}
+
+
+
+
+
+ 
+
+        @media print {
+
+            .dashed-line-date {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -12px;
+    position: relative;
+    margin-left: -117px;
+    margin-top: 3px;
+}
+
+            .dashed-line-receipt {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -22px;
+    position: relative;
+    margin-left: -58px;
+    margin-top: 2px;
+}
+
+            .dashed-line-amount {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -22px;
+    position: relative;
+    margin-left: -50px;
+    margin-top: 2px;
+}
+
+
+            .dashed-line-app {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -11px;
+    position: relative;
+    margin-left: -83px;
+    margin-top: 2px;
+}
+
+
+            .dashed-line-am {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -21px;
+    position: relative;
+    margin-left: -56px;
+    margin-top: 2px;
+}
+
+            .accountde{
+            padding-left: 20px;
+            }
+
+            .accountdetails{
+                font-weight: bold;
+                border-bottom: 2px solid;
+                width: 550px;
+                margin-left:12rem;
+                margin-bottom: 1rem;
+                padding: 1px;
+
+            }
+
+            .dashed-line-phone {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -20px;
+    position: relative;
+    margin-left: -48px;
+    margin-top: 4px;
+}
+
+
+            .dashed-line-mobile {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -20px;
+    position: relative;
+    margin-left: -35px;
+    margin-top: 4px;
+}
+
+
+            .dashed-line-email {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -11px;
+    position: relative;
+    margin-left: -72px;
+    margin-top: 2px;
+}
+
+
+            .dashed-line-defence {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -96px;
+    position: relative;
+    margin-left: -57px;
+    margin-top: 18px;
+}
+
+            .dashed-line-booked {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right:10px;
+    position: relative;
+    margin-left: -57px;
+    margin-top: 18px;
+}
+
+            .defencehabitathousing{
+            margin-left:60px;
+
+            }
+            .name-above-line-phone {
+    position: absolute;
+    top: -9px;
+    left:30%; 
+}
+
+            .dashed-line-habitat {
+    border-bottom: 1px dashed;
+    flex-grow: 1;
+    margin-right: -80px;
+    position: relative;
+    margin-left: 1px;
+    margin-top: 0px;
+}
+
+            .marginbt{
+    margin-bottom: 2px;
+}
+
+            .dashed-line-relation{
+            border-bottom: 1px dashed;
+            flex-grow: 1;
+            margin-right: -9px;
+            position: relative;
+            margin-left: -35px;
+            margin-top: 2px;
+            }
+
+            .dashed-line-service{
+                border-bottom: 1px dashed;
+                flex-grow: 1;
+                margin-right: -40px;
+                position: relative;
+                margin-left: -7px;
+                margin-top: 5px;
+            }
+
+            .dashed-line-rank{
+            border-bottom: 1px dashed;
+            flex-grow: 1;
+            margin-right: -20px;
+            position: relative;
+            margin-left: -7px;
+            margin-top: 5px;
+        }
+
+            .dashed-line {
+            border-bottom: 1px dashed;
+            flex-grow: 1;
+            margin-right: -7px;
+            position: relative;
+            margin-left: -48px;
+            margin-top: 2px;
+        }
+
+
+            .applicationfor{
+
+            margin-top:6px;
+            border-bottom: 2px solid;
+            width: 650px;
+            margin-left: 7rem;
+            }
+
+            .terms {
+            padding: 20px;
+            max-width: 100%;
+            margin-top: 3rem;
+            }
+            body {
+            /* font-family:"Cambria Math"; */
+            font-family: 'Math';
+            margin: 40px;
+        }
+
+        .phonelabel {
+            font-size: 18px;       
+         }
+
+            .complete{
+        padding: 1px;
+        width: 1000px;
+        /* border: 2px solid red; */
+    }
+
+            .printcontainer{
+            width:970px;
+        }
+
+            .date {
+            margin-top:-1rem;
+            text-align: left;
+        }
+            .signima{
+            position: relative;
+             left: 75%;
+                right: 0;
+                height: 43px;
+                }
+
+            .names {
+                border: none;
+                border-bottom: 2px dashed;
+                width: 410px;
+                text-align: center;
+                margin-top: -1rem;
+            }
+
+            .rank {
+                border: none;
+                border-bottom: 2px solid;
+                text-align: center;
+                width: 160px;
+            }
+
+            .relation {
+                border: none;
+                border-bottom: 1px dashed;
+                width: 380px;
+                text-align: center;
+            }
+
+            .located {
+                border: none;
+                border-bottom: 1px dashed;
+                text-align: center;
+                width: 430px;
+                margin-top: 1rem;
+                font-weight: 500;
+            }
+
+            .booked {
+                border: none;
+                border-bottom: 1px dashed;
+                text-align: center;
+                width: 100px;
+            }
+
+            .photoframe {
+                /* border: 2px solid; */
+                height: auto;
+                width: 206px;
+                margin-top: -1rem;
+            }
+
+            .realtionsmain {
+                margin-top: 0rem;
+            }
+
+            .defence {
+                border: none;
+                border-bottom: 1px dashed;
+                text-align: center;
+                width: 330px;
+            }
+
+            .defencemargin {
+                margin-top: 1rem;
+            }
+
+            .phone {
+                border: none;
+                border-bottom: 1px dashed;
+                text-align: center;
+                width: 240px;
+            }
+            
+            .margint {
+                margin-top:1rem;
+            }
+            
+            .dateof {
+                border: none;
+                border-bottom: 1px dashed;
+                text-align: center;
+                width: 275px;
+            }
+
+            .amount {
+                border: none;
+                border-bottom: 1px dashed;
+                text-align: center;
+                width: 175px;
+            }
+
+            th,
+            td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            th {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+                vertical-align: top;
+            }
+
+            .title-cell {
+                font-weight: bold;
+                color: black;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+           
+
+            .declaration p {
+                text-align: justify;
+            }
+
+            .declaration {
+                padding: 10px;
+                max-width: 100%;
+                margin: 10px;
+            }
+
+            .office {
+                padding: 10px;
+                max-width: 100%;
+                margin: 5px;
+            }
+
+            label{
+                font-size: 18px;
+            }
+            input{
+                font-size:18px;
+                font-family:"Cambria Math";
+
+            }
+
+
+
+
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container-fluid complete">
+
+
+        <!-- <div> -->
+        <img src="img/bANNER_DHS1.jpg" alt="logo"
+            style="height: 100%;width: 100%;margin-top: -2rem;" />
+            <div>
+                <h4 class="applicationfor">
+                    APPLICATION FOR
+                    MEMBERSHIP AND PURCHASE OF SITE
+                </h4>
+            </div>
+       
+        <!-- <hr> -->
+      
+
+        <!-- BASIC INFORMATION -->
+        <div class="container-fluid backc">
+            <div class="row">
+                <div class="col-md-9 col-9">
+                    <div class="margint" >
+                        <h5 class="font-weight-bold marginbt">Sl.NO .</h5>
+                            <!-- <input type="text"  value=""  style="border: none;"> -->
+                    </div>
+
+                    <!-- Name -->
+                    <!-- <div class="row">
+                        <div class="col-md-6 col-6" >
+                            <h5 style="font-weight: bold;"> NAME (Full name in Block Letters): </h5>
+                        </div>
+                        <div class="col-md-6 col-6" style="border-bottom: 1px dashed;text-align: center;margin-left: -60px;width: 420px;">
+                        <h5>Dasari Prudhvi Krishna</h5>
+                        </div>
+                    </div> -->
+
+                    <div class="row align-items-center position-relative margint marginbt" >
+                        <div class="col-md-6 col-6">
+                          <h5 class="font-weight-bold">NAME (Full name in Block Letters):</h5>
+                        </div>
+                        <div class="col-md-6 col-6 d-flex align-items-center" style="padding-left: 0;">
+                          <div class="dashed-line"></div>
+                          <h5 class="name-above-line" id="name"></h5>
+                        </div>
+                      </div>
+                      
+
+                           
+
+                            <!-- Rank and service -->
+                            <div class="row align-items-center position-relative margint marginbt " style="margin-top: 10px;">
+                                <div class="col-md-3 col-3">
+
+                                    <h5 style="font-weight: bold;">RANK/DESIGNATION:</h5>
+
+                                </div>
+                                <div class="col-md-3 col-3 d-flex align-items-center" style="text-align: center;margin-left:20px;">
+                                    <div class="dashed-line-rank"></div>
+
+                                    <h5 class="name-above-line" style="margin-left: 10px;" id="designation"></h5>
+
+                                </div>
+                                <div class="col-md-4 col-4 ">
+                                    <h5 style="font-weight: bold;">SERVICE / ID NO.</h5>
+
+                                </div>
+                                <div class="col-md-2 col-2 d-flex align-items-center" style="text-align: center;width:150px;margin-left: -80px;">
+                                    <div class="dashed-line-service"></div>
+                                    <h5 class="name-above-line" id="serviceid" style="margin-left: 1%;"></h5>
+
+                                </div>
+                            </div>
+
+
+                            <!-- Realtionship  -->
+
+                            <div class="row align-items-center position-relative margint marginbt" style="margin-top: 10px;">
+                                <div class="col-md-6 col-6" >
+                                    <h5 style="font-weight: bold;"> RELATIONSHIP WITH APPLICANT: </h5>
+                                </div>
+                                <div class="col-md-6 col-6 d-flex align-items-center" >
+                                    <div class="dashed-line-relation"></div>
+
+                                    <h5 class="name-above-line" style="margin-left: 4%;" id="relationship"></h5>
+                                </div>
+                            </div>
+                </div>
+
+                <!-- <div class="col-md-3 col-3" style="margin-top: 1rem;">
+                    <div class="photoframe">
+                        <img src="" alt="" style="height:180px;width:200px;">
+                    </div>
+                </div> -->
+
+                <div class="col-md-3 col-3" style="margin-top: 1rem;">
+                    <div class="photoframe">
+                        <img id="profile-image" src="" alt="Profile Image" style="height:180px;width:200px;">
+                    </div>
+                </div>
+                
+
+                <!-- <div style="margin-top: -2rem;">
+                    <label for="name" style="font-weight: 500;font-size:20px;">
+                        <h5 style="font-size: 20px;"> Booked a site of measuring </h5>    </label>
+                    <input type="text" class="booked" value="50X60">
+
+                    <label for="name" style="font-weight: 500;font-size:20px;"> 
+                        <h5 style="font-size: 20px;">in the Project"</h5>
+                    </label>
+                    <input type="text" class="located" value="Defence Habitat Marasandra"  style="font-size: 20px;"> 
+                    <span style="font-weight: 500;font-size: 20px;">
+                        located at 
+                    </span>
+                </div> -->
+            
+                <div class="container-fluid margint">
+                <div class="row align-items-center position-relative marginbt">
+                    <div class="col-md-5 col-5">
+                        <div class="row ">
+                            <div class="col-md-8 col-8 d-flex align-items-center">
+                                <h5>Booked a site of measuring </h5>
+                            </div>
+                            <div class="col-md-4 col-4" >
+                                <div class="dashed-line-booked"></div>
+
+                                <h5 class="name-above-line" style="margin-left:-2rem;" id="property_size"> </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-5">
+                        <div class="row">
+                            <div class="col-md-5 col-5 d-flex align-items-center " style="margin-left:-2rem;">
+                                <h5>in the Project"</h5>
+                            </div>
+                            <div class="col-md-7 col-7" >
+                                <div class="dashed-line-defence"></div>
+
+                                <h5 class="name-above-line"  id="property_name" ></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-2" >
+                        <h5 style="margin-left: 45px;">located at</h5>
+                    </div>
+                </div>
+            </div>
+                    
+               
+
+
+                <!-- <div class="defencemargin">
+                    <input type="text" class="defence" value="RANK" style="margin-top: -2rem;">
+                    <label for="">
+                        <h5>in <span style="font-weight: bold;"> "DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD"</span></h5>    
+                    </label> 
+                </div> -->
+
+                <div class="container-fluid margint">
+                    <div class="row align-items-center position-relative marginbt" style="margin-top:0rem;">
+                        <div class="col-md-4 col-4  d-flex align-items-center">
+                            <div class="dashed-line-habitat"></div>
+
+                            <h5 class="name-above-line1" id="propertylocation"></h5>
+                        </div>
+                        <div class="col-md-8 col-8">
+                            <h5 class="defencehabitathousing">DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD"</h5>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        
+<!-- TEST 0Th Table -->
+
+<div  style="margin-top:10px;">
+    <div class="container-fluid printcontainer">
+        <div class="row" style="border: 2px solid;">
+            <div class="col-md-4 col-4" style="border-right:2px solid;">
+                <h5 style="font-weight: bold;">Applicant Name :</h5></div>
+            <div class="col-md-6 col-6">
+                <h5 id="name1"></h5>
+            </div>
+        </div>
+        <div class="row" style="border-left: 2px solid;border-bottom: 2px solid;border-right: 2px solid;">
+            <div class="col-md-4 col-4" style="border-right:2px solid ;">
+               <h5 style="font-weight: bold;">Date of Brith : </h5>  </div>
+            <div class="col-md-2 col-2" ><h5 id="dob"></h5></div>
+            <div class="col-md-2 col-2" style="border-right:2px solid;text-align: right;"><h5 style="font-weight: bold;">Age :</h5></div>
+            <div class="col-md-2 col-2"><h5 id="age"></h5></div>
+
+        </div>
+        <div class="row" style="border-left: 2px solid;border-bottom: 2px solid;border-right: 2px solid;">
+            <div class="col-md-4 col-4" style="border-right:2px solid;"><h5 style="font-weight: bold;">Father's/Spouse Name :</h5></div>
+            <div class="col-md-6 col-6"> <h5 id="fatherSpouseNames"></h5></div>
+        </div>
+        <div class="row" style="border-left: 2px solid;border-bottom: 2px solid;border-right: 2px solid;height: 135px;">
+            <div class="col-md-4 col-4" style="border-right:2px solid;">
+                <h5 style="font-weight: bold;text-align: center;">Correspondence Address </h5>
+                <h5 style="text-align: center;" id="correspondence"></h5>
+                <!-- <p style="font-weight: bold;font-family: Courier Bold;text-align: center;font-size: 18px;">Correspondence Address </p> -->
+                <!-- <p style="text-align: center;">Behind Swathi Gardenia Restaurant, Sahakar Nagar, Byatarayanapura, Bengaluru, Karnataka 560092 </p> -->
+            </div>
+            <div class="col-md-4 col-4" style="border-right:2px solid;">
+                <h5 style="font-weight: bold;text-align: center;">Permanent Address </h5>
+                <h5 style="text-align: center;" id="permanent"></h5>
+                <!-- <p style="font-weight: bold;text-align: center;font-size: 18px;"></p>
+                <p style="text-align: center;">Behind Swathi Gardenia Restaurant, Sahakar Nagar, Byatarayanapura, Bengaluru, Karnataka 560092 </p> -->
+
+            </div>
+            <div class="col-md-4 col-4" >
+                <h5 style="font-weight: bold;text-align: center;">Working Address</h5>
+                <h5 style="text-align: center;" id="workingaddress"></h5>
+               
+                <!-- <p style="font-weight: bold;text-align: center;font-size: 18px;">Working Address</p>
+                <p style="text-align: center;">Behind Swathi Gardenia Restaurant, Sahakar Nagar, Byatarayanapura, Bengaluru, Karnataka 560092 </p> -->
+
+            </div>
+        </div>
+        <div class="row" style="border-left: 2px solid;border-bottom: 2px solid;border-right: 2px solid;height: 135px;">
+            <div class="col-md-4 col-4" style="border-right:2px solid;font-weight: bold;">
+               <!-- <p style="margin-top: 1.5rem;font-size: 18px;"> </p> -->
+               <h5 style="margin-top: 1rem;font-weight: bold;">Nominee particulars</h5>
+            </div>
+            <div class="col-md-6 col-6">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                       <h5 style="font-weight: bold;">Name &nbsp; &nbsp;  &nbsp; &nbsp; : 
+                        <span style="font-weight: 500;" id="nominename"></span>
+                       </h5> 
+                       <!-- &nbsp; &nbsp;  &nbsp; : &nbsp;Anupama -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-6">
+                       <h5 style="font-weight: bold;">Age &emsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;:
+                       <span style="font-weight: 500;" id="nage"></span> 
+                    </h5>
+                       <!-- &emsp;  &nbsp; &nbsp;  &nbsp; -->
+                    </div>
+                    <div class="col-md-6 col-6">
+                       <h5 style="font-weight: bold;">  Relationship &nbsp; :
+                        <span style="font-weight: 500;" id="nominerelation"></span></h5>
+                       
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <h5 style="font-weight: bold;"> Address &nbsp; &nbsp;  : &nbsp;
+                       <span style="font-weight: 500;" id="nominee_address"></span> 
+                    </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="border-left: 2px solid;border-bottom: 2px solid;border-right: 2px solid;">
+            <div class="col-md-4 col-4" style="border-right:2px solid;">
+                <h5 style="font-weight: bold;">Remarks,if any</h5></div>
+            <div class="col-md-6 col-6">
+                <h5 id="remarks"></h5></div>
+        </div>
+
+       
+        
+
+        <div class="row" style="border-left: 2px solid;border-bottom: 2px solid;border-right: 2px solid;font-weight: bold;">
+            <div class="col-md-12 col-12">
+                <div class="row " style="padding: 8px 2px 14px 0px;margin-top: 2px;">
+                    <div class="col-md-4 col-4 ">
+                        <div class="row align-items-center position-relative">
+                            <div class="col-md-5 col-5">
+                                <h5 style="font-weight: bold;">Phone No.</h5>
+
+                            </div>
+                            <div class="col-md-7 col-7 d-flex align-items-center">
+                                <div class="dashed-line-phone"></div>
+
+                                <h5 class="name-above-line-phone" id="phone"></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-3">
+                        <div class="row align-items-center position-relative ">
+                            <div class="col-md-5 col-5">
+                                <h5 style="font-weight: bold;"> Mobile:</h5>
+
+                            </div>
+                            <div class="col-md-7 col-7 d-flex align-items-center" >
+                                <div class="dashed-line-mobile"></div>
+
+                                <h5 class="name-above-line-phone" style="margin-left:7px;" id="mobile"></h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-5">
+                        <div class="row align-items-center position-relative">
+                            <div class="col-md-4 col-4">
+                                <h5 style="font-weight: bold;"> E-mail:</h5>
+
+                            </div>
+                            <div class="col-md-8 col-8 d-flex">
+                                <div class="dashed-line-email"></div>
+
+                                <h5 class="name-above-line-phone" style="margin-left: -1rem;" id="email"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div style="padding: 8px 2px 14px 0px;margin-top: 0.5rem;">
+                    <label for="name" class="phonelabel">Phone No. (R):</label>
+                    <input type="text" class="phone" value="7022788435">
+                    <label for="name" class="phonelabel"> Mobile: </label>
+                    <input type="text" class="phone" value="8535358066">
+                    <label for="name" class="phonelabel">E-mail:</label>
+                    <input type="text" class="phone" value="appi123@gmail.com">
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+       <!-- TEST 1St TABLE -->
+        <div  style="margin-top:10px;">
+            <div class="container-fluid printcontainer">
+                <div class="row" style="border: 2px solid;">
+                    <div class="col-md-2 col-2 headingcolor" style="border-right: 2px solid;">
+                       <h5 style="text-align: center;margin-top: 0.55rem;font-weight: bold;"> Membership Payment Details</h5>
+
+                    </div>
+
+                    <div class="col-md-10 col-10" >
+                        <div class="row" >
+                            <div class="col-md-3 col-3" style="border-right: 2px solid;">
+                                <h5 style="font-weight: bold;text-align: center;">Membership Amount</h5></div>
+                            <div class="col-md-9 col-9">
+                                <h5 style="font-weight: bold;">Rs. 2500/- (Rupees Two Thousand Five Hundred Only)</h5></div>
+                        </div>
+
+                        <div class="row" style="border-top: 2px solid;border-bottom: 2px solid;">
+                            <div class="col-md-1 col-1" style="border-right: 2px solid;text-align: justify;font-size: 18px;">Cheque</div>
+                            <div class="col-md-1 col-1" style="border-right: 2px solid;text-align: center;font-size: 18px; ">DD</div>
+                            <div class="col-md-1 col-1" style="border-right: 2px solid;text-align: center;font-size: 18px;">Online</div>
+                            <div class="col-md-9 col-9" style="font-size: 18px;" id="payment-info"></div>
+                        </div>
+                        
+
+                        <div class="row">
+                            <div class="col-md-3 col-3" style="border-right: 2px solid black;text-align: center;font-size: 18px;"> Bank</div>
+                            <div class="col-md-3 col-3" style="border-right: 2px solid black;font-size: 18px;" id="bank"></div>
+                            <div class="col-md-3 col-2" style="border-right: 2px solid black;text-align: center;font-size: 18px;">Branch</div>
+                            <div class="col-md-3 col-3" style="font-size: 18px;" id="branch"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEST 2ND TABLE -->
+      <div  style="margin-top:10px;">
+        <div class="container-fluid printcontainer">
+            <div class="row" style="border: 2px solid">
+                <div class="col-md-2 col-2 headingcolor" >
+                    <h5 style="text-align: center;margin-top: 1rem;font-weight: bold;"> Purchase of Site  Payment Details</h5>
+                    
+                </div>
+
+
+                <div class="col-md-10 col-10" style="border-left: 2px solid;" >
+
+                    <div class="row" style="border-bottom: 2px solid;">
+                        <div class="col-md-3 col-3" style="border-right: 2px solid;">
+                            <h5 style="font-weight: bold;text-align: center;"> Site Advance Amount</h5></div>
+                        <div class="col-md-3 col-3" style="border-right: 2px solid;">
+                            <h5 style="font-weight: bold;" id="advance"> </h5>
+                           </div>
+                        <div class="col-md-2 col-2" style="border-right: 2px solid;">
+                            <h5 style="font-weight: bold;text-align: center;">In words</h5>
+                            </div>
+                        <div class="col-md-3 col-3 "> </div>
+                    </div>
+
+
+                    <div class="row" >
+                        <div class="col-md-12 col-12" style="font-size: 18px;" id="site_payment_amount_in_words"> Only</div>
+                    </div>
+
+
+                    <div class="row" style="border-top: 2px solid black;">
+                        <div class="col-md-1 col-1 " style="border-right: 2px solid black;text-align: center;font-size: 18px;">Cheque</div>
+                        <div class="col-md-1 col-1" style="border-right: 2px solid black;text-align: center;font-size: 18px;">DD</div>
+                        <div class="col-md-1 col-1" style="border-right: 2px solid black;text-align: center;font-size: 18px;">Online</div>
+                        <div class="col-md-9 col-9" style="font-size: 18px;" id="sitePaymentInfoText"></div>
+                    </div>
+
+                    <div class="row" style="border-top: 2px solid;">
+                        <div class="col-md-3 col-3" style="border-right: 2px solid black;text-align: center;font-size: 18px;"> Bank</div>
+                        <div class="col-md-3 col-3" style="border-right: 2px solid black;font-size: 18px;" id="sitepurchasebank"></div>
+                        <div class="col-md-3 col-2" style="border-right: 2px solid black;text-align: center;font-size: 18px;">Branch</div>
+                        <div class="col-md-3 col-3" style="font-size: 18px;" id="sitepurchasebranch"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+       
+<!-- Account Information -->
+      <div style="margin-top:10px;">
+        <div class="container-fluid printcontainer">
+            <div class="row" style="border: 2px solid">
+              
+                    <h4 class="accountdetails">
+                        Account Details For NEFT/RTGS/Online Transaction:
+                    </h4>
+                <h6  class="accountde"><span class="label" >Account Name</span> &emsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;DEFENCE HABITAT HOUSING
+                    COOPERATIVE SOCIETY LIMITED.</h6>
+                <h6  class="accountde"><span class="label" >Account Number</span> &nbsp; &nbsp; &nbsp;&nbsp; : &nbsp;051388700000120</h6>
+                <h6  class="accountde"><span class="label" >Bank</span> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&nbsp; &nbsp; &nbsp; : &nbsp;YES BANK LTD.</h6>
+                <h6  class="accountde"><span class="label">Branch</span> &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; : &nbsp;SAHAKAR NAGAR</h6>
+                <h6  class="accountde"><span class="label">IFSC Code</span> &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; : &nbsp;YESB0000513</h6>
+          
+                </div>
+                </div>
+      </div>
+
+      <div class="terms">
+        <h3>TERMS AND CONDITIONS</h3>
+        <ol style="font-size: 18px;">
+            <li >Members of the society are governed by Govt. of Karnataka Co-operative Society by-Law Act
+                1960.</li>
+            <li>Application for allotment of the Site in the Society is subject to the approval of the
+                Membership/ Associate Membership, further clearance of land document by <span
+                    class="bold">BDA/BMRDA/BIAAPA/DTCP/RERA/DPA</span> and availability of the site.</li>
+            <li>Members shall pay the initial payment as prescribed by the <span class="bold">"Defence
+                    Habitat Housing Co-operative Society Ltd"</span>, remaining installment also be paid in
+                the prescribed time for development work.</li>
+            <li>In case of members furnishing false information/declaration, the society reserves the right
+                to call for document verification before allotment/cancellation.</li>
+            <li>Members shall update the Mobile No, e-mail ID and address, from time to time to update the
+                record in the office for all kinds of communication and reminders.</li>
+            <li>Members willing to withdraw or transfer the membership/booking shall be accepted only after
+                the completion of the project period. However, genuine reason, the Board members may decide
+                which shall attract a penalty.</li>
+            <li>Seniority for allotment of the site shall be made purely on the basis of initial payment and
+                prompt receipt of regular installment payment. Becoming only a member of the society, will
+                not confirm entitlement for allotment of the site.</li>
+            <li>I agree to abide by the conditions of allotment and sale of site as described by the <span
+                    class="bold ">"DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD"</span>. I, hereby
+                declare that the above information furnished by me is true to the best of my knowledge.
+                Furthermore, I shall furnish any other information that may be required with regards to
+                allotment of site.</li>
+            <li>I fully agree upon the above terms and conditions and it is binding on me.</li>
+        </ol>
+    </div>
+
+
+    <div class="declaration">
+        <h3>DECLARATION</h3>
+        <p style="font-size:18px;">I wish to become a member and to purchase site of the <span
+                class="bold ">"DEFENCE HABITAT
+                HOUSING CO-OPERATIVE SOCIETY LTD"</span>. I have read the above terms and conditions.
+            Further, hereby I abide by all the terms &amp; conditions mentioned in the bye-laws of the
+            society Act 1960. And the decisions are taken by the Board from time to time, which shall be
+            final and binding on me.</p>
+        <p style="font-size: 20px;">I declare that the particulars furnished by me are correct and true to the best
+            my knowledge.</p>
+        <!-- <div class="signature-section">
+            <div><span style="font-size: 18px;">Place:Bangalore</span></div>
+            <div><span style="font-size: 18px;">Date:29/07/2024</span></div>
+            <div class="signphoto">
+                <img src="legalsize-background/testsign.jpeg" alt="" class="signima" width="200">
+                <span class="signature" style="font-size: 18px;">Signature of the Applicant</span>
+            </div>
+        </div> -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 col-3">
+                    <p style="font-size: 18px;">Place:
+                        <span style="font-weight: bold;" id="place"></span>
+                    </p>
+                    <p style="font-size: 18px;">Date:
+                        <span style="font-weight: bold;" id="dateobj"></span>
+                    </p>
+                </div>
+
+                <div class="col-md-9 col-9">
+                    <img src="" alt="" class="signima" width="200" id="signimage">
+                    <p style="text-align: end;font-weight: bold;">Signature of the Applicant</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <img src="" alt="" width="100%">
+    </div>
+
+    <!-- for the office  -->
+    <div class="office">
+        <h3>FOR THE USE OF OFFICE</h3>
+        <div class="container-fluid">
+            <div class="row align-items-center position-relative" style="margin-top: 2px;">
+                <div class="col-md-4 col-4">
+                    <h5 style="font-weight: bold;"> 1. Date of receipt of application</h5>
+
+                </div>
+                <div class="col-md-3 col-3 d-flex align-items-center">
+                    <div class="dashed-line-am"></div>
+
+                            <h5 class="name-above-line-phone"></h5>
+                </div>
+                <div class="col-md-2 col-2">
+                    <h5 style="font-weight: bold;">A.M. No.</h5>
+
+                </div>
+                <div class="col-md-3 col-3 d-flex align-items-center">
+                    <div class="dashed-line-app"></div>
+
+                            <h5 class="name-above-line-phone"></h5>
+                </div>
+            </div>
+
+            <div class="row align-items-center position-relative"  style="margin-top: 10px;">
+                <div class="col-md-3 col-3">
+                    <h5 style="font-weight: bold;">2. Amount received:Rs.</h5>
+
+                </div>
+                <div class="col-md-2 col-2 d-flex align-items-center">
+                    <div class="dashed-line-amount"></div>
+
+                            <h5 class="name-above-line"></h5>
+                </div>
+                <div class="col-md-2 col-2">
+                    <h5 style="font-weight: bold;">Receipt No . </h5>
+
+                </div>
+                <div class="col-md-1 col-1 d-flex align-items-center">
+                    <div class="dashed-line-receipt"></div>
+
+                            <h5 class="name-above-line"></h5>
+                </div>
+                <div class="col-md-2 col-2">
+                    <h5 style="font-weight: bold;">Date. </h5>
+
+                </div>
+
+                <div class="col-md-2 col-2 d-flex align-items-center">
+                    <div class="dashed-line-date"></div>
+
+                            <h5 class="name-above-line"></h5>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div style=" margin-top: 2rem;">
+            <label for="name" class="receipt" style="font-size: 18px;">1. &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Date of receipt of application</label>
+            <input type="text" class="dateof" value="">
+
+            <label for="name"  class="receipt" style="font-size: 18px;">A.M. No </label>
+            <input type="text" class="dateof" value="">
+        </div> -->
+        <!-- <div style=" margin-top: 2rem;">
+            <label for="name" class="receipt" style="font-size: 18px;">2. &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Amount received:Rs.</label>
+            <input type="text" class="amount" value="">
+
+            <label for="name" class="receipt" style="font-size: 18px;">Receipt No .</label>
+            <input type="text" class="amount" value="">
+
+            <label for="name" class="receipt" style="font-size: 18px;">Date</label>
+            <input type="text" class="amount" value="">
+
+        </div> -->
+
+        <div class="signature">
+            <div class="col-md-2 testsign" style="font-size: 18px;margin-top: 14px;" ><span>President</span></div>
+            <div class="col-md-2 testsign" style="font-size: 18px;margin-top: 14px;"><span>Secretary</span></div>
+        </div>
+
+    </div>
+
+    <div>
+        <img src="legalsize-background/WhatsApp Image 2024-07-26 at 11.27.52_f281aeba.jpg" alt="" width="100%">
+    </div>
+
+
+
+    <div class="office">
+        <h3>DECISION OF THE BOARD</h3>
+        <p style="font-size:18px;">
+            Accepted as member of this Housing Society in the board Meeting held on _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _Meeting
+            book Page No _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ for
+            allotment or residential site in society's future / present Layout in accordance with the
+            Byelaws. Subsidiary Rules, Policy
+            decision taken by the Board/General Body from time to time and Rules, Acts and Policies of
+            Government of Karnataka on the
+            member.
+        </p>
+        <!-- <span style="font-size: 18px;">Date:
+            29/07/2024</span> -->
+            <p style="font-size: 18px;">Date:
+                <span style="font-weight: bold;"></span>
+            </p>
+
+        <div class="signature">
+            <div class="col-md-2 testsign1"><span style="font-size: 18px;margin-left: 21rem;">President</span></div>
+            <div  class="col-md-2 testsign1"><span style="font-size: 18px;">Secretary</span></div>
+        </div>
+    </div>
+</div>
+       
+       
+
+<!-- <script>
+   // Function to get query parameters from the URL
+   function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Extract 'id' from the URL
+    const id = getQueryParam('id');
+    // If 'id' is found in the URL, fetch the data
+    if (id) {
+
+     fetch('/download/fetchOnlineApplication?id=${id}')
+        .then(response => response.json())
+        .then(data => {
+            const name = data.result[0].name;
+            const designation = data.result[0].ref_designation;
+            const serviceid = data.result[0].ref_id; 
+            const relationship = data.result[0].ref_relationship;
+            const property_size = data.result[0].property_size;
+            const propertyname = data.result[0].property_name;
+            const propertylocation = data.result[0].property_location;
+            const dob = data.result[0].dob;
+            // Convert the date string to a Date object
+            const dateObj = new Date(dob);
+            // Format the date to `DD-MM-YYYY` format
+            const formattedDob = `${dateObj.getDate().toString().padStart(2, '0')}-${(dateObj.getMonth() + 1).toString().padStart(2, '0')}-${dateObj.getFullYear()}`;
+            // Adjust according to your data structure
+            const age = data.result[0].age;
+            const fatherSpouseNames = data.result[0].father_spouse_name;
+            const correspondence = data.result[0].correspondence_address;
+            const permanent = data.result[0].permanent_address;
+            const workingAddress = data.result[0].working_address;
+            const nominename = data.result[0].nominee_name;
+            const nominee_age = data.result[0].nominee_age;
+            const nominerelation= data.result[0].nominee_relationship;
+            const nominee_address= data.result[0].nominee_address;
+            const remarks= data.result[0].remarks;
+            const phone= data.result[0].phone;
+            const email= data.result[0].email;
+            const paymentMode = data.result[0].membership_payment_mode; // Example: "online"
+            const paymentReferenceNo = data.result[0].membership_payment_reference_no; // Example: "00014839164"
+            // Construct the text to display
+            const paymentInfoText = `${paymentMode.charAt(0).toUpperCase() + paymentMode.slice(1)} : ${paymentReferenceNo}`;
+            const bank= data.result[0].membership_payment_bank;
+            const branch= data.result[0].membership_payment_branch;
+            const advance= data.result[0].site_payment_amount;
+            // const formattedAdvance = `Rs.${advance}/-`; 
+            // Format the value
+            const formattedAdvance = `Rs.${new Intl.NumberFormat('en-IN').format(advance)}/-`; 
+
+            const site_payment_amount_in_words= data.result[0].site_payment_amount_in_words;
+
+            const sitepaymentmode = data.result[0].site_payment_mode; // Example: "online"
+            const sitepaymentreferenceno = data.result[0].site_payment_reference_no; // Example: "00014839164"
+            // Construct the text to display
+            const sitePaymentInfoText = `${sitepaymentmode.charAt(0).toUpperCase() + sitepaymentmode.slice(1)} : ${sitepaymentreferenceno}`;
+            const sitepurchasebank= data.result[0].site_payment_bank;
+            const sitepurchasebranch= data.result[0].site_payment_branch;
+            const dateobj = data.result[0].date;
+
+              // Convert the date string to a Date object
+              const finaldateObj = new Date(dateobj);
+            // Format the date to `DD-MM-YYYY` format
+            const formatteddate = `${finaldateObj.getDate().toString().padStart(2, '0')}-${(finaldateObj.getMonth() + 1).toString().padStart(2, '0')}-${finaldateObj.getFullYear()}`;
+            const place = data.result[0].place;
+
+            const base64Image = data.result[0].image; 
+            // document.getElementById('profile-image').src = `data:image/jpeg;base64,${base64Image}`;
+            document.getElementById('profile-image').src = `data:image/png;base64,${base64Image}`;
+            const signimage = data.result[0].signature; 
+            // document.getElementById('profile-image').src = `data:image/jpeg;base64,${base64Image}`;
+            document.getElementById('signimage').src = `data:image/png;base64,${signimage}`;
+            document.getElementById('name').textContent = name;
+            document.getElementById('name1').textContent = name;
+            document.getElementById('designation').textContent = designation;
+            document.getElementById('serviceid').textContent = serviceid; 
+            document.getElementById('relationship').textContent = relationship;
+            document.getElementById('property_size').textContent = property_size;
+            document.getElementById('property_name').textContent = propertyname;
+            document.getElementById('propertylocation').textContent = propertylocation;
+            document.getElementById('dob').textContent = formattedDob;
+            document.getElementById('age').textContent = age;
+            document.getElementById('fatherSpouseNames').textContent = fatherSpouseNames;
+            document.getElementById('correspondence').textContent = correspondence;
+            document.getElementById('permanent').textContent = permanent;
+            document.getElementById('workingaddress').textContent = workingAddress;
+            document.getElementById('nominename').textContent = nominename;
+            document.getElementById('nage').textContent = nominee_age;
+            document.getElementById('nominerelation').textContent = nominerelation;
+            document.getElementById('nominee_address').textContent = nominee_address;
+            document.getElementById('remarks').textContent = remarks;
+            document.getElementById('phone').textContent = phone;
+            document.getElementById('mobile').textContent = phone;
+            document.getElementById('email').textContent = email;
+            document.getElementById('payment-info').textContent = paymentInfoText;
+            document.getElementById('bank').textContent = bank;
+            document.getElementById('branch').textContent = branch;
+            document.getElementById('advance').textContent = formattedAdvance;
+            document.getElementById('site_payment_amount_in_words').textContent = site_payment_amount_in_words;
+            document.getElementById('sitePaymentInfoText').textContent = sitePaymentInfoText;
+            document.getElementById('sitepurchasebank').textContent = sitepurchasebank;
+            document.getElementById('sitepurchasebranch').textContent = sitepurchasebranch;
+            document.getElementById('dateobj').textContent = formatteddate;
+            document.getElementById('place').textContent = place;
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    } else {
+        console.error("No ID provided in the URL");
+    }
+</script> -->
+
+
+<script>
+    // Function to get query parameters from the URL
+    function getQueryParam(param) {
+         const urlParams = new URLSearchParams(window.location.search);
+         return urlParams.get(param);
+     }
+ 
+     // Extract 'id' from the URL
+     const id = getQueryParam('id');
+     // If 'id' is found in the URL, fetch the data
+     if (id) {
+         fetch(`/download/fetchOnlineApplication?id=${id}`) // Use backticks for template literals
+             .then(response => response.json())
+             .then(data => {
+                 if (data.error) {
+                     console.error(data.error);
+                     return;
+                 }
+                 
+                 const result = data.result[0];  // Fetch the first result
+                 
+                 // Populate fields with fetched data
+                 document.getElementById('profile-image').src = `data:image/png;base64,${result.image}`;
+                 document.getElementById('signimage').src = `data:image/png;base64,${result.signature}`;
+                //  document.getElementById('name').textContent = result.name;
+                document.getElementById('name').textContent = result.name.toUpperCase();
+
+                 document.getElementById('name1').textContent = result.name;
+                 document.getElementById('designation').textContent = result.ref_designation;
+                 document.getElementById('serviceid').textContent = result.ref_id; 
+                 document.getElementById('relationship').textContent = result.ref_relationship;
+                 document.getElementById('property_size').textContent = result.property_size;
+                 document.getElementById('property_name').textContent = result.property_name;
+                 document.getElementById('propertylocation').textContent = result.property_location;
+ 
+                 const dateObj = new Date(result.dob);
+                 const formattedDob = `${dateObj.getDate().toString().padStart(2, '0')}-${(dateObj.getMonth() + 1).toString().padStart(2, '0')}-${dateObj.getFullYear()}`;
+                 document.getElementById('dob').textContent = formattedDob;
+ 
+                 document.getElementById('age').textContent = result.age;
+                 document.getElementById('fatherSpouseNames').textContent = result.father_spouse_name;
+                 document.getElementById('correspondence').textContent = result.correspondence_address;
+                 document.getElementById('permanent').textContent = result.permanent_address;
+                 document.getElementById('workingaddress').textContent = result.working_address;
+                 document.getElementById('nominename').textContent = result.nominee_name;
+                 document.getElementById('nage').textContent = result.nominee_age;
+                 document.getElementById('nominerelation').textContent = result.nominee_relationship;
+                 document.getElementById('nominee_address').textContent = result.nominee_address;
+                 document.getElementById('remarks').textContent = result.remarks;
+                 document.getElementById('phone').textContent = result.phone;
+                 document.getElementById('mobile').textContent = result.phone;
+                 document.getElementById('email').textContent = result.email;
+ 
+                 const paymentInfoText = `${result.membership_payment_mode.charAt(0).toUpperCase() + result.membership_payment_mode.slice(1)} : ${result.membership_payment_reference_no}`;
+                 document.getElementById('payment-info').textContent = paymentInfoText;
+                 document.getElementById('bank').textContent = result.membership_payment_bank;
+                 document.getElementById('branch').textContent = result.membership_payment_branch;
+                 
+                 const formattedAdvance = `Rs.${new Intl.NumberFormat('en-IN').format(result.site_payment_amount)}/-`;
+                 document.getElementById('advance').textContent = formattedAdvance;
+                 document.getElementById('site_payment_amount_in_words').textContent = result.site_payment_amount_in_words;
+ 
+                 const sitePaymentInfoText = `${result.site_payment_mode.charAt(0).toUpperCase() + result.site_payment_mode.slice(1)} : ${result.site_payment_reference_no}`;
+                 document.getElementById('sitePaymentInfoText').textContent = sitePaymentInfoText;
+                 document.getElementById('sitepurchasebank').textContent = result.site_payment_bank;
+                 document.getElementById('sitepurchasebranch').textContent = result.site_payment_branch;
+ 
+                 const finaldateObj = new Date(result.date);
+                 const formatteddate = `${finaldateObj.getDate().toString().padStart(2, '0')}-${(finaldateObj.getMonth() + 1).toString().padStart(2, '0')}-${finaldateObj.getFullYear()}`;
+                 document.getElementById('dateobj').textContent = formatteddate;
+                 document.getElementById('place').textContent = result.place;
+             })
+             .catch(error => console.error('Error fetching data:', error));
+     } else {
+         console.error("No ID provided in the URL");
+     }
+ </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">  <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .menu-text {
+        font-size: 18px;
+      }
+    }
+
+    .icons-container {
+      display: flex;
+      gap: 10px;
+      /* Adjust as needed */
+      align-items: center;
+    }
+
+    .add-more-icon {
+      cursor: pointer;
+    }
+
+    .delete-icon {
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .radio-container {
+      display: flex;
+      /* justify-content: space-between; Adjust alignment as needed */
+    }
+
+    .radio-container label {
+      margin-right: 50px;
+      /* Adjust spacing between radio buttons */
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('partials/navbar') %>
+
+    <!-- Add your card here -->
+    <div id="content">
+      <!-- Content Goes Here -->
+      <span class="menu-text">Page Title</span>
+      <!-- Form Inside Card -->
+      <form id="ManageReceiptAmount" onsubmit="submitForm(); return false;">
+        <div class="card">
+          <h3 class="card-title">Add Membership Amount Details</h3>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="shares">Total Number of Shares</label>
+              <input type="text" class="form-control" id="shares" placeholder="Enter Total Number of Shares" />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="memberfee">Associate Member fee</label>
+              <input type="text" class="form-control" id="memberfee" placeholder="Enter Associate Member fee" />
+            </div>
+
+           
+          </div>
+
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="admissionfee">Admission fee</label>
+              <input type="text" class="form-control" id="admissionfee" placeholder="Enter Admission fee" />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="sharefee">Share fee</label>
+              <input type="text" class="form-control" id="sharefee" placeholder="Enter Share fee" />
+            </div>
+          
+          </div>
+
+          <button type="submit" class="btn btn-primary"  style="width: 70px; margin-top: 5px;">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"></script>
+
+      <script>
+ function submitForm() {
+    // Get form values
+    const share = document.getElementById('shares').value;
+    const associateMemberFee = document.getElementById('memberfee').value;
+    const admissionFee = document.getElementById('admissionfee').value;
+    const shareFee = document.getElementById('sharefee').value;
+    const total = parseFloat(associateMemberFee) + parseFloat(admissionFee) + parseFloat(shareFee);
+    
+    // Create data object to send to the server
+    const data = {
+        share: share,
+        associate_member_fee: associateMemberFee,
+        admission_fee: admissionFee,
+        share_fee: shareFee,
+        total: total
+    };
+
+    // Send POST request to the server
+    fetch('receipt/manageReceiptamount', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        // Show success message
+        showSuccessMessage('Data updated successfully');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Show error message
+        showErrorMessage('Failed to update data. Please try again later.');
+    });
+}
+
+function showSuccessMessage(message) {
+    const successMessage = document.createElement('div');
+    successMessage.className = 'alert alert-success';
+    successMessage.textContent = message;
+    console.log(successMessage)
+
+    // Append success message to the body
+    document.body.appendChild(successMessage);
+
+    // Remove success message after 5 seconds
+    setTimeout(() => {
+        successMessage.remove();
+    }, 5000);
+}
+
+function showErrorMessage(message) {
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'alert alert-danger';
+    errorMessage.textContent = message;
+
+    // Append error message to the body
+    document.body.appendChild(errorMessage);
+
+    // Remove error message after 5 seconds
+    setTimeout(() => {
+        errorMessage.remove();
+    }, 5000);
+}
+
+
+      </script>
+
+  
+</body>
+
+</html>

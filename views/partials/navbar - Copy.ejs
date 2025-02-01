@@ -1,0 +1,249 @@
+<!-- views/partials/navbar.ejs -->
+<link rel="stylesheet" href="/css/styles.css" />
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+<nav class="navbar">
+    <div class="logo_item">
+      <i class="bx bx-menu" id="sidebarOpen"></i>
+
+      <img src="/img/logo200.png" alt="">
+      <i>ಡಿಫೆನ್ಸ್ ಹ್ಯಾಬಿಟಾಟ್ ಹೌಸಿಂಗ್ ಕೋ-ಆಪರೇಟಿವ್ ಸೊಸೈಟಿ ಲಿ.<br>
+        DEFENCE HABITAT HOUSING CO-OPERATIVE SOCIETY LTD.<br>
+        Reg. No.:- HSG-3/64/HHS/53744 </i>
+
+        <!-- Rest of the code -->
+
+    </div>
+
+
+    <!-- <div class="search_bar">
+        <input type="text" placeholder="Search" />
+      </div> -->
+
+    <div class="navbar_content">
+      <i class="bi bi-grid"></i>
+      <i class='bx bx-sun' id="darkLight"></i>
+      <i class='bx bx-bell'></i>
+      <span class="profile-name">John Doe</span>
+      
+  
+    
+    </div>
+  </nav>
+  <nav class="sidebar">
+    <div class="menu_content">
+      <ul class="menu_items">
+        <div class="menu_title menu_dahsboard"></div>
+        <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+        <!-- start -->
+        <li class="item">
+          <a href="#" class="nav_link">
+            <!-- <span class="navlink_icon">
+                <i class="bx bxs-magic-wand"></i>
+              </span> -->
+            <span class="navlink"></span>
+          </a>
+        </li>
+
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-grid-alt"></i>
+            </span>
+            <span class="navlink">Dashboard</span>
+          </a>
+        </li>
+
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-buildings"></i>
+            </span>
+            <span class="navlink">Project</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+
+          <ul class="menu_items submenu">
+            <a href="/AddProjectDetails" class="nav_link sublink">- Add Project Details</a>
+            <a href="/viewPlotDimesion" class="nav_link sublink">- View Plot Dimensions</a>
+            <a href="/viewLandDetails" class="nav_link sublink">- View Land Details</a>
+
+          </ul>
+        </li>
+
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class='bx bx-user'></i>
+            </span>
+            <span class="navlink">Member Details</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+          <ul class="menu_items submenu">
+            <a href="/newuser" class="nav_link sublink">- Add New User</a>
+            <a href="/viewuser" class="nav_link sublink">- View User Details</a>
+            <a href="/viewmember" class="nav_link sublink">- View Member Details</a>
+            <a href="#" class="nav_link sublink">- View Inactive Members</a>
+            <a href="#" class="nav_link sublink">- View Contacted Members</a>
+            <a href="#" class="nav_link sublink">- View Member Due <br>Pending List</a>
+            <a href="#" class="nav_link sublink">- Online Application Member  <br>Details</a>
+            <a href="#" class="nav_link sublink">- View Contact Form  <br>Submissions</a>
+           
+          </ul>
+        </li>
+
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-map"></i>
+            </span>
+            <span class="navlink">Plot Details</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+          <ul class="menu_items submenu">
+            <a href="/plotTransferForm" class="nav_link sublink">- Plot Transfer Form</a>
+            <a href="/PlotCancellation" class="nav_link sublink">- Plot Cancellation Form</a>
+            <a href="#" class="nav_link sublink">- View Transferred Plot History</a>
+            <a href="#" class="nav_link sublink">- Plot Cancellation History</a>
+          </ul>
+        </li>
+
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-credit-card"></i>
+            </span>
+            <span class="navlink">Extra Charges Details</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+          <ul class="menu_items submenu">
+            <a href="/AddExtraCharges" class="nav_link sublink">- Extra Charges Form</a>
+            <a href="#" class="nav_link sublink">- View Extra Charges</a>
+            
+          </ul>
+        </li>
+
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-receipt"></i>
+            </span>
+            <span class="navlink">Receipt Details</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+          <ul class="menu_items submenu">
+            <a href="#" class="nav_link sublink">- View Reciepts</a>
+            <a href="#" class="nav_link sublink">- View Cancelled Reciepts</a>
+            <a href="/ManageRecieptAmount" class="nav_link sublink">- Manage Receipt Amount</a>
+            
+          </ul>
+        </li>
+
+        
+        <!-- end -->
+
+        <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
+        <!-- start -->
+      
+        <!-- end -->
+      </ul>
+
+      <!-- <ul class="menu_items">
+        <div class="menu_title menu_editor"></div>
+        
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bxs-magic-wand"></i>
+            </span>
+            <span class="navlink">Magic build</span>
+          </a>
+        </li>
+       
+
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-loader-circle"></i>
+            </span>
+            <span class="navlink">Filters</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-filter"></i>
+            </span>
+            <span class="navlink">Filter</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-cloud-upload"></i>
+            </span>
+            <span class="navlink">Upload new</span>
+          </a>
+        </li>
+      </ul> -->
+      <!-- <ul class="menu_items">
+        <div class="menu_title menu_setting"></div>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-flag"></i>
+            </span>
+            <span class="navlink">Notice board</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-medal"></i>
+            </span>
+            <span class="navlink">Award</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-cog"></i>
+            </span>
+            <span class="navlink">Setting</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-layer"></i>
+            </span>
+            <span class="navlink">Features</span>
+          </a>
+        </li>
+      </ul> -->
+
+      <!-- Sidebar Open / Close -->
+      <div class="bottom_content">
+        
+        <div class="bottom expand_sidebar">
+          <span> Expand</span>
+          <i class='bx bx-log-in'></i>
+        </div>
+        <div class="bottom collapse_sidebar">
+          <span> Collapse</span>
+          <i class='bx bx-log-out'></i>
+        </div>
+
+       
+
+        
+        
+      </div>
+     
+      
+    </div>
+    
+  </nav>
+
+  <!-- JavaScript -->
+  <script src="/js/script.js"></script>

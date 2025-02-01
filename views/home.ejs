@@ -1,0 +1,231 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Boxicons CSS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Defence Housing Soceity</title>
+    <link rel="icon" href="/img/logo200.png" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      #scroll-container {
+        border-radius: 5px;
+        height: 100px;
+        width: 50%;
+        margin-left: 30rem;
+        margin-top: 5rem;
+        overflow: hidden;
+        border: 1px solid;
+      }
+
+      #scroll-text {
+        height: 100%;
+        text-align: center;
+
+        /* animation properties */
+        -moz-transform: translateY(100%);
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+
+        -moz-animation: my-animation 5s linear infinite;
+        -webkit-animation: my-animation 5s linear infinite;
+        animation: my-animation 8s linear infinite;
+      }
+
+      /* Style for the scrolling text */
+      #scroll-text ul.star-bullet {
+        list-style-type: none;
+        padding-left: 20px; /* Adjust the left padding to your preference */
+      }
+
+      /* Custom bullet point image */
+      #scroll-text ul.star-bullet li:before {
+        content: "\2605"; /* Unicode character for a star */
+        display: inline-block;
+        width: 1em; /* Adjust the width of the bullet point */
+        margin-left: -1em; /* Adjust the margin to align with the text */
+      }
+
+      #scroll-text ul.star-bullet:hover {
+        color: green;
+        /* cursor: pointer; */
+      }
+
+      /* for Firefox */
+      @-moz-keyframes my-animation {
+        from {
+          -moz-transform: translateY(100%);
+        }
+
+        to {
+          -moz-transform: translateY(-100%);
+        }
+      }
+
+      /* for Chrome */
+      @-webkit-keyframes my-animation {
+        from {
+          -webkit-transform: translateY(100%);
+        }
+
+        to {
+          -webkit-transform: translateY(-100%);
+        }
+      }
+
+      @keyframes my-animation {
+        from {
+          -moz-transform: translateY(100%);
+          -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+        }
+
+        to {
+          -moz-transform: translateY(-100%);
+          -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <!-- Add your card here -->
+    <div id="content" style="margin-top: 6rem">
+      <!-- Content Goes Here -->
+      <span class="menu-text">Welcome</span>
+      <!-- <h1>hello</h1> -->
+      <!-- Form Inside Card -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div
+              class="card text-success"
+              style="margin-top: 4rem; height: 254px; border: 1px solid"
+            >
+              <div class="card-text text-center">
+                <h1>Total number of Projects</h1>
+              </div>
+              <div class="card-text text-center">
+                <h1>2</h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div
+              class="card text-danger"
+              style="margin-top: 4rem; border: 1px solid"
+            >
+              <div class="card-text text-center">
+                <h1>Total Registered Members</h1>
+              </div>
+              <div class="card-text text-center" id="totalUsersContainer">
+                <h1>Loading...</h1>
+                <!-- Placeholder for the total number of users -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="scroll-container" class="card text-info" style="height: 300px">
+        <div id="scroll-text">
+          <ul class="star-bullet">
+            <li>
+              Defence Habitat is a social service organization, functioning with
+              an objective of promoting and facilitating to Serving and Retired
+              Armed / Defence Forces as well as Para Military personnel.
+            </li>
+            <li>
+              The objectives of Defence Habitat amongst others, include
+              facilitating provisions of residential plots by promoting housing
+              schemes in cities all over the States as per the demand of Defence
+              and Para Military personnel and their families. Although Defence
+              Habitat does not construct any projects on its own, it ties up
+              with reputed builders /developers to provide the best in class
+              dwelling units to its members at genuine prices.
+            </li>
+            <li>
+              Defence Habitat amongst others provides premium residential plots
+              which is peaceful, and pollution-free property by promoting
+              housing schemes in cities all over the state as per the demand of
+              Defence and ParaMilitary personnel and their families.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script>
+      // Fetch the total number of users from the API endpoint
+      fetch("/users/totalUsers")
+        .then((response) => response.json())
+        .then((data) => {
+          // Update the content of the card incrementally with the total number of users
+          const totalUsersContainer = document.getElementById(
+            "totalUsersContainer"
+          );
+          const totalUsers = data.totalUsers;
+          let count = 1;
+          const intervalId = setInterval(() => {
+            if (count <= totalUsers) {
+              totalUsersContainer.innerHTML = `
+                          <h1>${count}</h1>
+                      `;
+              count++;
+            } else {
+              clearInterval(intervalId); // Stop the interval when the count reaches the total number of users
+            }
+          }, 100); // Adjust the interval duration as needed (in milliseconds)
+        })
+        .catch((error) => {
+          console.error("Error fetching total users:", error);
+          // Update the content to show an error message
+          document.getElementById("totalUsersContainer").innerHTML = `
+                  <h1>Error fetching data</h1>
+              `;
+        });
+    </script>
+
+    <script>
+      //        let scrollContainer = document.getElementById("scroll-text");
+      // let scrollInterval;
+
+      // function startScrolling() {
+      //   console.log("Start scrolling");
+      //   clearInterval(scrollInterval);
+      //   scrollInterval = setInterval(() => {
+      //     scrollContainer.scrollTop += 1;
+      //   }, 50);
+      // }
+
+      // function stopScrolling() {
+      //   console.log("Stop scrolling");
+      //   clearInterval(scrollInterval);
+      // }
+
+      // scrollContainer.addEventListener("mouseenter", stopScrolling);
+      // scrollContainer.addEventListener("mouseleave", startScrolling);
+    </script>
+  </body>
+</html>

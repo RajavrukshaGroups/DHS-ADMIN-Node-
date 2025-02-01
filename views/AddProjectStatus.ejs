@@ -1,0 +1,350 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous"
+    />
+    <!-- Boxicons CSS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Side Navigation Bar in HTML CSS JavaScript</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .menu-text {
+          font-size: 18px;
+        }
+      }
+
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .icons-container {
+        display: flex;
+        gap: 10px;
+        /* Adjust as needed */
+        align-items: center;
+      }
+
+      .add-more-icon {
+        cursor: pointer;
+      }
+
+      .delete-icon {
+        cursor: pointer;
+        margin-left: auto;
+      }
+
+      .radio-container {
+        display: flex;
+        /* justify-content: space-between; Adjust alignment as needed */
+      }
+
+      .radio-container label {
+        margin-right: 50px;
+        /* Adjust spacing between radio buttons */
+      }
+
+      .file-upload-wrapper {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .file-upload-wrapper input {
+        flex: 1;
+      }
+
+      .file-upload-wrapper a {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <!-- Add your card here -->
+    <div id="content" style="margin-top: 6rem">
+      <!-- Content Goes Here -->
+      <span class="menu-text">Page Title</span>
+      <!-- Form Inside Card -->
+
+      <div class="card">
+        <form id="projectForm">
+          <div id="alertContainer"></div>
+          <h3 class="card-title">Add Project Status</h3>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="projectDropdown">Project Name:</label>
+              <select
+                class="form-control"
+                id="projectDropdown"
+                name="projectName"
+              >
+                <option value="" selected disabled>Choose an option</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="statusDate">Status Date</label>
+              <input
+                type="date"
+                id="statusDate"
+                class="form-control"
+                name="statusDate"
+              />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="statusTitle">Status Title</label>
+              <textarea
+                id="statusTitle"
+                class="form-control"
+                rows="3"
+                name="statusTitle"
+                placeholder="Enter status title"
+              ></textarea>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="statusDetails">Status Details</label>
+              <textarea
+                id="statusDetails"
+                class="form-control"
+                rows="3"
+                name="statusDetails"
+                placeholder="Enter Status Details"
+              ></textarea>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="fileupload">File Upload Image/Document</label>
+              <div id="extra-file-uploads">
+                <div class="file-upload-wrapper">
+                  <input
+                    type="file"
+                    class="form-control"
+                    name="fileupload"
+                    accept="application/pdf"
+                  />
+                </div>
+              </div>
+              <div class="wrapper">
+                <div class="add">
+                  <a
+                    href="#"
+                    title="Add More"
+                    id="add_more"
+                    style="text-decoration: none; color: black"
+                    >Add More</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="checkbox-container">
+              <label for="sendSMS">
+                <input
+                  type="checkbox"
+                  id="sendSMS"
+                  name="notifications"
+                  value="SMS"
+                />
+                You want to send notification to customer as text message(SMS)
+              </label>
+              <br />
+              <label for="sendEmail">
+                <input
+                  type="checkbox"
+                  id="sendEmail"
+                  name="notifications"
+                  value="Email"
+                />
+                Send Email
+              </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 70px; margin-top: 5px"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+      integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"
+    ></script>
+    <!-- add project Name Dropdown -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("/project/projectNamesInStatus")
+          .then((response) => response.json())
+          .then((data) => {
+            const projectDropdown = document.getElementById("projectDropdown");
+            data.forEach((project) => {
+              const option = document.createElement("option");
+              option.value = project.project_pk; // Set the value to project_id
+              option.textContent = project.pro_name;
+              projectDropdown.appendChild(option);
+            });
+          })
+          .catch((error) =>
+            console.error("Error fetching project names:", error)
+          );
+      });
+    </script>
+
+    <!-- add more -->
+    <script>
+      document
+        .getElementById("add_more")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Create new file input wrapper
+          const newInputWrapper = document.createElement("div");
+          newInputWrapper.classList.add("file-upload-wrapper");
+
+          const newInput = document.createElement("input");
+          newInput.type = "file";
+          newInput.classList.add("form-control");
+          newInput.accept = "application/pdf";
+
+          // Create cancel link
+          const cancelLink = document.createElement("a");
+          cancelLink.href = "#";
+          cancelLink.title = "Cancel";
+          cancelLink.style.cssText =
+            "text-decoration: none; color: black; margin-left: 10px;";
+          cancelLink.innerHTML = "X";
+
+          // Append elements
+          newInputWrapper.appendChild(newInput);
+          newInputWrapper.appendChild(cancelLink);
+          document
+            .getElementById("extra-file-uploads")
+            .appendChild(newInputWrapper);
+
+          // Add event listener for cancel link
+          cancelLink.addEventListener("click", function (e) {
+            e.preventDefault();
+            newInputWrapper.remove();
+          });
+        });
+    </script>
+
+    <!-- handle submit  -->
+    <script>
+      document
+        .getElementById("projectForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const alertContainer = document.getElementById("alertContainer");
+          alertContainer.innerHTML = "";
+
+          const projectDropdown = document.getElementById("projectDropdown");
+          const statusDate = document.getElementById("statusDate");
+          const statusTitle = document.getElementById("statusTitle");
+          const statusDetails = document.getElementById("statusDetails");
+
+          let isValid = true;
+          let errorMessages = [];
+
+          if (!projectDropdown.value) {
+            isValid = false;
+            errorMessages.push("Please select a project name");
+          }
+
+          if (!statusDate.value) {
+            isValid = false;
+            errorMessages.push("Please select a status date.");
+          }
+
+          if (!statusTitle.value.trim()) {
+            isValid = false;
+            errorMessages.push("Please enter a status title.");
+          }
+
+          if (!statusDetails.value.trim()) {
+            isValid = false;
+            errorMessages.push("Please enter a status details");
+          }
+
+          if (!isValid) {
+            errorMessages.forEach((message) => {
+              alertContainer.innerHTML += `
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${message}
+                </div>`;
+            });
+            setTimeout(() => {
+              alertContainer.innerHTML = "";
+            }, 3000);
+
+            return;
+          }
+
+          const formData = new FormData(this);
+
+          fetch("/project/addProjectStatus", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === 200) {
+                alert("Data inserted successfully");
+                // Refresh the page to reset the form
+                location.reload();
+              } else {
+                alert("Error inserting data");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Error inserting data");
+            });
+        });
+    </script>
+  </body>
+</html>

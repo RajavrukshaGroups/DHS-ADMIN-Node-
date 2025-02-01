@@ -1,0 +1,278 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+      <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .menu-text {
+                font-size: 18px;
+            }
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .icons-container {
+            display: flex;
+            gap: 10px;
+            /* Adjust as needed */
+            align-items: center;
+        }
+
+        .add-more-icon {
+            cursor: pointer;
+        }
+
+        .delete-icon {
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .radio-container {
+            display: flex;
+            /* justify-content: space-between; Adjust alignment as needed */
+        }
+
+        .radio-container label {
+            margin-right: 50px;
+            /* Adjust spacing between radio buttons */
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+
+        <!-- Add your card here -->
+        <div id="content" style="margin-top: 6rem;">
+            <!-- Content Goes Here -->
+            <span class="menu-text">Page Title</span>
+            <!-- Form Inside Card -->
+            <div class="card">
+                <h3 class="card-title" style="font-weight: bold;">Edit view site booking</h3>
+                
+
+
+ <form id="confirmationletter" action="/saveEditSiteBooking" method="post" onsubmit="return submituserdata(event)">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="prosize">Member Details</label>
+                            <input type="text" id="prosize" class="form-control" name="membername" value="<%=result.name1 %>" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="prosize">Address</label>
+                            <textarea id="address" class="form-control" rows="0" name="address" > <%=result.name2 %> </textarea>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="projectname">Project Name</label>
+                            <!-- <input type="text" id="projectname" class="form-control" name="projectname" value="<%=result.name3 %>" required> -->
+                            <select id="projectname" class="form-control" name="projectname">
+                                <option value="Defence Habitat - Marasandra" <%= result.name3 === 'Defence Habitat - Marasandra' ? 'selected' : '' %>>Defence Habitat - Marasandra</option>
+                                <option value="Defence Habitat - Tapasihalli" <%= result.name3 === 'Defence Habitat - Tapasihalli' ? 'selected' : '' %>>Defence Habitat - Tapasihalli</option>
+                              </select>
+                        </div>
+
+                        <!-- <div class="form-group col-md-4">
+                            <label for="propertysize">Property Size</label>
+                            <input type="text" id="propertysize" class="form-control" name="propertysize" value="<%=result.name4 %>" required>
+                        </div> -->
+                        <div class="form-group col-md-4">
+                            <label for="propertysize">Property Size</label>
+                            <select id="propertysize" class="form-control" name="propertysize">
+                              <option value="100x120" <%= result.name4 === '100x120' ? 'selected' : '' %>>100x120</option>
+                              <option value="50x60" <%= result.name4 === '50x60' ? 'selected' : '' %>>50x60</option>
+                              <option value="40x60" <%= result.name4 === '40x60' ? 'selected' : '' %>>40x60</option>
+                              <option value="30x50" <%= result.name4 === '30x50' ? 'selected' : '' %>>30x50</option>
+                              <option value="30x40" <%= result.name4 === '30x40' ? 'selected' : '' %>>30x40</option>
+                            </select>
+                          </div>
+                          
+
+                        <div class="form-group col-md-4">
+                            <label for="persqft">Sqft Rate</label>
+                            <input type="text" id="persqft" class="form-control" name="persqft" value="<%=result.name5 %>" required>
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label for="projectaddress">Project Address</label>
+                            <textarea id="projectaddress" class="form-control" rows="0"
+                                placeholder="Enter residence/contact address" name="projectaddress"><%=result.name6 %></textarea>
+                        </div>
+                        
+                        <input type="hidden" name="booking_id" value="<%=result.id %>">
+                        
+                        <div class="form-group col-md-4">
+                            <label for="date">Date</label>
+                            <input type="text" id="issuedate" class="form-control" name="issuedate" value="<%=result.issuedate %>"required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="amt">Amount</label>
+                            <input type="text" id="amount" class="form-control" name="amount"  value="<%=result.name8 %>" required>
+                        </div>
+                        <!-- <div class="form-group col-md-4">
+                            <label for="paymentmethod">Payment Method</label>
+                            <select id="paymentmethod" class="form-control" name="paymentmethod" required>
+                                <option value="cheque">Cheque</option>
+                                <option value="dd">DD</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </div> -->
+                        
+                        <div class="form-group col-md-4">
+                            <label for="paymentmethod">Payment Method</label>
+                            <select id="paymentmethod" class="form-control" name="paymentmethod" required>
+                              <option value="cheque" <%= result.name9 === 'cheque' ? 'selected' : '' %>>Cheque</option>
+                              <option value="dd" <%= result.name9 === 'dd' ? 'selected' : '' %>>DD</option>
+                              <option value="online" <%= result.name9 === 'online' ? 'selected' : '' %>>Online</option>
+                              <option value="netbanking" <%= result.name9 === 'netbanking' ? 'selected' : '' %>>Net Banking</option> <!-- Dynamically add "Net Banking" -->
+                            </select>
+                          </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label for="refno">Cheque No/DD No/UTR No</label>
+                            <input type="text" id="refno" class="form-control" name="refno" value="<%=result.name10 %>" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="bank">Bank Name</label>
+                            <input type="text" id="bank" class="form-control" name="bank" value="<%=result.name11 %>" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="branch">Branch</label>
+                            <input type="text" id="branch" class="form-control" name="branch" value="<%=result.name12 %>" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="sitedimension">Site Diemension</label>
+                            <input type="text" id="sitedimension" class="form-control" name="sitedimension" value="<%=result.name13 %>" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="recno">Receipt No</label>
+                            <input type="text" id="recno" class="form-control" name="recno" value="<%=result.name14%>" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="memberid">Memeber ID</label>
+                            <input type="text" id="memberid" class="form-control" name="memberid" value="<%=result.name15%>" required>
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label for="sid">Seniority No</label>
+                            <input type="text" id="sid" class="form-control" name="sid" value="<%=result.name16%>" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="duration">Duration</label>
+                            <input type="text" id="duration" class="form-control" name="duration" value="<%=result.site_fk %>" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="comformation_no">Confirmation Number</label>
+                            <input type="text" id="comformation_no" class="form-control" name="comformation_no" value="<%=result.name17 %>" required>
+                        </div>
+                        <div class="form-group col-md-4" style="display: none;">
+                            <label for="userid">userid</label>
+                            <input type="text" id="userid" class="form-control" name="userid" >
+                        </div>
+                    </div>
+
+                    <button type="submit"  class="btn btn-primary"
+                        style="width: 70px; margin-top: 5px">
+                        Submit
+                    </button>
+                </form>
+                
+                <div class="modal" id="submissionStatusModal" tabindex="-1" role="dialog" aria-labelledby="submissionStatusModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="submissionStatusModalLabel">Submission Status</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="submissionStatusMessage"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="closeModalButton" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- JavaScript -->
+             <script>
+                function submituserdata(event) {
+                    console.log(event,'function clicked');
+                    event.preventDefault(); 
+                    const form = document.getElementById('confirmationletter');
+                    const formData = new FormData(form);
+                    const data = {};
+                    formData.forEach((value, key) => {
+                        data[key] = value;
+                    });
+                    fetch(form.action, { 
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    }
+                )
+                    .then(response => {
+                        console.log(response,);
+                        if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert(data.message || 'Booking updated successfully!');
+                         window.location.href = '/view-sitebooking';
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred: ' + error.message);
+                    });
+                    }
+
+             </script>
+            <script src="/js/script.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+                integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+                crossorigin="anonymous"></script>
+                <script>
+                    // Use JSON.stringify to pass server-side data safely to the client-side
+                    var data = <%- JSON.stringify(result) %>;
+                    console.log(data, 'incoming data');
+                  </script>
+            </body>
+            </html>

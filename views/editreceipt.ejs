@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Defence Housing Soceity </title>
+    <link rel="icon" href="/img/logo200.png">
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        @media (max-width: 768px) {
+            .menu-text {
+                font-size: 18px;
+            }
+        }
+        .icons-container {
+            display: flex;
+            gap: 10px;
+            /* Adjust as needed */
+            align-items: center;
+        }
+        .add-more-icon {
+            cursor: pointer;
+        }
+        .delete-icon {
+            cursor: pointer;
+            margin-left: auto;
+        }   
+
+        .radio-container {
+            display: flex;
+            /* justify-content: space-between; Adjust alignment as needed */
+        }
+
+        .radio-container label {
+            margin-right: 50px;
+            /* Adjust spacing between radio buttons */
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+        <!-- Add your card here -->
+        <div id="content" style="margin-top: 6rem;">
+            <!-- Content Goes Here -->
+            <span class="menu-text">Page Title</span>
+            <!-- Form Inside Card -->
+            <form id="userDataForm" onsubmit="submituserdata(event)">
+                <div class="card">
+                    <h3 class="card-title">Customer Details</h3>
+                    <%console.log("result_123",result) %>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="recno">Receipt NO :</label>
+                            <input type="text" class="form-control" id="recno" name="recno"
+                                value="<%= result['Receipt Number'] %>" required>
+                        </div>
+                        <% function formatDate(dateString) {
+                            if (!dateString) return ''; // Handle empty or undefined dates
+                            const date = new Date(dateString);
+                            const year = date.getFullYear();
+                            const month = ('0' + (date.getMonth() + 1)).slice(-2); // Ensures 2 digits for month
+                            const day = ('0' + date.getDate()).slice(-2); // Ensures 2 digits for day
+                            return `${year}-${month}-${day}`; // Format as YYYY-MM-DD
+                          } %>
+                        <div class="form-group col-md-6">
+                            <label for="date">Date :</label>
+                            <input type="text" id="date" class="form-control" name="date"
+                                value="<%= formatDate(result['Created Date']) %>" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="refname">Name</label>
+                            <input type="text" name="name" id="refname" class="form-control" placeholder="Enter name"
+                                value="<%= result['User Name'] %>" required/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="cAddress"> Address</label>
+                            <textarea id="cAddress" class="form-control" rows="1"
+                                name="cAddress"><%= result['Member Address'] %></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Details -->
+                <div id="paymentDetailsContainer">
+                    <div class="card payment-card">
+                        <h3 class="card-title">Payment Details</h3>
+                        <!-- Payment Type Dropdown -->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="paymentTypeDropdown">Payment Type:</label>
+                                <select class="form-control payment-type-dropdown" name="paymentTypeDropdown"
+                                    id="paymentTypeDropdown" required>
+                                    <option value="" selected disabled>Choose payment type</option>
+                                    <option value="advance" <%=result['Payment Type']==='advance' ? 'selected' : '' %>>Site
+                                        Advance</option>
+                                    <option value="downPayment" <%=result['Payment Type']==='downPayment' ? 'selected' : ''
+                                        %>>Site Down Payment</option>
+                                    <option value="installment" <%=result['Payment Type']==='installment' ? 'selected' : ''
+                                        %>>Installments</option>
+                                </select>
+                            </div>
+
+                            <!-- Payment Mode Dropdown -->
+                            <div class="form-group col-md-6">
+                                <label for="paymentModeDropdown">Payment Mode:</label>
+                                <select id="paymentModeDropdown" class="form-control payment-mode-dropdown"
+                                    name="paymentModeDropdown" required onchange="handlePaymentModeChange(this)">
+                                    <option value="" selected disabled>Choose payment mode</option>
+                                    <option value="cheque" <%=result['Payment Mode']==='cheque' ? 'selected' : '' %>>Cheque
+                                    </option>
+                                    <option value="netbanking" <%=result['Payment Mode']==='netbanking' ? 'selected' : '' %>
+                                        >Netbanking/UPI</option>
+                                    <option value="cash" <%=result['Payment Mode']==='cash' ? 'selected' : '' %>>Cash
+                                    </option>
+                                    <option value="dd" <%=result['Payment Mode']==='dd' ? 'selected' : '' %>>DD</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Input Fields -->
+                        <div class="form-row">
+                            <div class="form-group col-md-6" id="bankNameGroup">
+                                <label for="bankName">Bank Name:</label>
+                                <input type="text" class="form-control bank-name-input" id="bankNameInput"
+                                    name="bankNameInput" value="<%= result['Bank Name'] %>" required>
+                            </div>
+                            <div class="form-group col-md-6" id="branchNameGroup">
+                                <label for="branchName">Branch Name:</label>
+                                <input type="text" class="form-control branch-name-input" id="branchNameInput"
+                                    name="branchNameInput" value="<%= result['Branch Name'] %>" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="amount">Amount:</label>
+                                <input type="text" class="form-control amount-input" id="amount" name="amount"
+                                    value="<%= result['Payment Amount'] %>" required>
+                            </div>
+                            <!-- <div class="form-group col-md-6">
+                                <label for="paymentDate">Payment Date:</label>
+                                <input type="date" class="form-control payment-date-input" id="paymentDate"
+                                    name="paymentDate" value="" required>
+                            </div> -->
+                        </div>
+
+                        <div class="form-row">
+                            <div id="dynamicField" style="display: none" class="form-group col-md-6">
+                                <label id="dynamicLabel" for="dynamicInput">Dynamic Field:</label>
+                                <input type="text" class="form-control dynamic-input" id="dynamicInput"
+                                    name="dynamicInput" value="<%= result.chequetransdd %>">
+                            </div>
+
+                            <!-- Installments Dropdown (Initially Hidden) -->
+                            <div class="form-group installments-dropdown col-md-6" style="display: none">
+                                <label for="installmentsDropdown">Installments:</label>
+                                <select class="form-control installments-dropdown" id="installmentsDropdown"
+                                    name="installmentsDropdown">
+                                    <option value="" selected disabled>Choose installment</option>
+                                    <option value="installment1" <%=result.installments==='installment1' ? 'selected'
+                                        : '' %>>Installment 1</option>
+                                    <option value="installment2" <%=result.installments==='installment2' ? 'selected'
+                                        : '' %>>Installment 2</option>
+                                    <option value="installment3" <%=result.installments==='installment3' ? 'selected'
+                                        : '' %>>Installment 3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Payment Received Details -->
+                <div class="card">
+                    <h3 class="card-title">Payment Received Details</h3>
+                    <input type="text" hidden id="reciptId" name="reciptId" value="<%= receiptId %>">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="share">1 .Share</label>
+                            <input type="text" id="share" name="share" class="form-control"
+                                value="<%= result['Share Fee'] %>" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="membership">2.Membership Fee</label>
+                            <input type="text" id="membership" name="membership" class="form-control"
+                                value="<%= result['Membership Fee'] %>" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="admission">3.Admission Fee</label>
+                            <input type="text" id="admission" name="admission" class="form-control"
+                                value="<%= result['Admission Fee'] %>" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sharefee">4.Share Fee</label>
+                            <input type="text" id="sharefee" class="form-control" name="sharefee"
+                                value="<%= result['Share Fee'] %>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="miscellaneous">5.Miscellaneous</label>
+                            <input type="text" id="miscellaneous" name="miscellaneous" class="form-control"
+                                value="<%= result['Miscellaneous'] %>">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Site Advance -->
+                <div class="card">
+                    <h3 class="card-title">6.Site Advance</h3>
+                    <div class="form-row">
+                        <!-- <div class="form-group col-md-6">
+                            <label for="dimension">Dimension</label>
+                            <input type="text" id="dimension" class="form-control" name="dimension"
+                                value="<%= result['Property Dimension'] %>">
+                        </div> -->
+                        <div class="form-group col-md-6">
+                            <label for="dimension">Dimension</label>
+                            <select id="dimension" class="form-control" name="dimension">
+                                <option value="100x120" <%= result.Dimension === '100x120' ? 'selected' : '' %>>100x120</option>
+                                <option value="50x60" <%= result.Dimension === '50x60' ? 'selected' : '' %>>50x60</option>
+                                <option value="40x60" <%= result.Dimension === '40x60' ? 'selected' : '' %>>40x60</option>
+                                <option value="30x50" <%= result.Dimension === '30x50' ? 'selected' : '' %>>30x50</option>
+                                <option value="30x40" <%= result.Dimension === '30x40' ? 'selected' : '' %>>30x40</option>
+                            </select>
+                        </div>                        
+                        <div class="form-group col-md-6">
+                            <label for="siteamount">Amount</label>
+                            <input type="text" id="siteamount" class="form-control" name="siteamount"
+                                value="<%= result.siteAmount %>">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advance Balance -->
+                <!-- <div class="card">
+                    <h3 class="card-title">7.Advance Balance</h3>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="advanceamount">Amount</label>
+                            <input type="text" id="advanceamount" class="form-control" name="advanceamount"
+                                value="<%= result.advanceAmount %>">
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Installments -->
+                <div class="card">
+                    <h3 class="card-title">8.Installments</h3>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="installment">Installment</label>
+                            <select id="installment" class="form-control" name="installment" required>
+                                <option value="" selected disabled>Select Installment</option>
+                                <option value="installment1" <%=result.Installments==='installment1' ? 'selected' : '' %>
+                                    >Installment 1</option>
+                                <option value="installment2" <%=result.Installments==='installment2' ? 'selected' : '' %>
+                                    >Installment 2</option>
+                                <option value="installment3" <%=result.Installments==='installment3' ? 'selected' : '' %>
+                                    >Installment 3</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="installmentamount">Amount</label>
+                            <input type="text" id="installmentamount" class="form-control" name="installmentamount"
+                                value="<%= result.installmentAmount %>">
+                        </div>
+                    </div>
+                    <div class="submit-button-container">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <!-- JavaScript -->
+        <script src="/js/script.js"></script>
+        <script>
+            function submituserdata(event) {
+                event.preventDefault();
+                const formData = new FormData(document.getElementById('userDataForm'));
+                const jsonData = {};
+                formData.forEach((value, key) => {
+                    jsonData[key] = value;
+                });
+                // https://adminpanel.defencehousingsociety.com/saveEditReciept
+                fetch('https://adminpanel.defencehousingsociety.com/saveEditReciept', {
+                // fetch('http://localhost:4000/saveEditReciept', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data, 'datas are coming');
+                        if (data.message === 'Receipt updated successfully') {
+                            alert("User updated successfully");
+                            //  window.location.href = '/viewUserExtraCharges'; 
+                        } else {
+                            alert("Error updating user");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+                 }
+        </script>
+        <!-- <script src="/js/adduser.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+
+            <script>
+                var someObject = <%- JSON.stringify(result) %>;
+                console.log("Server-side object:", someObject);
+            </script>
+
+        <script>
+            // Parse receipt ID from URL query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const receiptId = urlParams.get('receiptId');
+            let receiptData; // Define a global variable to store the fetched data
+            // Function to fetch installment amount based on selected installment
+            function fetchInstallmentAmount(installment, receiptData) {
+                // Extract the installment amount based on the selected installment from receipt data
+                let installmentAmount; 
+                switch (installment) {
+                    case 'installment1':
+                        installmentAmount = receiptData['First Installment'];
+                        break;
+                    case 'installment2':
+                        installmentAmount = receiptData['Second Installment'];
+                        break;
+                    case 'installment3':
+                        installmentAmount = receiptData['Third Installment'];
+                        break;
+                    case 'installment4':
+                        installmentAmount = receiptData['Fourth Installment'];
+                        break;
+                    default:
+                        installmentAmount = 0;
+                }
+
+                // Populate installment amount field with the fetched installment amount
+                document.getElementById('installmentamount').value = installmentAmount || '';
+            }
+
+            // Function to execute when installment is changed
+            $('#installment').change(function () {
+                // fetchInstallmentAmount(this.value,receiptData);
+                fetchInstallmentAmount(this.value, receiptData);
+
+            });
+
+            function handlePaymentModeChange(paymentModeDropdown) {
+                const dynamicField = paymentModeDropdown.closest(".payment-card").querySelector("#dynamicField");
+                const dynamicLabel = paymentModeDropdown.closest(".payment-card").querySelector("#dynamicLabel");
+                const bankNameGroup = paymentModeDropdown.closest(".payment-card").querySelector("#bankNameGroup");
+                const branchNameGroup = paymentModeDropdown.closest(".payment-card").querySelector("#branchNameGroup");
+
+                if (paymentModeDropdown.value === "dd") {
+                    dynamicLabel.textContent = "DD Number:";
+                    dynamicField.style.display = "block";
+                    bankNameGroup.style.display = "block";
+                    branchNameGroup.style.display = "block";
+                } else if (paymentModeDropdown.value === "netbanking") {
+                    dynamicLabel.textContent = "Transaction ID / UTR No:";
+                    dynamicField.style.display = "block";
+                    bankNameGroup.style.display = "block";
+                    branchNameGroup.style.display = "block";
+                } else if (paymentModeDropdown.value === "cheque") {
+                    dynamicLabel.textContent = "Cheque Number:";
+                    dynamicField.style.display = "block";
+                    bankNameGroup.style.display = "block";
+                    branchNameGroup.style.display = "block";
+                } else if (paymentModeDropdown.value === "cash") {
+                    dynamicField.style.display = "none";
+                    bankNameGroup.style.display = "none";
+                    branchNameGroup.style.display = "none";
+                }
+            }
+
+
+
+            function calculateTotalAmount() {
+                // Get values of individual fee components
+                const paymentAmount = parseFloat(document.getElementById('amount').value) || 0;
+                const membershipFee = parseFloat(document.getElementById('membership').value) || 0;
+                const admissionFee = parseFloat(document.getElementById('admission').value) || 0;
+                const shareFee = parseFloat(document.getElementById('sharefee').value) || 0;
+                const miscellaneous = parseFloat(document.getElementById('miscellaneous').value) || 0;
+                const advanceAmount = parseFloat(document.getElementById('advanceamount').value) || 0;
+                const siteAdvanceAmount = parseFloat(document.getElementById('siteamount').value) || 0;
+                // Get the selected installment amount
+                const installmentAmount = parseFloat(document.getElementById('installmentamount').value) || 0;
+                // Calculate total amount by summing up all fee components and installment amount
+                const totalAmount = paymentAmount + membershipFee + admissionFee + shareFee + miscellaneous + advanceAmount + siteAdvanceAmount + installmentAmount;
+                // Update the total amount display
+                document.getElementById('tot_amnt').textContent = 'Rs. ' + totalAmount.toFixed(2);
+            }
+
+        </script>
+        
+</body>
+
+</html>

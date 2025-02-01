@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Defence Housing Soceity </title>
+  <link rel="icon" href="/img/logo200.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        /* Your provided CSS styles */
+        /* ... */
+        /* Add your table styles below */
+
+        /* Responsive Table */
+        .responsive-table-container {
+            /* margin-top: 85px; */
+            /* Adjust margin to clear the navbar */
+            transition: margin-left 0.5s ease;
+            /* Add transition for smooth adjustment */
+            overflow-x: auto;
+            /* Enable horizontal scrolling if needed */
+            margin-left: 22rem;
+            padding: 61px 20px 30px 0px;
+        }
+
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            /* margin-top: 61px; */
+            /* margin-left: 1px; */
+            /* margin-bottom: 2rem; */
+        }
+
+        .responsive-table th,
+        .responsive-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .responsive-table th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .responsive-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .responsive-table tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Adjust table cell padding for responsiveness */
+        @media (max-width: 768px) {
+
+            .responsive-table th,
+            .responsive-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <%- include('partials/navbar') %>
+        <!-- Sidebar content -->
+
+
+        <!-- Main Content -->
+
+        <div id="content" class="responsive-table-container" style="margin-top: 6rem;">
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Extra Charges Reason</th>
+                        <th>Amount</th>
+                        <th>Reason</th>
+                        <th>Created Date</th>
+                        <th> Repaid Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        <script src="/js/script.js"></script>
+        <!-- <script>
+  document.addEventListener('DOMContentLoaded', () => {
+// Fetch data from the API endpoint
+fetch('/charges/viewextracharges')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Get the table body element
+    const tableBody = document.getElementById('tableBody');
+
+    // Iterate through the data and create table rows
+    data.forEach((userExtra, index) => {
+      const row = document.createElement('tr');
+      // const pend_amt = user.plot_amount - user.paid_amount;
+      // let plt_size = user.plotsize_width ? `${user.plotsize_width}X${user.plotsize_height}` : '------';
+
+      // Populate the table cells with user data
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>
+            <div>Seniority ID: ${userExtra.senior_id}</div>
+            <div>Project Name: ${userExtra.pro_name}</div>
+            <div>Property Size: ${userExtra.prop_dimension}</div>
+          </td>
+        <td>${userExtra.username}</td>
+        <td>${userExtra.total_extra_amnt}</td>
+        <td>${userExtra.paid_amount}</td>
+        <td>${userExtra.pending_amount}</td>
+        <td><a href="#">View History</a></td>
+
+        `;
+
+      // Append the row to the table body
+      tableBody.appendChild(row);
+    });
+
+// Add event listener to all buttons with the class 'view-history-button'
+
+
+
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+});
+
+
+
+
+
+
+
+
+
+  </script> -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const tableBody = document.getElementById('tableBody');
+
+                // Extract userExtraPk from the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const userExtraPk = urlParams.get('userExtraPk');
+
+                // Fetch data from the API endpoint
+                fetch(`/charges/viewextrahistory/${userExtraPk}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Iterate through the fetched data and populate the table
+                        data.forEach((rowData, index) => {
+                            // Extract date portion from created_date and paid_date
+                            const createdDate = rowData.created_date.substring(0, 10); // Extract first 10 characters
+                const paidDate = rowData.paid_date ? rowData.paid_date.substring(0, 10) : ''; // Check if paid_date is available
+
+                            const row = document.createElement('tr');
+                            const formattedAmount = formatNumber(rowData.extra_amnt); // Format the amount
+
+                            row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>
+                        <div>User: ${rowData.username}</div>
+                        <div>Cheque No: ${rowData.cheque_no}</div>
+                        <div>Cheque Amount: ${rowData.cheque_amnt}</div>
+                    </td>
+                    <td>${formattedAmount}/-</td>
+                    <td>${rowData.reason}</td>
+                    <td>${createdDate}</td>
+                    <td>${paidDate}</td>
+                    <td class="payment-status-cell">${rowData.payment_status}</td>
+                    <td>
+                        <i class="fas fa-times" data-extra-pk="${rowData.user_extra_fk}"></i>
+                    </td>                
+                    `;
+                            tableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            });
+
+            document.getElementById('tableBody').addEventListener('click', function(event) {
+    if (event.target.classList.contains('fa-times')) {
+        // Get the userExtraPk from the clicked icon's data attribute
+        const userExtraPk = event.target.getAttribute('data-extra-pk');
+
+// Log the value to the console
+console.log(userExtraPk);
+
+        // Make a PUT request to update the payment status
+        fetch(`/charges/updatePaymentStatus/${userExtraPk}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Update the payment status in the DOM only if the response indicates success
+                const statusCell = event.target.closest('tr').querySelector('.payment-status-cell');
+                statusCell.textContent = 'Paid'; // Update status to 1
+            } else {
+                console.error('Failed to update payment status');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating payment status:', error);
+        });
+    }
+});
+
+
+const formatNumber = (number) => {
+    const formatter = new Intl.NumberFormat('en-IN');
+    return formatter.format(number);
+};
+
+
+
+        </script>
+</body>
+
+</html>
