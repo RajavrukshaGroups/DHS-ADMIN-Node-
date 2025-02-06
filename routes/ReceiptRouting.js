@@ -408,7 +408,7 @@ router.get("/view_sitebooking", (req, res) => {
 //   });
 // });
 
-app.get("/receipt/get_affidavit", async (req, res) => {
+router.get("/receipt/get_affidavit", async (req, res) => {
   const userId = req.query.user_id;
   console.log("Received User ID:", userId); // Debugging
 
