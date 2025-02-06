@@ -141,7 +141,7 @@
 			</div>
 			
 			<div class="wrapper" style="padding-bottom:10px;">
-			<p class="logo-cnt1 p3"><span style="float:left;margin-top:10px;font-weight:normal;background:#fff; ">Project Name :</span>
+			<p class="logo-cnt1 p3"><span style="float:left;margin-top:10px;font-weight:normal;background:#fff; ">Project Name:</span>
 			
 			<span class="date-dot2" style="width:86%;margin-top:10px; text-align:left;" id="projectname"></span>
 			
@@ -425,12 +425,17 @@
                 console.log("Project Name: ", data['Project Name']); // Log the project name from data
 
                 // Update Project Name based on total amount
-                if (totalAmount === 2500) {
-                    document.getElementById('projectname').textContent = 'Membership Fee';
-                } else if (totalAmount > 2500) {
-                    document.getElementById('projectname').textContent = data['Project Name'];
-                }
-
+                // if (totalAmount === 2500) {
+                //     document.getElementById('projectname').textContent = 'Membership Fee';
+                // } else if (totalAmount > 2500) {
+                //     document.getElementById('projectname').textContent = data['Project Name'];
+                // }
+// 				if (data['Project Name']) {
+//     document.getElementById('projectname').textContent = data['Project Name'];
+// } else {
+//     document.getElementById('projectname').textContent = 'Membership Fee';
+// }
+document.getElementById('projectname').textContent = data['Project Name'];
                 document.getElementById('transactionId').textContent = data['Chequetransdd'];
                 document.getElementById('bankname').textContent = data['Bank Name'];
                 document.getElementById('branchname').textContent = data['Branch Name'];
