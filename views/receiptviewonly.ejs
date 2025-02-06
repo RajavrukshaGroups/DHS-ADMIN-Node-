@@ -173,7 +173,7 @@
 				</tr>
 				<tr>
 					<td>
-					<span style="float:left;padding-left:12px; width:50px;">2.</span> Admission Fee 
+					<span style="float:left;padding-left:12px; width:50px;">2.</span> Admission Fee
 					<span class="tab-dot"></span>
 					</td>
 					<td></td>
@@ -365,9 +365,13 @@
             if (data) {
                 receiptData = data;
                 const createdDate = new Date(data['Created Date']);
-                const day = createdDate.getUTCDate().toString().padStart(2, '0');
-                const month = (createdDate.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
-                const year = createdDate.getUTCFullYear();
+                // const day = createdDate.getUTCDate().toString().padStart(2, '0');
+                // const month = (createdDate.getUTCMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+                // const year = createdDate.getUTCFullYear();
+				const day = createdDate.getDate().toString().padStart(2, '0');
+const month = (createdDate.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+const year = createdDate.getFullYear();
+
 
                 const formattedDate = `${day}-${month}-${year}`;
 
@@ -411,15 +415,15 @@ function displayDimension(dimension, elementId) {
     if (data['Installments'] === 'installment1') {
         firstInstallmentFee = data['Payment Amount'];
         populateAmount('.first-installment-fee-rupees-value', '.first-installment-fee-paisa-value', firstInstallmentFee);
-        displayDimension(data['property-dimension'], 'first-installment-dimension');
+        displayDimension(data['Property Dimension'], 'first-installment-dimension');
     }  else if (data['Installments'] === 'installment2') {
         secondInstallmentFee = data['Payment Amount'];
         populateAmount('.second-installment-fee-rupees-value', '.second-installment-fee-paisa-value', secondInstallmentFee);
-        displayDimension(data['property-dimension'], 'second-installment-dimension');
+        displayDimension(data['Property Dimension'], 'second-installment-dimension');
     } else if (data['Installments'] === 'installment3') {
         thirdInstallmentFee = data['Payment Amount'];
         populateAmount('.third-installment-fee-rupees-value', '.third-installment-fee-paisa-value', thirdInstallmentFee);
-		displayDimension(data['property-dimension'], 'third-installment-dimension')
+		displayDimension(data['Property Dimension'], 'third-installment-dimension')
 
 	}
 }
