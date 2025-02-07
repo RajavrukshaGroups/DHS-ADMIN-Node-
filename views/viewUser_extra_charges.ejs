@@ -69,6 +69,14 @@
  <!-- Main Content -->
  
 <div id="content" class="responsive-table-container" style="margin-top: 6rem;">
+  <div class="re-container mt-10 mb-6">
+    <div class="wrapper p2 rtop">
+        <a style=" color:black; font-weight:900; font-size:19px; position: relative; left:65rem"
+            onclick="goBack()" class="back-btn">
+            <img style="vertical-align:sub;" src="/img/go-back.png" /> Back
+        </a>
+    </div>
+</div>
   <table class="responsive-table">
     <thead>
       <tr>
@@ -163,7 +171,9 @@ const formatNumber = (number) => {
     return formatter.format(number);
 };
 
-
+function goBack() {
+            window.history.back();
+        }
   </script>
  
 </body>

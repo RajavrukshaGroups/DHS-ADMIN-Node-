@@ -72,6 +72,7 @@
           padding: 8px;
         }
       }
+      
     </style>
   </head>
 
@@ -95,6 +96,16 @@
       <p style="color: green; margin-right: 10px; margin-bottom: 0">
         *search here on receipt number,project name or member details
       </p>
+
+      <div class="re-container mt-10 mb-6">
+        <div class="wrapper p2 rtop">
+            <a style=" color:black; font-weight:900; font-size:19px; position: relative; left:13rem"
+                onclick="goBack()" class="back-btn">
+                <img style="vertical-align:sub;" src="/img/go-back.png" /> Back
+            </a>
+        </div>
+    </div>
+
     </div>
     <!-- Main Content -->
     <div id="content" class="responsive-table-container">
@@ -528,6 +539,12 @@
         const formatter = new Intl.NumberFormat("en-IN");
         return formatter.format(number);
       };
+
+      
+      function goBack() {
+            window.history.back();
+        }
+        
     </script>
   </body>
 </html>

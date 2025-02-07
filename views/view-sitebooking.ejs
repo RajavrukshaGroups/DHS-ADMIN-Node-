@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <title>Defence Housing Soceity </title>
-  <link rel="icon" href="/img/logo200.png">
+    <title>Defence Housing Soceity</title>
+    <link rel="icon" href="/img/logo200.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -113,7 +113,6 @@
             <th>Receipt No.</th>
             <th>Total Amount</th>
             <th>Action</th>
-
             <!-- Add more columns as needed -->
           </tr>
         </thead>
@@ -123,21 +122,27 @@
       </table>
     </div>
     <div id="pagination" class="pagination"></div>
+<!-- <<<<<<< HEAD -->
 
-
+<!-- ======= -->
+<!-- >>>>>>> d500354 (added nodemodules) -->
     <script>
       function navigateToconlett(user_pk) {
         const shareCertUrl = `/confirm?user_pk=${user_pk}`;
         window.location.href = shareCertUrl;
       }
-      
+// <<<<<<< HEAD
+
+      function viewAffidavit(userId) {
+// =======
        function viewAffidavit(userId) {
-        console.log("view afff",userId)
+        console.log("view afffidavit user id",userId)
+// >>>>>>> d500354 (added nodemodules)
         // Open the affidavit PDF in a new tab
-        const url = `/receipt/get_affidavit?user_id=${userId}`;
-        window.open(url, '_blank');
+        const url = `https://adminpanel.defencehousingsociety.com/receipt/get_affidavit?user_id=${userId}`;
+        // const url = `http://localhost:4000/receipt/get_affidavit?user_id=${userId}`;
+        window.open(url, "_blank");
       }
-    
 
       document.addEventListener("DOMContentLoaded", () => {
         const pageSize = 5; // Number of rows per page
@@ -163,17 +168,20 @@
 
           paginatedData.forEach((item, index) => {
             const formattedAmount = formatNumber(item.name8); // Format the amount
-
             const row = `
                     <tr>
-                      <td>${startIndex +  index + 1}</td>
+                      <td>${startIndex + index + 1}</td>
                         <td>${item.name1}  </td>
                         <td>${item.name1}<br>${item.name16}</td>
                         <td>${item.name14}</td>
                        <td>${formattedAmount}/-</td>
                         <td class = "view-history-button">
-                         <i class="fas fa-eye" data-userid="${item.id}" onclick="navigateToconlett('${item.id}')"></i>
-                         <i class="fas fa-file-pdf" data-userid="${item.id}" onclick="viewAffidavit('${item.id}')"></i> 
+                         <i class="fas fa-eye" data-userid="${
+                           item.id
+                         }" onclick="navigateToconlett('${item.id}')"></i>
+                         <i class="fas fa-file-pdf" data-userid="${
+                           item.user_fk
+                         }" onclick="viewAffidavit('${item.user_fk}')"></i> 
                            <i class="fas fa-edit edit-button"
                            data-userpk="${item.id}" 
                            data-toggle="tooltip" 
@@ -181,10 +189,8 @@
                                style="cursor: pointer;"></i>
                         </td>
                         </td>
-
                     </tr>
                 `;
-
             // tableBody.innerHTML += row;
             tableBody.insertAdjacentHTML("beforeend", row);
           });
@@ -248,7 +254,8 @@
         function handleSearch() {
           const searchInput = document
             .getElementById("searchInput")
-            .value.trim().toLowerCase();
+            .value.trim()
+            .toLowerCase();
           const filteredData = data.filter((item) => {
             // Customize this condition based on your search requirements
             return item.name1.toLowerCase().includes(searchInput);
@@ -257,29 +264,33 @@
         }
 
         function renderFilteredTable(filteredData) {
-  const tableBody = document.getElementById('tableBody');
-  tableBody.innerHTML = ''; // Clear existing rows
- // Calculate the index of the first item on the current page
- const startIndex = (currentPage - 1) * pageSize;
-console.log(startIndex);
-// Reset overall index based on the start index of the current page
-overallIndex = startIndex ;
+          const tableBody = document.getElementById("tableBody");
+          tableBody.innerHTML = ""; // Clear existing rows
+          // Calculate the index of the first item on the current page
+          const startIndex = (currentPage - 1) * pageSize;
+          console.log(startIndex);
+          // Reset overall index based on the start index of the current page
+          overallIndex = startIndex;
 
-  filteredData.forEach( item => {
-    const formattedAmount = formatNumber(item.name8); // Format the amount
+          filteredData.forEach((item) => {
+            const formattedAmount = formatNumber(item.name8); // Format the amount
 
-    const row = document.createElement('tr');
-  
-    // Populate table cells with filtered user data
-    row.innerHTML = `
+            const row = document.createElement("tr");
+
+            // Populate table cells with filtered user data
+            row.innerHTML = `
                         <td>${overallIndex + 1}</td>
                         <td>${item.name1}  </td> 
                         <td>${item.name1}<br>${item.name16}</td>
                         <td>${item.name14}</td>
                         <td>${formattedAmount}/-</td>                        
                         <td class = "view-history-button">
-                         <i class="fas fa-eye" data-userid="${item.id}" onclick="navigateToconlett('${item.id}')"></i>
-                         <i class="fas fa-file-pdf" data-userid="${item.id}" onclick="viewAffidavit('${item.id}')"></i> 
+                         <i class="fas fa-eye" data-userid="${
+                           item.id
+                         }" onclick="navigateToconlett('${item.id}')"></i>
+                         <i class="fas fa-file-pdf" data-userid="${
+                           item.user_fk
+                         }" onclick="viewAffidavit('${item.user_fk}')"></i> 
                         <i class="fas fa-edit edit-button"
                            data-userpk="${item.id}" 
                            data-toggle="tooltip" 
@@ -288,17 +299,18 @@ overallIndex = startIndex ;
                         </td>
     `;
 
-    // Append the row to the table body
-    tableBody.appendChild(row);
+            // Append the row to the table body
+            tableBody.appendChild(row);
 
-    // Increment overall index
-    overallIndex++;
-  });
-}
+            // Increment overall index
+            overallIndex++;
+          });
+        }
 
-    // Event listener for search button click
-    document.getElementById('searchButton').addEventListener('click', handleSearch);
-
+        // Event listener for search button click
+        document
+          .getElementById("searchButton")
+          .addEventListener("click", handleSearch);
       });
 
       function redirectToRecPage(index) {
@@ -312,26 +324,26 @@ overallIndex = startIndex ;
       }
 
       const formatNumber = (number) => {
-    const formatter = new Intl.NumberFormat('en-IN');
-    return formatter.format(number);
-};
-
-
+        const formatter = new Intl.NumberFormat("en-IN");
+        return formatter.format(number);
+      };
     </script>
-     <script>
-        document.getElementById('tableBody').addEventListener('click', function (event) {
-        if (event.target.classList.contains('edit-button')) {
-          event.preventDefault()
-          const user_pk = event.target.getAttribute('data-userpk');
-          console.log(user_pk,'userpkkkkk');
-          
-          // const user_pro_pk = event.target.getAttribute('data-userprojectpk')
-          // console.log('USER ID FETCHED in edit button', user_pk)
-          const EditViewUserUrl = `/editviewsitebooking/${user_pk}`; 
-          // const EditViewUserUrl = `/editViewsiteBooking`;
-          window.location.href = EditViewUserUrl;
-        }
-      });
+    <script>
+      document
+        .getElementById("tableBody")
+        .addEventListener("click", function (event) {
+          if (event.target.classList.contains("edit-button")) {
+            event.preventDefault();
+            const user_pk = event.target.getAttribute("data-userpk");
+            console.log(user_pk, "userpkkkkk");
+
+            // const user_pro_pk = event.target.getAttribute('data-userprojectpk')
+            // console.log('USER ID FETCHED in edit button', user_pk)
+            const EditViewUserUrl = `/editviewsitebooking/${user_pk}`;
+            // const EditViewUserUrl = `/editViewsiteBooking`;
+            window.location.href = EditViewUserUrl;
+          }
+        });
     </script>
     <!-- JavaScript and additional content -->
     <!-- Include your JavaScript files and other content here -->

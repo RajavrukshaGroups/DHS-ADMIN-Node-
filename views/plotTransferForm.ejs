@@ -77,6 +77,16 @@
       <!-- Form Inside Card -->
       <form id="plotTransferForm">
         <div class="card">
+
+          <div class="re-container mt-10 mb-6">
+            <div class="wrapper p2 rtop ">
+                <a style="cursor: pointer; color:black; font-weight:900; font-size:19px; position: relative; left:6rem "
+                    onclick="goBack()" class="back-btn">
+                    <img style="vertical-align:sub;" src="/img/go-back.png" /> Back
+                </a>
+                
+            </div>
+        </div>
           <h3 class="card-title">Plot Transfer From</h3>
           <div class="form-row">
             <div class="form-group col-md-4">
@@ -274,6 +284,12 @@
     <script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script>
 
     <script>
+
+      
+function goBack() {
+            window.history.back();
+        }
+
       let cancel_pk;
       document.addEventListener("DOMContentLoaded", () => {
         const seniorityIdInput = document.getElementById("seniorityIdFrom");

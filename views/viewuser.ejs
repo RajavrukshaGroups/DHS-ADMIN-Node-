@@ -94,6 +94,16 @@
       <p style="color: green; margin-left: 10px; margin-bottom: 0">
         *search here on username,email,seniority id or project name
       </p>
+
+      <div class="re-container mt-10 mb-6">
+        <div class="wrapper p2 rtop">
+            <a style=" color:black; font-weight:900; font-size:19px; position: relative; left:13rem"
+                onclick="goBack()" class="back-btn">
+                <img style="vertical-align:sub;" src="/img/go-back.png" /> Back
+            </a>
+        </div>
+    </div>
+    
     </div>
     <div id="content" class="responsive-table-container">
       <table class="responsive-table" id="responsive-table">
@@ -522,6 +532,10 @@
             window.location.href = EditViewUserUrl;
           }
         });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
   </body>
 </html>

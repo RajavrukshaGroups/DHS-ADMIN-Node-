@@ -385,28 +385,123 @@ router.get("/view_sitebooking", (req, res) => {
   });
 });
 
-router.get("/get_affidavit", (req, res) => {
+// <<<<<<< HEAD
+// router.get("/get_affidavit", (req, res) => {
+//   const userId = req.query.user_id;
+
+//   // Query your database to get the base64 PDF from the `th_user` table
+//   const query = `SELECT user_affidiafit FROM th_user WHERE user_pk = ?`;
+
+//   conn.query(query, [userId], (err, result) => {
+//     if (err || result.length === 0) {
+//       return res.status(500).json({ error: "Error fetching affidavit" });
+//     }
+
+//     const affidavitBase64 = result[0].user_affidiafit;
+
+//     // Convert base64 to binary data
+//     const affidavitBuffer = Buffer.from(affidavitBase64, "base64");
+
+//     // Set the headers and send the PDF as binary data
+//     res.setHeader("Content-Type", "application/pdf");
+//     res.setHeader("Content-Disposition", "inline; filename=affidavit.pdf");
+//     res.send(affidavitBuffer);
+//   });
+// });
+
+router.get("/receipt/get_affidavit", async (req, res) => {
   const userId = req.query.user_id;
+  console.log("Received User ID:", userId); // Debugging
 
-  // Query your database to get the base64 PDF from the `th_user` table
-  const query = `SELECT user_affidiafit FROM th_user WHERE user_pk = ?`;
+  if (!userId) {
+    return res.status(400).json({ error: "User ID is required" });
+  }
 
-  conn.query(query, [userId], (err, result) => {
-    if (err || result.length === 0) {
-      return res.status(500).json({ error: "Error fetching affidavit" });
+  try {
+    const query = `SELECT user_affidiafit FROM th_user WHERE user_pk = ?`;
+    const [rows] = await pool.execute(query, [userId]);
+
+    if (rows.length === 0 || !rows[0].user_affidiafit) {
+      console.log("Affidavit not found for User ID:", userId);
+      return res.status(404).json({ error: "Affidavit not found" });
     }
 
-    const affidavitBase64 = result[0].user_affidiafit;
-
-    // Convert base64 to binary data
-    const affidavitBuffer = Buffer.from(affidavitBase64, "base64");
-
-    // Set the headers and send the PDF as binary data
     res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", "inline; filename=affidavit.pdf");
-    res.send(affidavitBuffer);
-  });
+    res.send(rows[0].user_affidiafit);
+  } catch (err) {
+    console.error("Database Error:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
+// =======
+// Old version 
+
+// router.get("/get_affidavit", (req, res) => {
+//   const userId = req.query.user_id ;
+//   // Query your database to get the base64 PDF from the `th_user` table
+//   const query = `SELECT user_affidiafit FROM th_user WHERE user_pk = ?`;
+
+//   conn.query(query, [userId], (err, result) => {
+//     if (err || result.length === 0) {
+//       return res.status(500).json({ error: "Error fetching affidavit" });
+//     }
+
+//     const affidavitBase64 = result[0].user_affidiafit;
+
+//     // Convert base64 to binary data
+//     const affidavitBuffer = Buffer.from(affidavitBase64, "base64");
+
+//     // Set the headers and send the PDF as binary data
+//     res.setHeader("Content-Type", "application/pdf");
+//     res.setHeader("Content-Disposition", "inline; filename=affidavit.pdf");
+//     res.send(affidavitBuffer);
+//   });
+// });
+
+     // New affidavit code is going to be here
+
+     router.get("/get_affidavit", (req, res) => {
+      const userId = req.query.user_id;
+      console.log('debugging console for checking userid is coming from server',req.query.user_id);
+    
+      if (!userId) {
+        return res.status(400).json({ error: "User ID is required" });
+      }
+    
+      const query = `SELECT user_affidiafit FROM th_user WHERE user_pk = ?`;
+    
+      conn.query(query, [userId], (err, result) => {
+        if (err) {
+          console.error("Database query error:", err);
+          return res.status(500).json({ error: "Error fetching affidavit" });
+        }
+    
+        if (result.length === 0 || !result[0].user_affidiafit) {
+          return res.status(404).json({ error: "Affidavit not found" });
+        }
+    
+        const affidavitBase64 = result[0].user_affidiafit;
+    
+        try {
+          // Validate Base64 String
+          if (!/^[A-Za-z0-9+/=]+$/.test(affidavitBase64)) {
+            return res.status(500).json({ error: "Invalid affidavit data" });
+          }
+    
+          // Convert base64 to Buffer safely
+          const affidavitBuffer = Buffer.from(affidavitBase64, "base64");
+    
+          // Set headers for PDF response
+          res.setHeader("Content-Type", "application/pdf");
+          res.setHeader("Content-Disposition", "inline; filename=affidavit.pdf");
+          res.send(affidavitBuffer);
+        } catch (error) {
+          console.error("Error processing affidavit:", error);
+          return res.status(500).json({ error: "Error processing affidavit" });
+        }
+      });
+    });
+// >>>>>>> d500354 (added nodemodules)
 
 // router.get('/view_sitebooking', (req, res) => {
 // const receiptNumber = req.query.receiptNumber;
