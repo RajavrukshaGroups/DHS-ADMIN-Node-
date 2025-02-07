@@ -113,7 +113,6 @@
             <th>Receipt No.</th>
             <th>Total Amount</th>
             <th>Action</th>
-
             <!-- Add more columns as needed -->
           </tr>
         </thead>
@@ -123,14 +122,22 @@
       </table>
     </div>
     <div id="pagination" class="pagination"></div>
+<!-- <<<<<<< HEAD -->
 
+<!-- ======= -->
+<!-- >>>>>>> d500354 (added nodemodules) -->
     <script>
       function navigateToconlett(user_pk) {
         const shareCertUrl = `/confirm?user_pk=${user_pk}`;
         window.location.href = shareCertUrl;
       }
+// <<<<<<< HEAD
 
       function viewAffidavit(userId) {
+// =======
+       function viewAffidavit(userId) {
+        console.log("view afffidavit user id",userId)
+// >>>>>>> d500354 (added nodemodules)
         // Open the affidavit PDF in a new tab
         const url = `https://adminpanel.defencehousingsociety.com/receipt/get_affidavit?user_id=${userId}`;
         // const url = `http://localhost:4000/receipt/get_affidavit?user_id=${userId}`;
@@ -161,7 +168,6 @@
 
           paginatedData.forEach((item, index) => {
             const formattedAmount = formatNumber(item.name8); // Format the amount
-
             const row = `
                     <tr>
                       <td>${startIndex + index + 1}</td>
@@ -183,10 +189,8 @@
                                style="cursor: pointer;"></i>
                         </td>
                         </td>
-
                     </tr>
                 `;
-
             // tableBody.innerHTML += row;
             tableBody.insertAdjacentHTML("beforeend", row);
           });
