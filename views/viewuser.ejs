@@ -423,36 +423,39 @@
       //     }
       //   });
 
+      document
+        .getElementById("tableBody")
+        .addEventListener("click", function (event) {
+          if (event.target.classList.contains("fa-times")) {
+            const userId = event.target.dataset.userid;
+            fetch(`/users/updateUserStatus/${userId}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.message) {
+                  const statusCell = event.target
+                    .closest("tr")
+                    .querySelector(".user-status-cell");
 
-      document.getElementById("tableBody").addEventListener("click", function (event) {
-  if (event.target.classList.contains("fa-times")) {
-    const userId = event.target.dataset.userid;
-    fetch(`/users/updateUserStatus/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.message) {
-          const statusCell = event.target.closest("tr").querySelector(".user-status-cell");
-
-          // Toggle text content based on current status
-          if (statusCell.textContent.trim() === "Active") {
-            statusCell.textContent = "Inactive";
-          } else {
-            statusCell.textContent = "Active";
+                  // Toggle text content based on current status
+                  if (statusCell.textContent.trim() === "Active") {
+                    statusCell.textContent = "Inactive";
+                  } else {
+                    statusCell.textContent = "Active";
+                  }
+                } else {
+                  console.error("Failed to update user status");
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating user status:", error);
+              });
           }
-        } else {
-          console.error("Failed to update user status");
-        }
-      })
-      .catch((error) => {
-        console.error("Error updating user status:", error);
-      });
-  }
-});
+        });
 
       document
         .getElementById("tableBody")
@@ -492,10 +495,21 @@
             const user_pro_pk = event.target.getAttribute("data-userprojectpk");
             console.log(user_pro_pk);
 
-            const addConnUrl = `/add_conn?user_pk=${user_pk}&user_project_pk=${user_pro_pk}`;
-            console.log(addConnUrl);
-            // Navigate to the add_conn page with user ID and project PK
-            window.location.href = addConnUrl;
+            const row = event.target.closest("tr");
+            const paidAmountText = row.children[5].textContent;
+            const paidAmount = parseFloat(
+              paidAmountText.replace(/[^\d.]/g, "")
+            );
+            console.log(paidAmount);
+
+            if (paidAmount > 0) {
+              const addConnUrl = `/add_conn?user_pk=${user_pk}&user_project_pk=${user_pro_pk}`;
+              window.location.href = addConnUrl;
+            } else {
+              alert(
+                "This page will be appeared only after generating the receipt excluding the membership fees."
+              );
+            }
           }
         });
 
