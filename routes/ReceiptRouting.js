@@ -410,7 +410,7 @@ router.get("/view_sitebooking", (req, res) => {
 
 router.get("/receipt/get_affidavit", async (req, res) => {
   const userId = req.query.user_id;
-  console.log("Received User ID:", userId); // Debugging
+  console.log("Received User ID:///", userId); // Debugging
 
   if (!userId) {
     return res.status(400).json({ error: "User ID is required" });
