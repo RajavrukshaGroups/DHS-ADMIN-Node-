@@ -247,7 +247,6 @@
                     }
                 )
                     .then(response => {
-                        console.log(response,);
                         if (!response.ok) {
                         throw new Error('Network response was not ok');
                         }
@@ -261,7 +260,8 @@
                         console.error('Error:', error);
                         alert('An error occurred: ' + error.message);
                     });
-                    }
+
+                }
 
              </script>
             <script src="/js/script.js"></script>

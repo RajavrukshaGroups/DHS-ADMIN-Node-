@@ -1332,6 +1332,7 @@ ORDER BY
 `;
 
   conn.query(qry, (err, result) => {
+       
     if (err) {
       console.error("Error getting the data:", err);
       return res.status(500).json({ error: "Internal Server Error" });
@@ -1475,8 +1476,12 @@ router.post("/insert_receipt", (req, res) => {
 });
 
 router.get("/get_conn_data", (req, res) => {
-  const { user_pk, user_project_pk } = req.query;
-
+  console.log('function get_conn_data is called');
+  
+  const { user_pk , user_project_pk } = req.query;
+  console.log(user_project_pk,'incoming project id');
+  console.log(user_pk,'incoming user id');
+  
   // Query to fetch user data
   const user_data_query = `SELECT * FROM th_user WHERE user_pk = ?`;
 
@@ -1485,7 +1490,6 @@ router.get("/get_conn_data", (req, res) => {
       console.error("Error getting user data:", err);
       return res.status(500).json({ error: "Error getting user data" });
     }
-
     if (userData && userData.length > 0) {
       const user = userData[0];
       const {
