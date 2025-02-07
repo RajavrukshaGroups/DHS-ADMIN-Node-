@@ -385,7 +385,7 @@ router.get("/view_sitebooking", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
 // router.get("/get_affidavit", (req, res) => {
 //   const userId = req.query.user_id;
 
@@ -433,7 +433,7 @@ router.get("/receipt/get_affidavit", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-=======
+// =======
 // Old version 
 
 // router.get("/get_affidavit", (req, res) => {
@@ -501,7 +501,7 @@ router.get("/receipt/get_affidavit", async (req, res) => {
         }
       });
     });
->>>>>>> d500354 (added nodemodules)
+// >>>>>>> d500354 (added nodemodules)
 
 // router.get('/view_sitebooking', (req, res) => {
 // const receiptNumber = req.query.receiptNumber;
