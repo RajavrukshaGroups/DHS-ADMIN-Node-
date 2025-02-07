@@ -74,8 +74,6 @@
             <div class="card">
                 <h3 class="card-title">AddConfirmation letter</h3>
                 <form id="confirmationletter" >
-
-
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="memberName">Member Name</label>
@@ -99,14 +97,11 @@
                             <label for="persqft">Sqft Rate</label>
                             <input type="text" id="persqft" class="form-control" name="persqft" required>
                         </div>
-
-
                         <div class="form-group col-md-4">
                             <label for="projectaddress">Project Address</label>
                             <textarea id="projectaddress" class="form-control" rows="0"
                                 placeholder="Enter residence/contact address" name="projectaddress"></textarea>
                         </div>
-
                         <div class="form-group col-md-4">
                             <label for="date">Date</label>
                             <input type="text" id="date" class="form-control" name="date" required>
@@ -115,7 +110,6 @@
                             <label for="amt">Amount</label>
                             <input type="text" id="amt" class="form-control" name="amt" required>
                         </div>
-
                         <div class="form-group col-md-4">
                             <label for="paymentmethod">Payment Method</label>
                              <input type="text" id="paymentmethod" class="form-control" name="paymentmethod" required>
@@ -126,9 +120,6 @@
                             <!--    <option value="online">Online</option>-->
                             <!--</select>-->
                         </div>
-                        
-
-
                         <div class="form-group col-md-4">
                             <label for="refno">Cheque No/DD No/UTR No</label>
                             <input type="text" id="refno" class="form-control" name="refno" required>
@@ -194,8 +185,6 @@
                         Submit
                     </button>
                 </form>
-
-
                 <div class="modal" id="submissionStatusModal" tabindex="-1" role="dialog" aria-labelledby="submissionStatusModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -214,10 +203,7 @@
                         </div>
                     </div>
                 </div>
-                
-
             </div>
-
 
 
             <!-- JavaScript -->
@@ -351,13 +337,10 @@
 //     // Submit the form data directly (without converting to JSON)
 //     submitData(formData);
 // }
-
 function handleSubmitForm(event) {
     event.preventDefault(); // Prevent default form submission
-
     const form = document.getElementById('confirmationletter');
     const formData = new FormData(form);
-
     // File size validation (50 MB)
     const affidavitFile = formData.get('user_affidiafit');
     const maxSizeMB = 100;
@@ -391,8 +374,6 @@ function submitData(formData) {
         $('#submissionStatusModal').modal('show');
     });
 }
-
-
                     // Add event listener to form submit event
                     document.getElementById('confirmationletter').addEventListener('submit', handleSubmitForm);
                 
