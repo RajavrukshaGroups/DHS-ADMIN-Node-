@@ -88,6 +88,15 @@
       <p style="color: green; margin-right: 10px; margin-bottom: 0">
         *search here on member name or email
       </p>
+
+      <div class="re-container mt-10 mb-6">
+        <div class="wrapper p2 rtop">
+            <a style=" color:black; font-weight:900; font-size:19px; position: relative; left:26rem"
+                onclick="goBack()" class="back-btn">
+                <img style="vertical-align:sub;" src="/img/go-back.png" /> Back
+            </a>
+        </div>
+    </div>
     </div>
 
     <!-- Main Content -->
@@ -304,6 +313,11 @@
         // Add your action code here
         console.log("Action performed for row:", index + 1);
       }
+
+
+      function goBack() {
+            window.history.back();
+        }
     </script>
     <!-- JavaScript and additional content -->
     <!-- Include your JavaScript files and other content here -->

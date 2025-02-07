@@ -73,63 +73,13 @@
         margin-left: 23rem;
         margin-top: 20rem;
       }
-
-
-      /* Arrow Styling */
-.backArrow {
-    font-size: 35px;
-    line-height: 13px;
-
-    width: 1em;
-    height: 1em;
-    padding: 6px;
-
-    cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    transform: rotate(180deg);
-
-    color: white;
-    border: 2px solid white;
-    border-radius: 50%;
-
-    -webkit-touch-callout: none;
-     -khtml-user-select: none;
-}
-.backArrow:hover {
-    background: rgba(190, 31, 31, 0.5);
-    padding: 10px;
-}
-.backArrow:active {
-    position: relative;
-    right: 2px;
-}
-/* Document Styling */
-/* header {
-  text-align: center;
-  font-size: 24pt;
-} */
-.container {
-  padding-top: 2em;
-  margin: auto 49%;
-}
     </style>
   </head>
 
   <body>
     <!-- Sidebar -->
-      
     <%- include('partials/navbar') %>
-
-   
-    
     <div id="searchContainer" class="d-flex align-items-center">
-
-
-    
-
       <input
         class="form-control me-2"
         type="search"
@@ -145,27 +95,16 @@
         *search here on username,email,seniority id or project name
       </p>
 
-
-      <!-- <div class="re-container mt-10 mb-6">
+      <div class="re-container mt-10 mb-6">
         <div class="wrapper p2 rtop">
             <a style=" color:black; font-weight:900; font-size:19px; position: relative; left:13rem"
                 onclick="goBack()" class="back-btn">
                 <img style="vertical-align:sub;" src="/img/go-back.png" /> Back
             </a>
-            
         </div>
-    </div> -->
-
-    <div class="container">
-      <div title="Back to Menu" class="backArrow">
-        &#10140;
-      </div>
-    </div>
-
-
     </div>
     
-  
+    </div>
     <div id="content" class="responsive-table-container">
       <table class="responsive-table" id="responsive-table">
         <thead>
@@ -195,11 +134,6 @@
     <script src="/js/script.js"></script>
 
     <script>
-
-      function goBack() {
-            window.history.back();
-        }
-
       document.addEventListener("DOMContentLoaded", () => {
         const pageSize = 10; // Number of rows per page
         let currentPage = 1;
@@ -499,39 +433,36 @@
       //     }
       //   });
 
-      document
-        .getElementById("tableBody")
-        .addEventListener("click", function (event) {
-          if (event.target.classList.contains("fa-times")) {
-            const userId = event.target.dataset.userid;
-            fetch(`/users/updateUserStatus/${userId}`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                if (data.message) {
-                  const statusCell = event.target
-                    .closest("tr")
-                    .querySelector(".user-status-cell");
 
-                  // Toggle text content based on current status
-                  if (statusCell.textContent.trim() === "Active") {
-                    statusCell.textContent = "Inactive";
-                  } else {
-                    statusCell.textContent = "Active";
-                  }
-                } else {
-                  console.error("Failed to update user status");
-                }
-              })
-              .catch((error) => {
-                console.error("Error updating user status:", error);
-              });
+      document.getElementById("tableBody").addEventListener("click", function (event) {
+  if (event.target.classList.contains("fa-times")) {
+    const userId = event.target.dataset.userid;
+    fetch(`/users/updateUserStatus/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message) {
+          const statusCell = event.target.closest("tr").querySelector(".user-status-cell");
+
+          // Toggle text content based on current status
+          if (statusCell.textContent.trim() === "Active") {
+            statusCell.textContent = "Inactive";
+          } else {
+            statusCell.textContent = "Active";
           }
-        });
+        } else {
+          console.error("Failed to update user status");
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating user status:", error);
+      });
+  }
+});
 
       document
         .getElementById("tableBody")
@@ -571,21 +502,10 @@
             const user_pro_pk = event.target.getAttribute("data-userprojectpk");
             console.log(user_pro_pk);
 
-            const row = event.target.closest("tr");
-            const paidAmountText = row.children[5].textContent;
-            const paidAmount = parseFloat(
-              paidAmountText.replace(/[^\d.]/g, "")
-            );
-            console.log(paidAmount);
-
-            if (paidAmount > 0) {
-              const addConnUrl = `/add_conn?user_pk=${user_pk}&user_project_pk=${user_pro_pk}`;
-              window.location.href = addConnUrl;
-            } else {
-              alert(
-                "This page will be appeared only after generating the receipt excluding the membership fees."
-              );
-            }
+            const addConnUrl = `/add_conn?user_pk=${user_pk}&user_project_pk=${user_pro_pk}`;
+            console.log(addConnUrl);
+            // Navigate to the add_conn page with user ID and project PK
+            window.location.href = addConnUrl;
           }
         });
 
@@ -612,6 +532,10 @@
             window.location.href = EditViewUserUrl;
           }
         });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
   </body>
 </html>
